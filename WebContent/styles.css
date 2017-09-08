@@ -1,0 +1,165 @@
+@CHARSET "UTF-8";
+
+body{
+/*	background-color: #CECEF6;*/
+	background-color: #E0E6F8
+}
+
+/* centrage du site*/
+.divbody{
+	max-width:960px;
+	min-height: 800px;
+	margin:auto;
+	margin-bottom: 20px;
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow:#464040 0px 0px 15px;	
+}
+
+li{
+	list-style-type: none;
+}
+
+header{
+	display: flex;
+	justify-content: space-around;
+}
+
+.parentFlex{
+	display: flex;
+	
+}
+
+.titrePanier{
+	display: flex;	
+	width: 100%;
+	height: 50px;
+	border-top: darkred solid 2px;
+	border-bottom: darkred solid 2px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#titreCompte{
+	justify-content: center;
+}
+
+.menuVertical{
+	width: 100%;
+	height: 200px;
+	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;		
+}
+
+.titreSite{
+	display: flex;
+	flex-direction: columnn;
+	justify-content: space-around;
+	align-items: center;
+	padding-bottom: 20px;	
+}
+
+.titreSite p {
+	font-size: 1.9em;
+	color: darkred;
+}
+
+.menuHorizontal{
+	width: 100%;
+	height:60px;
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+		
+}
+
+.elementMenu{
+	display: flex;
+	justify-content: space-around;
+}
+
+#formConnectionCompte{
+	justify-content: space-between;
+}
+
+#divBoutonDeconnecter{
+	width: 156px;
+}
+
+#boutonConnexion{
+	margin-bottom: 5px;
+}
+
+#elementMenuContenuPanier{
+	margin-bottom: 20px;
+}
+
+#rechercheArticleMenu{
+	margin-bottom: 15px;
+}
+
+.pPanier{
+	font-size: 1.2em;
+}
+
+.article{
+	border-top: darkred solid 2px;
+	display: flex;
+	flex-direction: column;
+}
+
+.articlePanier{
+	border-bottom: darkgrey solid 2px;	
+}
+
+.headerArticle{
+	display: flex;
+	justify-content: space-between;
+}
+
+#nomArticle{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.messageException{
+	color: #DF0101;
+}
+
+.champsAjoutPanier{
+	width: 40px;
+}
+
+.imageEtInfos{
+	display: flex;
+	background-color: lightgrey;
+	border-top: darkgrey solid 3px;
+	border-bottom: darkgrey solid 3px;
+	
+}
+
+.imageArticle{
+	width: 15%;
+}
+
+.imageArticle img{
+	width: 100%;
+	margin: 10px;
+}
+
+
+
+.descriptionArticle{
+	width: 90%;
+	flex-direction: column;
+}
+
+
+
+textarea{
+	resize:none;
+	width: 250px;
+}

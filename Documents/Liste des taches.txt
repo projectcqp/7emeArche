@@ -1,0 +1,23 @@
+TODO
+----
+Mettre à jour le modèle de données (BDD) pour bien séparer les tables
+modifier les noms de colonnes de la BDD au format Fabrice et les appels SQL correspondants dans les DAO
+choisir le critère de tri pour l'affichage des articles en page d'accueil
+vérifier et nettoyer les commentaires superflus
+faire des choix pour le back office (gestion catalogue, stock, utilisateur...)
+choisir gestion de la commande et du paiement
+robustesse du site, fait-on du multi users (thread / transactionnal)
+tests unitaires
+
+DOING
+----
+se répartir les taches
+#MOU refaire la vue en bootstrap & accessibilité 
+
+DONE
+----
+créer un compte mail pour le projet (voir compte_gmail.txt)
+créer un compte git (voir compte_git.txt)
+Choix techno : spring jdbc web services bootstrap
+choisir le projet de base (Alex renommé 7emeArche)
+choisir un pc en réseau et créer la BDD MySql : PC Fabrice
