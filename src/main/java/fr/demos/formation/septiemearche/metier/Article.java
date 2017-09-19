@@ -36,7 +36,6 @@ public abstract class Article {
 	private Dematerialise immateriel;
 	@Column(name = "stock_article")
 	private int stock;
-	@Column(name = "tva_article")
 	@ManyToOne
 	private Tva tva;
 

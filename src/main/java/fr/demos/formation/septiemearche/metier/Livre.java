@@ -4,10 +4,12 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "livre")
+@PrimaryKeyJoinColumn(name = "id_livre")
 public class Livre extends Article {
 	
 	@Column(name = "auteur_livre", nullable = false)
@@ -20,6 +22,9 @@ public class Livre extends Article {
 	private String genre;
 	@Column(name = "date_livre", nullable = false)
 	private LocalDate date;
+	
+	public Livre(){
+	}
 	
 	// constructeur livre dematerialise
 	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload,

@@ -1,24 +1,13 @@
 package fr.demos.formation.septiemearche.data;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import fr.demos.formation.septiemearche.metier.Article;
-import fr.demos.formation.septiemearche.metier.ArticleDivers;
-import fr.demos.formation.septiemearche.metier.Etat;
-import fr.demos.formation.septiemearche.metier.Livre;
-import fr.demos.formation.septiemearche.metier.Type;
 
-public class ArticleDAOMySql implements ArticleDAO {
+public class ArticleDAOMySql implements ArticleDao {
 	
 	//plus besoin du context en CDI
 	//private Context context;
@@ -53,6 +42,18 @@ public class ArticleDAOMySql implements ArticleDAO {
 	}
 
 	@Override
+	public Article select(String key) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> selectAll() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Override
 	public List<Article> select(String critere) {
 
 		ArrayList<Article> catalogue = new ArrayList<Article>();
@@ -249,5 +250,5 @@ public class ArticleDAOMySql implements ArticleDAO {
 		
 		return catalogue;
 	} // override select
-
+*/
 }// class

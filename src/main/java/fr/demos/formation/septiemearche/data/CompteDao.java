@@ -12,8 +12,7 @@ public class CompteDao implements InterfaceDao<Compte> {
 	@PersistenceContext
 	private EntityManager em;
 
-	// pour vérifier le mot de passe et retroune un compte
-	public 
+	
 	
 	
 	@Override
@@ -27,7 +26,7 @@ public class CompteDao implements InterfaceDao<Compte> {
 	}
 
 	@Override
-	public List<Compte> selectAll(String criteria) throws Exception {
+	public List<Compte> selectAll() throws Exception {
 		String requestString = "SELECT FROM COMPTE";
 
 		TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);

@@ -1,9 +1,8 @@
 package fr.demos.formation.septiemearche.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,17 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.demos.formation.poe.cinegrandearche.data.ArticleDAO;
-import fr.demos.formation.poe.cinegrandearche.data.ArticleDAOMySql;
-import fr.demos.formation.poe.cinegrandearche.metier.Article;
-import fr.demos.formation.poe.cinegrandearche.metier.Livre;
+import fr.demos.formation.septiemearche.data.ArticleDao;
+import fr.demos.formation.septiemearche.metier.Article;
 
 @WebServlet("/ControlerArticles")
 public class ControlerArticles extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// appel de l'interface on pourra choisir son dao si plusieurs
-	@Inject ArticleDAO articleDaoCDI;
+	@Inject ArticleDao articleDaoCDI;
 
 
 	public ControlerArticles() {
@@ -97,8 +94,15 @@ public class ControlerArticles extends HttpServlet {
 //			}
 			
 			// version avec injection
-			ArrayList<Article> catalogue = (ArrayList<Article>) articleDaoCDI.select(recherche);
-			session.setAttribute("catalogue", catalogue);
+			List<Article> catalogue;
+			try {
+				catalogue = (List<Article>) articleDaoCDI.select(recherche);
+				session.setAttribute("catalogue", catalogue);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 
 			
 			//je mets le crit�re de recherche dans la requete pour le cas o� on ne trouve rien
@@ -121,4 +125,3 @@ public class ControlerArticles extends HttpServlet {
 	}// do post
 
 } // class
-}

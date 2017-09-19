@@ -43,11 +43,11 @@ public class PanierTest {
 				"auteur lDemat", "isbn lDemat", "editeur lDemat", "genre lDemat");
 
 		//Article divers standard matériel neuf
-		adNeuf = new ArticleDivers("refAdNeuf", 12.00, "nom adNeuf", "URL image adNeuf", 10, "type article adNeuf", "caractéristiques adNeuf");
+		adNeuf = new ArticleDivers("refAdNeuf", 12.00, "nom adNeuf", "URL image adNeuf", 10, "type article adNeuf");
 		//Article divers matériel occasion
-		adOccasion = new ArticleDivers("refAdOccasion", 8.00, "nom adOccasion", "URL image adOccasion", 10, Etat.OCCASION_MOYEN, "type articel adOccasion", "caractéristique adOccasion");
+		adOccasion = new ArticleDivers("refAdOccasion", 8.00, "nom adOccasion", "URL image adOccasion", 10, Etat.OCCASION_MOYEN, "type article adOccasion");
 		//Article divers dématérialisé"
-		adDemat = new ArticleDivers("refAdDemat", 8.00, "nom adDemat", "URL image adDemat", "format adDemat", "URL download adDemat","type article adDemat", "caractéristiques adDemat");		
+		adDemat = new ArticleDivers("refAdDemat", 8.00, "nom adDemat", "URL image adDemat", "format adDemat", "URL download adDemat","type article adDemat");		
 		
 		p = new Panier();
 		
@@ -70,7 +70,7 @@ public class PanierTest {
 			e.printStackTrace();
 		}
 		// Livre matériel neuf bien ajouté ?
-		assertEquals("lignePanier livreMat Neuf non inséré", "refDuLivreLNeuf", p.iterator().next().getArticle().getRef());
+		assertEquals("lignePanier livreMat Neuf non inséré", "refDuLivreLNeuf", p.iterator().next().getArticle().getReference());
 		
 		// Y a il bien un seul article ? (sans utiliser la méthode de panier)
 		int i = 0;
@@ -95,7 +95,7 @@ public class PanierTest {
 			e.printStackTrace();
 		}
 		// Livre matériel neuf bien ajouté ?
-		assertEquals("lignePanier livreMat Occasion non inséré", "refDuLivreLOccasion", p.iterator().next().getArticle().getRef());
+		assertEquals("lignePanier livreMat Occasion non inséré", "refDuLivreLOccasion", p.iterator().next().getArticle().getReference());
 		
 		// Y a il bien un seul article ? (sans utiliser la méthode de panier)
 		int i = 0;
@@ -119,7 +119,7 @@ public class PanierTest {
 			e.printStackTrace();
 		}
 		// Livre matériel neuf bien ajouté ?
-		assertEquals("lignePanier livre Démat non inséré", "refDuLivreLDemat", p.iterator().next().getArticle().getRef());
+		assertEquals("lignePanier livre Démat non inséré", "refDuLivreLDemat", p.iterator().next().getArticle().getReference());
 		
 		// Y a il bien un seul article ? (sans utiliser la méthode de panier)
 		int i = 0;
@@ -144,7 +144,7 @@ public class PanierTest {
 			e.printStackTrace();
 		}
 		// Livre matériel neuf bien ajouté ?
-		assertEquals("lignePanier article divers Neuf non inséré", "refAdNeuf", p.iterator().next().getArticle().getRef());
+		assertEquals("lignePanier article divers Neuf non inséré", "refAdNeuf", p.iterator().next().getArticle().getReference());
 		
 		// Y a il bien un seul article ? (sans utiliser la méthode de panier)
 		int i = 0;
@@ -169,7 +169,7 @@ public class PanierTest {
 			e.printStackTrace();
 		}
 		// Livre matériel neuf bien ajouté ?
-		assertEquals("lignePanier article divers Occasion non inséré", "refAdOccasion", p.iterator().next().getArticle().getRef());
+		assertEquals("lignePanier article divers Occasion non inséré", "refAdOccasion", p.iterator().next().getArticle().getReference());
 		
 		// Y a il bien un seul article ? (sans utiliser la méthode de panier)
 		int i = 0;
@@ -194,7 +194,7 @@ public class PanierTest {
 			e.printStackTrace();
 		}
 		// Livre matériel neuf bien ajouté ?
-		assertEquals("lignePanier article divers dématérialisé non inséré", "refAdDemat", p.iterator().next().getArticle().getRef());
+		assertEquals("lignePanier article divers dématérialisé non inséré", "refAdDemat", p.iterator().next().getArticle().getReference());
 		
 		// Y a il bien un seul article ? (sans utiliser la méthode de panier)
 		int i = 0;

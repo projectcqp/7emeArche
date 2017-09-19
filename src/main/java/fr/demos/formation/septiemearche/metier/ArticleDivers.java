@@ -2,10 +2,12 @@ package fr.demos.formation.septiemearche.metier;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "article_divers")
+@PrimaryKeyJoinColumn(name = "id_article_divers")
 public class ArticleDivers extends Article {
 
 	@Column(name = "type_article_divers")
@@ -32,7 +34,7 @@ public class ArticleDivers extends Article {
 
 	// constructeur article divers materialise non neuf
 	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock,
-			Etat argEtat, String argType, String caracteristiques) {
+			Etat argEtat, String argType) {
 		super(argReference, argPrixHt, argNom, argUrlImage, argStock, argEtat);
 		this.type = argType;
 	}

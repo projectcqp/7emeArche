@@ -1,6 +1,5 @@
 package fr.demos.formation.septiemearche.web;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionQuantiteDemandeeSuperieureAuStock;
-import fr.demos.formation.poe.cinegrandearche.metier.Article;
-import fr.demos.formation.poe.cinegrandearche.metier.Panier;
+import fr.demos.formation.septiemearche.exceptions.ExceptionQuantiteDemandeeSuperieureAuStock;
+import fr.demos.formation.septiemearche.metier.Panier;
 
 @WebServlet("/ControlerPanier")
 public class ControlerPanier extends HttpServlet {

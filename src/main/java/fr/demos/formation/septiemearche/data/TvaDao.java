@@ -20,7 +20,7 @@ public class TvaDao implements InterfaceDao<Tva>{
 //On définit le generic entre chevrons
 	@Override
 	public Tva select(String id) throws Exception {
-		String requestString = "SELECT FROM TVA WHERE ID=?";
+		String requestString = "SELECT t FROM Tva t WHERE t.id=?";
 		
 		TypedQuery<Tva> query =em.createQuery(requestString, Tva.class);
 		query.setParameter(0, id);
@@ -29,25 +29,23 @@ public class TvaDao implements InterfaceDao<Tva>{
 	}
 
 	@Override
-	public List<Tva> selectAll(String criteria) throws Exception {
-		String requestString = "SELECT FROM TVA";
+	public List<Tva> selectAll() throws Exception {
+		String requestString = "SELECT t FROM Tva t";
 		
 		TypedQuery<Tva> query =em.createQuery(requestString, Tva.class);
 		
 		return query.getResultList();
-//Todo filtrer les résultats en fonction du paramètree
+// TODO filtrer les résultats en fonction du paramètre
 	}
 
 	@Override
-	public int insert(Tva tva) throws Exception {
+	public void insert(Tva tva) throws Exception {
 		em.persist(tva);
-		
-		return tva.getId();
 	}
 
 	@Override
 	public void update(Tva tva) throws Exception {
-		em.persist(tva);
+		em.merge(tva);
 	}
 
 	@Override

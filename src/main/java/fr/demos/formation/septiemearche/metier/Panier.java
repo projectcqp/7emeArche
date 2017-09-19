@@ -85,7 +85,7 @@ public class Panier implements Iterable<LignePanier> {
 		while(iter.hasNext()){
 			LignePanier lp= iter.next();
 			// si la réf est la même, c'est ma ligne panier
-			if(lp.getArticle().getRef().equals(refArticleLigne)){
+			if(lp.getArticle().getReference().equals(refArticleLigne)){
 				iter.remove();
 			}
 		}
@@ -129,7 +129,7 @@ public class Panier implements Iterable<LignePanier> {
 	public void modifierQuantiteLignePanier (String refArticleLigne, int nouvelleQuantiteLigne) throws ExceptionQuantiteDemandeeSuperieureAuStock{
 		for(LignePanier lignePanier : lignesPanier){
 			// si c'est bien mon article
-			if (lignePanier.getArticle().getRef().equals(refArticleLigne)){
+			if (lignePanier.getArticle().getReference().equals(refArticleLigne)){
 				// si article dématérialisé (pas de stock à gérer quantité illimitée)
 				if(lignePanier.getArticle().getMateriel() == null){
 					lignePanier.setQuantite(nouvelleQuantiteLigne);

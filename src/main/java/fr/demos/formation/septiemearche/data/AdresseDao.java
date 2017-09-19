@@ -23,7 +23,7 @@ public class AdresseDao implements InterfaceDao<Adresse> {
 	}
 
 	@Override
-	public List<Adresse> selectAll(String criteria) throws Exception {
+	public List<Adresse> selectAll() throws Exception {
 		String requestString = "SELECT FROM ADRESSE";
 
 		TypedQuery<Adresse> query = em.createQuery(requestString, Adresse.class);

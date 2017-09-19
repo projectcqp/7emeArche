@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fr.demos.formation.poe.cinegrandearche.data.CompteDAO;
-import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionPasswordFail;
-import fr.demos.formation.poe.cinegrandearche.metier.Compte;
-import fr.demos.formation.poe.cinegrandearche.metier.CompteLogin;
+import fr.demos.formation.septiemearche.metier.Compte;
+import fr.demos.formation.septiemearche.metier.CompteLogin;
 
 @WebServlet("/ControlerCompte")
 public class ControlerCompte extends HttpServlet {

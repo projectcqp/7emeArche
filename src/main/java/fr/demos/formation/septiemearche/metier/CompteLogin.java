@@ -2,10 +2,7 @@ package fr.demos.formation.septiemearche.metier;
 
 import javax.inject.Inject;
 
-import fr.demos.formation.septiemearche.data.CompteDAO;
-import fr.demos.formation.septiemearche.data.CompteDAOMySql;
 import fr.demos.formation.septiemearche.data.CompteDao;
-import fr.demos.formation.septiemearche.data.InterfaceDao;
 
 public class CompteLogin {
 	
@@ -34,7 +31,8 @@ public class CompteLogin {
 		//je cree une instance du DAO qui va me retourner un Compte
 		//
 		
-		compteRetourne = compteDao.     .select(identifiantEmail, password);
+		//TODO
+		//compteRetourne = compteDao.select(identifiantEmail, password);
 		
 		return compteRetourne;
 		// si retourne null erreur password ou email

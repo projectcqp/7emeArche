@@ -1,17 +1,16 @@
 package fr.demos.formation.septiemearche.web;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import fr.demos.formation.poe.cinegrandearche.data.ArticleDAO;
-import fr.demos.formation.poe.cinegrandearche.data.ArticleDAOMySql;
-import fr.demos.formation.poe.cinegrandearche.metier.Article;
-import fr.demos.formation.poe.cinegrandearche.metier.Compte;
-import fr.demos.formation.poe.cinegrandearche.metier.Panier;
+import fr.demos.formation.septiemearche.data.ArticleDao;
+import fr.demos.formation.septiemearche.metier.Article;
+import fr.demos.formation.septiemearche.metier.Compte;
+import fr.demos.formation.septiemearche.metier.Panier;
 
 @WebListener
 public class ListenerPanier implements HttpSessionListener {
@@ -20,7 +19,7 @@ public class ListenerPanier implements HttpSessionListener {
 	//@Inject private ArticleDAOMySql articleDAOMySqlCDI;
 	
 	// appel de l'interface on pourra choisir son dao si plusieurs
-	@Inject private ArticleDAO articleDaoCDI;
+	@Inject private ArticleDao articleDaoCDI;
 	
 	
     public ListenerPanier() {
@@ -47,8 +46,15 @@ public class ListenerPanier implements HttpSessionListener {
 //    	arg0.getSession().setAttribute("catalogue", catalogue);
     	
     	// version avec CDI et appel interface pour choisir le DAO
-    	ArrayList<Article> catalogue = (ArrayList<Article>) articleDaoCDI.select("");
-    	arg0.getSession().setAttribute("catalogue", catalogue);
+    	List<Article> catalogue;
+		try {
+			catalogue = (List<Article>) articleDaoCDI.select("");
+			arg0.getSession().setAttribute("catalogue", catalogue);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     	
     	
     	

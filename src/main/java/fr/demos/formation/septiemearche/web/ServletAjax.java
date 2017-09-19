@@ -37,70 +37,70 @@ public class ServletAjax extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("servlet ajax");
-		// je dis à tomcat d'utiliser les accente et caractères spéciaux
+		// je dis ï¿½ tomcat d'utiliser les accente et caractï¿½res spï¿½ciaux
 		request.setCharacterEncoding("UTF-8");		
 		
 		// on utilise un outil printwriter car on sort de java
-		// on en a besoin pour écrire sur le réseau
+		// on en a besoin pour ï¿½crire sur le rï¿½seau
 		PrintWriter out = response.getWriter();
 		
 		// j'identifie et je stocke la session actuelle
 		HttpSession session = request.getSession();
 
-		// je stocke le paramètre de requete (la valeur du id du bouton)
+		// je stocke le paramï¿½tre de requete (la valeur du id du bouton)
 		String actionBouton = request.getParameter("actionBouton");
 		
 		
 		// si on clique sur ajouter au panier
-		// TODO : vérification nom utilisateur et mdp pour valider connection
+		// TODO : vï¿½rification nom utilisateur et mdp pour valider connection
 		if (actionBouton != null && actionBouton.equals("boutonAjoutArticle")) {
 
-			// ### je récupère la quantité mais c'est un string ###
+			// ### je rï¿½cupï¿½re la quantitï¿½ mais c'est un string ###
 			String stringQuantiteAjoutee = request.getParameter("quteAjoutPanier");
-			// transforme stringQuantitéAjoutee en intQuantiteAjoutee
+			// transforme stringQuantitï¿½Ajoutee en intQuantiteAjoutee
 			int intQuantiteAjoutee = Integer.parseInt(stringQuantiteAjoutee);
 
-			// ### je récupere la réf de l'article ###
+			// ### je rï¿½cupere la rï¿½f de l'article ###
 			String refArticle = request.getParameter("idArticle");
 
-			// ### je récupère l'arraylist du controlerArticle en le castant en arrayList
+			// ### je rï¿½cupï¿½re l'arraylist du controlerArticle en le castant en arrayList
 			ArrayList<Article> catalogue = (ArrayList<Article>) session.getAttribute("catalogue");
 
-			// et je cherche l'article de cette réf###
+			// et je cherche l'article de cette rï¿½f###
 			// pour chaque article du catalogue
 			for (Article article : catalogue) {
-				// là où réf de l'article est la même que celle récupérée dans le bouton
-				if (article.getRef().equals(refArticle)) {
+				// lï¿½ oï¿½ rï¿½f de l'article est la mï¿½me que celle rï¿½cupï¿½rï¿½e dans le bouton
+				if (article.getReference().equals(refArticle)) {
 					// Je me connecte au panier de la session en le castant
 					Panier p = (Panier) session.getAttribute("panier");
-					// ### je déclenche la méthode panier ajouterArticle###
+					// ### je dï¿½clenche la mï¿½thode panier ajouterArticle###
 					try {
 						p.ajouterUnArticle(article, intQuantiteAjoutee);
 
-						// je créée mon objet json pour le retour d'infos
+						// je crï¿½ï¿½e mon objet json pour le retour d'infos
 						
 						//on informe le navigateur du type mime
 						response.setContentType("application/json");
 						
-						// je renvoie les infos en jason dans la réponse http vers la page jsp
-						// la réception de cette réponse est l'étape n° 4 du xhr.readyState
-						//je génère le jason manuellement mais on pourrait utiliser un outil pour le générer
+						// je renvoie les infos en jason dans la rï¿½ponse http vers la page jsp
+						// la rï¿½ception de cette rï¿½ponse est l'ï¿½tape nï¿½ 4 du xhr.readyState
+						//je gï¿½nï¿½re le jason manuellement mais on pourrait utiliser un outil pour le gï¿½nï¿½rer
 						out.println("{\"nouveauQteCumuPanier\":" + p.getArticlesCumulesPanier() + ",\"nouveauPxTotalPanier\":" + p.getPrixTotal() + "}");
 							
 					} catch (ExceptionQuantiteDemandeeSuperieureAuStock e) {
 						String message = e.getMessage();
 						int quantiteStock = e.getQuantiteStock();
-						// je mets les éléments du message dans une variable
+						// je mets les ï¿½lï¿½ments du message dans une variable
 						// unique pour la mettre en argument du setAttribute
 						String messageExceptionQDSAS = message + quantiteStock;
-						// je mets à disposition le message en EL pour la requete
+						// je mets ï¿½ disposition le message en EL pour la requete
 						request.setAttribute("ExceptionQuantiteDemandeeSuperieureAuStock", messageExceptionQDSAS);
-						// je mets dans la session la référence de l'article mis
+						// je mets dans la session la rï¿½fï¿½rence de l'article mis
 						// dans le panier
 						session.setAttribute("referenceArticlePanier", refArticle);
 					}
-					// break pour arrêter de boucler car on aura qu'une seule
-					// fois cet article (référence unique)
+					// break pour arrï¿½ter de boucler car on aura qu'une seule
+					// fois cet article (rï¿½fï¿½rence unique)
 					break;
 				} // if
 			} // for article catalogue
