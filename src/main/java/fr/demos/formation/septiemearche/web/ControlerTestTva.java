@@ -30,7 +30,7 @@ public class ControlerTestTva extends HttpServlet {
 			throws ServletException, IOException {
 
 		
-		System.out.println("test tva");
+		System.out.println("doGet controler tva");
 		
 		// 
 		ArrayList<Tva> mesTva = null;
@@ -38,7 +38,7 @@ public class ControlerTestTva extends HttpServlet {
 			System.out.println("je vais faire un selectAll");
 			mesTva = (ArrayList<Tva>)tvaDao.selectAll();
 			for (Tva tva : mesTva) {
-				System.out.println("voici ma tva : " + tva.toString());	
+				System.out.println("j'itère sur une tva : " + tva.toString());	
 			}
 			
 		} catch (Exception e) {

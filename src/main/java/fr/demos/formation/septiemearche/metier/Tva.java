@@ -109,7 +109,7 @@ public class Tva {
 
 	@Override
 	public String toString() {
-		return "TVA " + id + id + libelle + taux + "%";
+		return "TVA" + ", Id = " + id + ", Libellé = " + libelle + ", Taux = " + taux + "%";
 	}
 
 }
