@@ -21,10 +21,13 @@ public class TvaDao implements InterfaceDao<Tva>{
 
 	@Override
 	public Tva select(String id) throws Exception {
+		
+		int idInt = Integer.parseInt(id);
+		
 		String requestString = "SELECT t FROM Tva t WHERE t.id=?";
 		
 		TypedQuery<Tva> query =em.createQuery(requestString, Tva.class);
-		query.setParameter(0, id);
+		query.setParameter(1, idInt);
 		
 		return query.getSingleResult();
 	}

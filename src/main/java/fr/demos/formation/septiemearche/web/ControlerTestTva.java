@@ -18,8 +18,8 @@ public class ControlerTestTva extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// appel de l'interface on pourra choisir son dao si plusieurs
-	@Inject private TvaDao tvaDao;
-
+	@Inject
+	private TvaDao tvaDao;
 
 	public ControlerTestTva() {
 		super();
@@ -29,35 +29,39 @@ public class ControlerTestTva extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
 		System.out.println("doGet controler tva");
-		
-		// 
 		ArrayList<Tva> mesTva = null;
+		
+		// test tvaDao.selectAll()
 		try {
-			System.out.println("je vais faire un selectAll");
-			mesTva = (ArrayList<Tva>)tvaDao.selectAll();
+			System.out.println("tvaDao.selectAll()");
+			mesTva = (ArrayList<Tva>) tvaDao.selectAll();
 			for (Tva tva : mesTva) {
-				System.out.println("j'itère sur une tva : " + tva.toString());	
+				System.out.println("j'itère sur une tva : " + tva.toString());
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("exception dans selectAll TVA :" + e);
+		}
+
+		// test tvaDao.select(1)
+		try {
+			System.out.println("tvaDao.select(1)");
+			Tva tva = tvaDao.select("1");
+			System.out.println("Voici la tva demandée : " + tva.toString());
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("exception dans selectAll :" + e);
+			System.out.println("exception dans select TVA :" + e);
 		}
 		
-	
-		
-
 	}// do get
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		
-		
-		
 	}// do post
 
 } // class
