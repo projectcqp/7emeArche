@@ -32,16 +32,50 @@ public class TvaDao implements InterfaceDao<Tva>{
 		return query.getSingleResult();
 	}
 
+	
+	
+	@Override
+	public List<Tva> selectSearch(String criteria) throws Exception {
+		
+		int criteriaInt = 2147483647;
+		try {
+			System.out.println("je parseInt");
+			criteriaInt = Integer.parseInt(criteria);
+		} catch (Exception e) {
+			System.out.println("ParseInt raté");
+		}
+		
+		float criteriaFloat = 3.4028235E38f;
+		try {	
+			System.out.println("je parseFloat");
+			criteriaFloat = Float.parseFloat(criteria);
+		} catch (Exception e) {
+			System.out.println("ParseFloat raté");
+		}
+		
+		String requestString = "SELECT t FROM Tva t WHERE t.id=? OR t.taux=? OR t.libelle=?";
+		
+		TypedQuery<Tva> query =em.createQuery(requestString, Tva.class);
+		query.setParameter(1, criteriaInt);
+		query.setParameter(2, criteriaFloat);
+		query.setParameter(3, criteria);
+		
+		return query.getResultList();
+	}
+	
+	
+	
 	@Override
 	public List<Tva> selectAll() throws Exception {
+		
 		String requestString = "SELECT t FROM Tva t";
 		
 		TypedQuery<Tva> query =em.createQuery(requestString, Tva.class);
 		
 		return query.getResultList();
-// TODO filtrer les résultats en fonction du paramètre
 	}
 
+	
 	@Override
 	public void insert(Tva tva) throws Exception {
 		em.persist(tva);

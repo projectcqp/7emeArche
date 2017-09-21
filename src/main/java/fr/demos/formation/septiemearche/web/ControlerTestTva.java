@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.demos.formation.septiemearche.data.AdresseDao;
 import fr.demos.formation.septiemearche.data.TvaDao;
+import fr.demos.formation.septiemearche.metier.Adresse;
 import fr.demos.formation.septiemearche.metier.Tva;
 
 @WebServlet("/ControlerTestTva")
@@ -20,6 +22,8 @@ public class ControlerTestTva extends HttpServlet {
 	// appel de l'interface on pourra choisir son dao si plusieurs
 	@Inject
 	private TvaDao tvaDao;
+	@Inject
+	private AdresseDao adresseDao;
 
 	public ControlerTestTva() {
 		super();
@@ -30,33 +34,83 @@ public class ControlerTestTva extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("doGet controler tva");
+		
+		
+// ######## TEST TvaDao ########	
 		ArrayList<Tva> mesTva = null;
 		
 		// test tvaDao.selectAll()
 		try {
-			System.out.println("tvaDao.selectAll()");
 			mesTva = (ArrayList<Tva>) tvaDao.selectAll();
 			for (Tva tva : mesTva) {
 				System.out.println("j'itère sur une tva : " + tva.toString());
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("exception dans selectAll TVA :" + e);
 		}
 
 		// test tvaDao.select(1)
 		try {
-			System.out.println("tvaDao.select(1)");
 			Tva tva = tvaDao.select("1");
 			System.out.println("Voici la tva demandée : " + tva.toString());
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("exception dans select TVA :" + e);
 		}
 		
+		// test tvaDao.selectSearch(normal ou 20.0 ou 3)
+		ArrayList<Tva> mesTvaSearch = null;
+		try {
+			mesTvaSearch = (ArrayList<Tva>) tvaDao.selectSearch("intermédiaire");
+			for (Tva tva : mesTvaSearch) {
+				System.out.println("le criteria retourne une tva : " + tva.toString());
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("exception dans selectSearch TVA :" + e);
+		}
+// ######## Fin TEST TvaDao ########		
+
+		
+// ######## TEST AdresseDao ########
+		ArrayList<Adresse> mesAdresses = null;
+		
+		// test adresseDao.selectAll()
+		try {
+			mesAdresses = (ArrayList<Adresse>) adresseDao.selectAll();
+			for (Adresse adresse : mesAdresses) {
+				System.out.println("j'itère sur une adresse : " + adresse.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("exception dans selectAll Adresse :" + e);
+		}
+
+//		// test adresseDao.select(1)
+//		try {
+//			Adresse adresse = adresseDao.select("1");
+//			System.out.println("Voici l'adresse demandée : " + adresse.toString());
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("exception dans select Adresse :" + e);
+//		}
+//		
+//		// test adresseDao.selectSearch()
+//		ArrayList<Tva> mesAdressesSearch = null;
+//		try {
+//			mesTvaSearch = (ArrayList<Tva>) tvaDao.selectSearch("intermédiaire");
+//			for (Tva tva : mesTvaSearch) {
+//				System.out.println("le criteria retourne une tva : " + tva.toString());
+//				}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("exception dans selectSearch TVA :" + e);
+//		}
+		
+				
 	}// do get
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
