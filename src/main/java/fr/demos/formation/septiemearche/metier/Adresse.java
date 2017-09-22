@@ -36,8 +36,6 @@ public class Adresse {
 	private String pays;
 	
 	
-	
-	
 	public int getId() {
 		return id;
 	}

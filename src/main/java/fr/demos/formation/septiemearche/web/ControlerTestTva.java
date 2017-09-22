@@ -65,7 +65,7 @@ public class ControlerTestTva extends HttpServlet {
 		try {
 			mesTvaSearch = (ArrayList<Tva>) tvaDao.selectSearch("intermédiaire");
 			for (Tva tva : mesTvaSearch) {
-				System.out.println("le criteria retourne une tva : " + tva.toString());
+				System.out.println("le criteria de recherche retourne une tva : " + tva.toString());
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,27 +88,28 @@ public class ControlerTestTva extends HttpServlet {
 			System.out.println("exception dans selectAll Adresse :" + e);
 		}
 
-//		// test adresseDao.select(1)
-//		try {
-//			Adresse adresse = adresseDao.select("1");
-//			System.out.println("Voici l'adresse demandée : " + adresse.toString());
-//			
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("exception dans select Adresse :" + e);
-//		}
-//		
-//		// test adresseDao.selectSearch()
-//		ArrayList<Tva> mesAdressesSearch = null;
-//		try {
-//			mesTvaSearch = (ArrayList<Tva>) tvaDao.selectSearch("intermédiaire");
-//			for (Tva tva : mesTvaSearch) {
-//				System.out.println("le criteria retourne une tva : " + tva.toString());
-//				}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("exception dans selectSearch TVA :" + e);
-//		}
+		// test adresseDao.select(5)
+		try {
+			Adresse adresse = adresseDao.select("5");
+			System.out.println("Voici l'adresse demandée : " + adresse.toString());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("exception dans select Adresse :" + e);
+		}
+		
+		// test adresseDao.selectSearch()
+		ArrayList<Adresse> mesAdressesSearch = null;
+		try {
+//			mesAdressesSearch = (ArrayList<Adresse>) adresseDao.selectSearch("facturatio");
+			mesAdressesSearch = (ArrayList<Adresse>) adresseDao.selectSearch("75013");
+			for (Adresse adresse : mesAdressesSearch) {
+				System.out.println("le criteria de recherche retourne une adresse : " + adresse.toString());
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("exception dans selectSearch Adresse :" + e);
+		}
 		
 				
 	}// do get

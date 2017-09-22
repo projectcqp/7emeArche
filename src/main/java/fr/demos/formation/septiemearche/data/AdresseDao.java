@@ -16,10 +16,18 @@ public class AdresseDao implements InterfaceDao<Adresse>{
 	@Override
 	public Adresse select(String id) throws Exception {
 		
+		int idInt = 0;
+		try {
+			idInt = Integer.parseInt(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("On fait le select() sur un int" + e);
+		}
+		
 		String requestString = "SELECT a FROM Adresse a WHERE a.id=?";
 
 		TypedQuery<Adresse> query = em.createQuery(requestString, Adresse.class);
-		query.setParameter(1, id);
+		query.setParameter(1, idInt);
 
 		return query.getSingleResult();
 	}
@@ -34,7 +42,7 @@ public class AdresseDao implements InterfaceDao<Adresse>{
 			System.out.println("je parseInt");
 			criteriaInt = Integer.parseInt(criteria);
 		} catch (Exception e) {
-			System.out.println("ParseInt raté");
+			System.out.println("Impossible de ParseInt le criteria");
 		}
 				
 		String requestString = "SELECT a FROM Adresse a WHERE a.id=? OR a.nomAdresse=? OR a.voie=?"
