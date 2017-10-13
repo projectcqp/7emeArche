@@ -1,13 +1,21 @@
 package fr.demos.formation.septiemearche.metier;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import fr.demos.formation.septiemearche.exceptions.ExceptionPasswordFormat;
 
@@ -19,26 +27,46 @@ import fr.demos.formation.septiemearche.exceptions.ExceptionPasswordFormat;
  */
 @Entity
 @Table(name = "compte")
-public class Compte {
+public class Compte implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_compte")
 	private int id;
+	
 	@Column(name = "email_compte", nullable = false)
 	private String email;
+	
 	@Column(name = "password_compte", nullable = false)
 	private String password;
+	
 	@Column(name = "nom_compte", nullable = false)
 	private String nom;
+	
 	@Column(name = "prenom_compte", nullable = false)
 	private String prenom;
+	
 	@Column(name = "telephone_compte", nullable = false)
 	private String telephone;
-	@Column(name = "date_naissance_compte", nullable = false)
+	
+	//TODO faire autrechose que de la date java 8 ça fait planter hibernate
+	//@Column(name = "date_naissance_compte", nullable = false)
+	@Transient
 	private LocalDate dateNaissance;
-	@Column(name = "id_adress_facturation_compte", nullable = false)
+	
+	//TODO
+	@OneToOne
+	@JoinColumn(name= "id_adresse_facturation_compte")
+	//@Transient
 	private Adresse adresseFacturation;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="id_compte_adresse")
+	private List<Adresse> adressesCompte;
+	
+	@Transient
 	private int longueurPasswordMini = 6;
 
 	public void testCreationPassword(String password, String passwordConfirmation) throws ExceptionPasswordFormat {
@@ -57,7 +85,17 @@ public class Compte {
 		}
 	}
 
+	public Compte() {
+		super();
+	}
 	
+	@Override
+	public String toString() {
+		return "Compte [id=" + id + ", email=" + email + ", password=" + password + ", nom=" + nom + ", prenom="
+				+ prenom + ", telephone=" + telephone + ", dateNaissance=" + dateNaissance + ", adresseFacturation="
+				+ adresseFacturation + ", longueurPasswordMini=" + longueurPasswordMini + "]";
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -129,5 +167,19 @@ public class Compte {
 	public void setLongueurPasswordMini(int longueurPasswordMini) {
 		this.longueurPasswordMini = longueurPasswordMini;
 	}
+
+	public List<Adresse> getAdressesCompte() {
+		return adressesCompte;
+	}
+
+	public void setAdressesCompte(List<Adresse> adressesCompte) {
+		this.adressesCompte = adressesCompte;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 	
 }

@@ -15,8 +15,10 @@ public class Dematerialise {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_dematerialise_article")
 	private int id;
+	
 	@Column(name = "format_dematerialise")
 	private String format;
+	
 	@Column(name = "url_download_dematerialise")
 	private String urlDownload;
 	

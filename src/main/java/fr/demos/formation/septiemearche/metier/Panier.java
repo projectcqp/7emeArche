@@ -23,10 +23,12 @@ public class Panier implements Iterable<LignePanier> {
 
 	public double getPrixTotal(){
 		double prixTotal=0;
+		double prixTotalArrondi=0.00; 
 		for (LignePanier ligneDuPanier : lignesPanier){
 			prixTotal = prixTotal + (ligneDuPanier.getQuantite() * ligneDuPanier.getArticle().getPrixHt());
+			prixTotalArrondi = Math.round(prixTotal*100.0)/100.0;
 		}
-		return prixTotal;
+		return prixTotalArrondi;
 	}
 	
 	//sera appelée par ajouterUnArticle

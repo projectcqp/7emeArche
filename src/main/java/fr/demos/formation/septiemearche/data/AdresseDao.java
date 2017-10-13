@@ -21,7 +21,7 @@ public class AdresseDao implements InterfaceDao<Adresse>{
 			idInt = Integer.parseInt(id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("On fait le select() sur un int" + e);
+			System.out.println("On fait le select(id) sur un int" + e);
 		}
 		
 		String requestString = "SELECT a FROM Adresse a WHERE a.id=?";

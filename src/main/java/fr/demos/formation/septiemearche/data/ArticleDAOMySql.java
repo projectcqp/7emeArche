@@ -53,6 +53,12 @@ public class ArticleDAOMySql implements ArticleDao {
 		return null;
 	}
 
+	@Override
+	public List<Article> selectSearch(String criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/*@Override
 	public List<Article> select(String critere) {
 

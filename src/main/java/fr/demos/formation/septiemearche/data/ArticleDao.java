@@ -12,46 +12,28 @@ import fr.demos.formation.septiemearche.metier.Article;
  *
  */
 
-public class ArticleDao implements InterfaceDao<Article> {
+public interface ArticleDao extends InterfaceDao<Article> {
 
 	
 	
 	
 	@Override
-	public Article select(String key) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Article select(String key) throws Exception;
 
 	@Override
-	public List<Article> selectSearch(String criteria) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<Article> selectSearch(String criteria) throws Exception;
 
 	@Override
-	public List<Article> selectAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<Article> selectAll() throws Exception;
 
 	@Override
-	public void insert(Article object) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	public void insert(Article object) throws Exception;
 
 	@Override
-	public void update(Article object) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	public void update(Article object) throws Exception;
 
 	@Override
-	public void delete(Article object) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	public void delete(Article object) throws Exception;
 	
 
 }

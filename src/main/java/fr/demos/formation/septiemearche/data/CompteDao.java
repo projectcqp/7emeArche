@@ -1,16 +1,13 @@
 package fr.demos.formation.septiemearche.data;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import fr.demos.formation.septiemearche.metier.Adresse;
 import fr.demos.formation.septiemearche.metier.Compte;
-import fr.demos.formation.septiemearche.metier.Tva;
 
 public class CompteDao implements InterfaceDao<Compte> {
 	@PersistenceContext
@@ -24,7 +21,7 @@ public class CompteDao implements InterfaceDao<Compte> {
 			idInt = Integer.parseInt(id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("On fait le select() sur un int" + e);
+			System.out.println("On fait le select(id) sur un int" + e);
 		}
 
 		String requestString = "SELECT c FROM Compte c WHERE c.id=?";
@@ -56,8 +53,8 @@ public class CompteDao implements InterfaceDao<Compte> {
 		}
 		
 		String requestString = "SELECT c FROM Compte c WHERE c.id=? OR c.email=? OR c.nom=? OR c.prenom=?"
-				//+ " OR c.telephone=? OR c.dateNaissance=? OR c.adresseFacturation.id=?";
-				+ " OR c.telephone=? OR c.dateNaissance=?";
+				//+ " OR c.telephone=? OR c.dateNaissance=?";
+				+ " OR c.telephone=?";
 
 		TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);
 		query.setParameter(1, criteriaInt);
@@ -65,22 +62,19 @@ public class CompteDao implements InterfaceDao<Compte> {
 		query.setParameter(3, criteria);
 		query.setParameter(4, criteria);
 		query.setParameter(5, criteria);
-		query.setParameter(6, criteriaLocalDate);
-		// TODO recherche sur le type adresse ?
-		// ou alors on appelle le selectSearch sur adresse et retourne le id int ?
-		//query.setParameter(7, criteriaAdresse ou criteriaInt);
-
+		//query.setParameter(6, criteriaLocalDate);
+		
 		return query.getResultList();
 	}
 
 	@Override
 	public List<Compte> selectAll() throws Exception {
-		String requestString = "SELECT FROM COMPTE";
+		String requestString = "SELECT c FROM Compte c";
 
 		TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);
 
 		return query.getResultList();
-		// Todo filtrer les résultats en fonction du paramètree
+		// Todo filtrer les résultats en fonction du paramètre
 	}
 
 	@Override
@@ -97,7 +91,7 @@ public class CompteDao implements InterfaceDao<Compte> {
 	@Override
 	public void delete(Compte compte) throws Exception {
 		em.remove(compte);
-		compte.setEmail("0");
+		compte.setId(0);
 	}
 
 }

@@ -20,15 +20,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tva")
 public class Tva {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_tva")
 	private int id;
+	
 	@Column(name = "taux_tva", nullable = false)
 	private float taux;
+	
 	@Column(name = "libelle_tva", nullable = false, unique = true)
 	private String libelle;
 
+	
 	public Tva() {
 	}
 

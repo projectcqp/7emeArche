@@ -26,7 +26,7 @@ public class TvaDao implements InterfaceDao<Tva> {
 			idInt = Integer.parseInt(id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("On fait le select() sur un int" + e);
+			System.out.println("On fait le select(id) sur un int" + e);
 		}
 
 		String requestString = "SELECT t FROM Tva t WHERE t.id=?";
@@ -68,7 +68,6 @@ public class TvaDao implements InterfaceDao<Tva> {
 
 	@Override
 	public List<Tva> selectAll() throws Exception {
-
 		String requestString = "SELECT t FROM Tva t";
 
 		TypedQuery<Tva> query = em.createQuery(requestString, Tva.class);

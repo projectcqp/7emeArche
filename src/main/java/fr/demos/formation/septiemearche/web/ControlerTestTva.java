@@ -11,19 +11,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.demos.formation.septiemearche.data.AdresseDao;
+import fr.demos.formation.septiemearche.data.ArticleDiversDao;
+import fr.demos.formation.septiemearche.data.CompteDao;
 import fr.demos.formation.septiemearche.data.TvaDao;
 import fr.demos.formation.septiemearche.metier.Adresse;
+import fr.demos.formation.septiemearche.metier.ArticleDivers;
+import fr.demos.formation.septiemearche.metier.Compte;
 import fr.demos.formation.septiemearche.metier.Tva;
 
 @WebServlet("/ControlerTestTva")
 public class ControlerTestTva extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	// appel de l'interface on pourra choisir son dao si plusieurs
+	// appel de l'interface
 	@Inject
 	private TvaDao tvaDao;
 	@Inject
 	private AdresseDao adresseDao;
+	@Inject
+	private CompteDao compteDao;
+	@Inject
+	private ArticleDiversDao articleDiversDao;
 
 	public ControlerTestTva() {
 		super();
@@ -74,6 +83,7 @@ public class ControlerTestTva extends HttpServlet {
 // ######## Fin TEST TvaDao ########		
 
 		
+		
 // ######## TEST AdresseDao ########
 		ArrayList<Adresse> mesAdresses = null;
 		
@@ -110,7 +120,95 @@ public class ControlerTestTva extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("exception dans selectSearch Adresse :" + e);
 		}
+// ######## FIN TEST AdresseDao ########		
+	
 		
+		
+// ######## TEST CompteDao ########
+		
+		ArrayList<Compte> mesComptes = null;
+		
+		// test compteDao.selectAll()
+		try {
+			mesComptes = (ArrayList<Compte>) compteDao.selectAll();
+			for (Compte compte : mesComptes) {
+				System.out.println("j'itère sur un compte : " + compte.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("exception dans selectAll Compte :" + e);
+		}
+		
+		
+		// test compteDao.select(2)
+		try {
+			Compte compte = compteDao.select("2");
+			System.out.println("Voici le compte demandé : " + compte.toString());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("exception dans select Compte :" + e);
+		}
+
+		// test compteDao.selectSearch(	nom, email2, 4)
+		ArrayList<Compte> mesComptesSearch = null;
+		try {
+			//mesComptesSearch = (ArrayList<Compte>) compteDao.selectSearch("nom");
+			//mesComptesSearch = (ArrayList<Compte>) compteDao.selectSearch("email2");
+			mesComptesSearch = (ArrayList<Compte>) compteDao.selectSearch("2");
+			for (Compte compte : mesComptesSearch) {
+				System.out.println("le criteria de recherche retourne un compte : " + compte.toString());
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("exception dans selectSearch Compte :" + e);
+		}
+		
+// ######## FIN TEST CompteDao ########		
+		
+	
+
+// ######## TEST ArticleDiversDao ########
+		
+				ArrayList<ArticleDivers> mesArticlesDivers = null;
+				
+				// test articleDiversDao.selectAll()
+				try {
+					mesArticlesDivers = (ArrayList<ArticleDivers>) articleDiversDao.selectAll();
+					for (ArticleDivers articleDivers : mesArticlesDivers) {
+						System.out.println("j'itère sur un compte : " + articleDivers.toString());
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("exception dans selectAll ArticleDivers :" + e);
+				}
+				
+				
+				// test mesArticlesDivers.select(2)
+				try {
+					ArticleDivers articleDivers = articleDiversDao.select("2");
+					System.out.println("Voici l'article divers demandé : " + articleDivers.toString());
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("exception dans select ArticleDivers :" + e);
+				}
+
+				// test compteDao.selectSearch(dvd)
+				ArrayList<ArticleDivers> mesArticlcesDiversSearch = null;
+				try {
+					//mes
+					mesArticlcesDiversSearch = (ArrayList<ArticleDivers>) articleDiversDao.selectSearch("dvd");
+					for (ArticleDivers articleDivers : mesArticlcesDiversSearch) {
+						System.out.println("le criteria de recherche retourne un article divers : " + articleDivers.toString());
+						}
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("exception dans selectSearch ArticleDivers :" + e);
+				}
+				
+// ######## FIN TEST ArticleDiversDao ########		
+				
 				
 	}// do get
 

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "livre")
@@ -14,13 +15,19 @@ public class Livre extends Article {
 	
 	@Column(name = "auteur_livre", nullable = false)
 	private String auteur;
+	
 	@Column(name = "isbn_livre", nullable = false)
 	private String isbn;
+	
 	@Column(name = "editeur_livre", nullable = false)
 	private String editeur;
+	
 	@Column(name = "genre_livre", nullable = false)
 	private String genre;
-	@Column(name = "date_livre", nullable = false)
+	
+	//TODO
+	//@Column(name = "date_livre", nullable = false)
+	@Transient
 	private LocalDate date;
 	
 	public Livre(){

@@ -1,5 +1,7 @@
 package fr.demos.formation.septiemearche.metier;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Alexandre
@@ -17,21 +21,30 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "adresse")
-public class Adresse {
+public class Adresse implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_adresse")
 	private int id;
+	
 	@Column(name = "nom_adresse", nullable = false)
 	private String nomAdresse;
+	
 	@Column(name="voie_adresse", nullable = false)
 	private String voie;
+	
 	@Column(name="complement_adresse")
 	private String complement;
+	
 	@Column(name="code_postal_adresse", nullable = false)
 	private String codePostal;
+	
 	@Column(name="ville_adresse", nullable = false)
 	private String ville;
+	
 	@Column(name="pays_adresse", nullable = false)
 	private String pays;
 	
@@ -79,11 +92,17 @@ public class Adresse {
 		this.pays = pays;
 	}
 	
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Override
 	public String toString() {
 		return "Adresse [id=" + id + ", nomAdresse=" + nomAdresse + ", voie=" + voie + ", complement=" + complement
 				+ ", codePostal=" + codePostal + ", ville=" + ville + ", pays=" + pays + "]";
 	}
+	
+	
 	
 	
 }

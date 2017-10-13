@@ -1,6 +1,8 @@
 package fr.demos.formation.septiemearche.metier;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,28 +16,38 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "article")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="type_article", discriminatorType=DiscriminatorType.STRING)
 public abstract class Article {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_article")
 	private int id;
+	
 	@Column(name="reference_article", nullable = false)
 	private String reference;
+	
 	@Column(name = "prix_ht_article", nullable = false)
 	private double prixHt;
+	
 	@Column(name = "nom_article", nullable = false)
 	private String nom;
+	
 	@Column(name = "description_article", nullable = false)
 	private String description;
+	
 	@Column(name = "url_image_article", nullable = false)
 	private String urlImage;
+	
 	@OneToOne
 	private Materialise materiel;
+	
 	@OneToOne
 	private Dematerialise immateriel;
+	
 	@Column(name = "stock_article")
 	private int stock;
+	
 	@ManyToOne
 	private Tva tva;
 

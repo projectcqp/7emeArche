@@ -42,4 +42,10 @@ public class CommandeDao implements InterfaceDao<Commande> {
 		
 	}
 
+	@Override
+	public List<Commande> selectSearch(String criteria) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
