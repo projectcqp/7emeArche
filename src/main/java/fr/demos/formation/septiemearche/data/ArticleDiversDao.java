@@ -15,6 +15,7 @@ public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 	@Override
 	public ArticleDivers select(String id) throws Exception {
 		
+		//TODO mettre à jour avec l'exemple sur TvaDao
 		int idInt = 2147483647;
 		try {
 			idInt = Integer.parseInt(id);
@@ -24,7 +25,7 @@ public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 		}
 				
 		// on accède directement à l'id de la classe mère article avec ad.id
-		String requestString = "SELECT ad FROM Article_divers ad WHERE ad.id=?";
+		String requestString = "SELECT ad FROM ArticleDivers ad WHERE ad.id=?";
 
 		TypedQuery<ArticleDivers> query = em.createQuery(requestString, ArticleDivers.class);
 		query.setParameter(1, idInt);
@@ -35,7 +36,7 @@ public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 	@Override
 	public List<ArticleDivers> selectSearch(String criteria) throws Exception {
 		
-		String requestString = "SELECT ad FROM Article_divers ad WHERE ad.type=?";
+		String requestString = "SELECT ad FROM ArticleDivers ad WHERE ad.type=?";
 
 		TypedQuery<ArticleDivers> query = em.createQuery(requestString, ArticleDivers.class);
 		query.setParameter(1, criteria);
@@ -45,7 +46,7 @@ public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 
 	@Override
 	public List<ArticleDivers> selectAll() throws Exception {
-		String requestString = "SELECT ad FROM Article_divers ad";
+		String requestString = "SELECT ad FROM ArticleDivers ad";
 
 		TypedQuery<ArticleDivers> query = em.createQuery(requestString, ArticleDivers.class);
 

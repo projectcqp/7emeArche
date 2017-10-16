@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "article_divers")
-@PrimaryKeyJoinColumn(name = "id_article_divers")
+@PrimaryKeyJoinColumn(name = "id_article_article_divers")
 public class ArticleDivers extends Article {
 
 	@Column(name = "type_article_divers")
@@ -15,7 +15,6 @@ public class ArticleDivers extends Article {
 
 	// constructeur vide pour hibernate
 	public ArticleDivers() {
-		super();
 	}
 
 	// constructeur article divers dematerialise
@@ -41,11 +40,11 @@ public class ArticleDivers extends Article {
 
 	@Override
 	public String toString() {
-		if (super.getMateriel() == null) {
-			return "ArticleDivers [type=" + type + ", toString()=" + super.getImmateriel().getFormat()
-					+ ", getUrlDownload()=" + super.getImmateriel().getUrlDownload() + "]";
+		if (super.getMaterialise() == null) {
+			return "ArticleDivers [type=" + type + ", toString()=" + super.getDematerialise().getFormat()
+					+ ", getUrlDownload()=" + super.getDematerialise().getUrlDownload() + "]";
 		} else {
-			return "ArticleDivers [type=" + type + ", toString()=" + ", Etat=" + super.getMateriel().getEtat() + "]";
+			return "ArticleDivers [type=" + type + ", toString()=" + ", Etat=" + super.getMaterialise().getEtat() + "]";
 		}
 	}
 

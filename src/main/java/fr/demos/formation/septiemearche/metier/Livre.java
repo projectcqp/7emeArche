@@ -10,9 +10,9 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "livre")
-@PrimaryKeyJoinColumn(name = "id_livre")
+@PrimaryKeyJoinColumn(name = "id_article_livre")
 public class Livre extends Article {
-	
+		
 	@Column(name = "auteur_livre", nullable = false)
 	private String auteur;
 	
@@ -25,11 +25,12 @@ public class Livre extends Article {
 	@Column(name = "genre_livre", nullable = false)
 	private String genre;
 	
-	//TODO
+	//TODO type, stockage et mettre dans constructeurs et toString
 	//@Column(name = "date_livre", nullable = false)
 	@Transient
 	private LocalDate date;
 	
+	// Constructeur vide pour hibernate
 	public Livre(){
 	}
 	
@@ -65,16 +66,16 @@ public class Livre extends Article {
 
 	@Override
 	public String toString() {
-		if (super.getMateriel() == null){		
+		if (super.getMaterialise() == null){		
 		return "Livre Dematerialise [auteur=" + auteur + ", isbn=" + isbn + ", editeur=" + editeur + ", genre=" + genre + ", date="
 				+ date + ", getPrixHt()=" + getPrixHt() + ", getRef()=" + getReference() + ", getNom()=" + getNom()
-				+ ", getUrlImage()=" + getUrlImage() + ", getFormat()=" + super.getImmateriel().getFormat() + ", getUrlDownload()=" 
-				+ super.getImmateriel().getUrlDownload() + "]";
+				+ ", getUrlImage()=" + getUrlImage() + ", getFormat()=" + super.getDematerialise().getFormat() + ", getUrlDownload()=" 
+				+ super.getDematerialise().getUrlDownload() + "]";
 		} else {
 		return "Livre materiel [auteur=" + auteur + ", isbn=" + isbn + ", editeur=" + editeur + ", genre=" + genre + ", date="
 				+ date + ", PrixHt=" + getPrixHt() + ", Ref=" + getReference() + ", Nom=" + getNom()
 				+ ", getUrlImage()=" + getUrlImage() + ", mat�rialis�" + ", Stock=" + getStock() + ", Etat=" 
-				+ super.getMateriel().getEtat() + "]";
+				+ super.getMaterialise().getEtat() + "]";
 		}
 	}
 

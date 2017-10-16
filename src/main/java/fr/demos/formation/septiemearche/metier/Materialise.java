@@ -2,8 +2,8 @@ package fr.demos.formation.septiemearche.metier;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,10 +12,10 @@ import javax.persistence.Table;
 public class Materialise {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_materialise_article")
+	@Column(name = "id_materialise")
 	private int id;
 	@Column(name = "etat_materialise")
+	@Enumerated(EnumType.STRING)
 	private Etat etat;
 
 	public Materialise() {
