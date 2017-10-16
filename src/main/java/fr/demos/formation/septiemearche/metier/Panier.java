@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.demos.formation.septiemearche.exceptions.ExceptionQuantiteDemandeeSuperieureAuStock;
-import fr.demos.formation.septiemearche.exceptions.ExceptionRetirerArticleAbsentDuPanier;
-import fr.demos.formation.septiemearche.exceptions.ExceptionRetirerArticlePanier;
 
 public class Panier implements Iterable<LignePanier> {
 	
