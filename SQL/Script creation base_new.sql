@@ -98,21 +98,27 @@ alter table adresse add foreign key (id_compte_adresse) references compte(id_com
 create table commande(
 id_commande integer(5) primary key,
 date_commande date not null,
+montant_ht_comande double not null,
+montant_tva_commande double not null,
+ numero_commande varchar(10) not null,
+numero_facture_commande varchar(10) not null,
+adresse_facturation_commande varchar(255) not null,
+adresse_livraison_commande varchar(255) not null,
 
 id_compte_commande integer(5) not null, 
 foreign key (id_compte_commande ) references compte(id_compte)
 ) engine innodb;
 
 create table ligne_commande(
+id_ligne_commande int(6) primary key,
+references_article_ligne_commande varchar(10) not null,
+designation_article_ligne_commande varchar(10)  not null,
+prix_unitaire_ligne_commande double not null,
+quantite_ligne_commande integer(5) not null,
+total_ligne_commande double not null,
+
 id_commande__ligne_commande  integer(5) not null,
- foreign key (id_commande__ligne_commande ) references commande(id_commande),
-
-id_article_ligne_commande integer(5) not null,
-foreign key (id_article_ligne_commande) references article(id_article),
-
-primary key(id_commande__ligne_commande,id_article_ligne_commande),
-
-quantite_ligne_commande integer(5) not null
+ foreign key (id_commande__ligne_commande ) references commande(id_commande)
  ) engine innodb;
 
 
