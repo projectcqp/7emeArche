@@ -37,7 +37,7 @@ public class Panier implements Iterable<LignePanier> {
 		if (quantite <= a.getStock()){
 			lignesPanier.add(new LignePanier(a, quantite));
 		} else { // si quantite demandée supérieure au stock
-			if (a.getMateriel() == null){ // si dématerialise illimité, quantité toujours à 1
+			if (a.getMaterialise() == null){ // si dématerialise illimité, quantité toujours à 1
 				lignesPanier.add(new LignePanier(a, quantite));
 			} else { // si matérialisé stock insuffisant
 				throw new ExceptionQuantiteDemandeeSuperieureAuStock("Le stock n'est pas suffisant, nombre d'articles en stock : ", a.getStock());
@@ -63,7 +63,7 @@ public class Panier implements Iterable<LignePanier> {
 					lignesPanier.get(indexDeMaLigne).getQuantite() + quantiteAjoutee);
 			} else { // si quantite demandée supérieure au stock
 				 // si dématerialise on s'en fiche c'est illimité
-				if (a.getMateriel() == null){
+				if (a.getMaterialise() == null){
 					lignesPanier.get(indexDeMaLigne).setQuantite(
 							lignesPanier.get(indexDeMaLigne).getQuantite() + quantiteAjoutee);
 				} else { // si matérialisé et stock insuffisant
@@ -133,7 +133,7 @@ public class Panier implements Iterable<LignePanier> {
 			// si c'est bien mon article
 			if (lignePanier.getArticle().getReference().equals(refArticleLigne)){
 				// si article dématérialisé (pas de stock à gérer quantité illimitée)
-				if(lignePanier.getArticle().getMateriel() == null){
+				if(lignePanier.getArticle().getMaterialise() == null){
 					lignePanier.setQuantite(nouvelleQuantiteLigne);
 				} else { // si article matériel 
 					// test quantité demandée et stock

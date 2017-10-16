@@ -13,7 +13,7 @@ public class Dematerialise {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_dematerialise_article")
+	@Column(name = "id_dematerialise")
 	private int id;
 	
 	@Column(name = "format_dematerialise")

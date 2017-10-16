@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,15 +41,18 @@ public abstract class Article {
 	private String urlImage;
 	
 	@OneToOne
-	private Materialise materiel;
+	@JoinColumn(name="id_materialise_article")
+	private Materialise materialise;
 	
 	@OneToOne
-	private Dematerialise immateriel;
+	@JoinColumn(name="id_dematerialise_article")
+	private Dematerialise dematerialise;
 	
 	@Column(name = "stock_article")
 	private int stock;
 	
 	@ManyToOne
+	@JoinColumn(name="id_tva_article")
 	private Tva tva;
 
 	
@@ -66,7 +70,7 @@ public abstract class Article {
 		this.nom = argNom;
 		this.urlImage = argUrlImage;
 		this.stock = 1;
-		this.immateriel = new Dematerialise(argFormat, argUrlDownload);
+		this.dematerialise = new Dematerialise(argFormat, argUrlDownload);
 	}
 
 	// constructeur si materialise et neuf car 80% de l'activite = livres neufs
@@ -78,7 +82,7 @@ public abstract class Article {
 		this.nom = argNom;
 		this.urlImage = argUrlImage;
 		this.stock = argStock;
-		this.materiel = new Materialise(Etat.NEUF);
+		this.materialise = new Materialise(Etat.NEUF);
 	}
 
 	// constructeur si materialise livre, dvd, cd...
@@ -91,7 +95,7 @@ public abstract class Article {
 		this.nom = argNom;
 		this.urlImage = argUrlImage;
 		this.stock = argStock;
-		this.materiel = new Materialise(argEtat);
+		this.materialise = new Materialise(argEtat);
 	}
 	
 	@Override
@@ -160,20 +164,22 @@ public abstract class Article {
 		this.urlImage = urlImage;
 	}
 
-	public Materialise getMateriel() {
-		return materiel;
+	
+
+	public Materialise getMaterialise() {
+		return materialise;
 	}
 
-	public void setMateriel(Materialise materiel) {
-		this.materiel = materiel;
+	public void setMaterialise(Materialise materialise) {
+		this.materialise = materialise;
 	}
 
-	public Dematerialise getImmateriel() {
-		return immateriel;
+	public Dematerialise getDematerialise() {
+		return dematerialise;
 	}
 
-	public void setImmateriel(Dematerialise immateriel) {
-		this.immateriel = immateriel;
+	public void setDematerialise(Dematerialise dematerialise) {
+		this.dematerialise = dematerialise;
 	}
 
 	public int getStock() {
@@ -195,8 +201,8 @@ public abstract class Article {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", reference=" + reference + ", prixHt=" + prixHt + ", nom=" + nom
-				+ ", description=" + description + ", urlImage=" + urlImage + ", materiel=" + materiel + ", immateriel="
-				+ immateriel + ", stock=" + stock + ", tva=" + tva + "]";
+				+ ", description=" + description + ", urlImage=" + urlImage + ", materiel=" + materialise + ", immateriel="
+				+ dematerialise + ", stock=" + stock + ", tva=" + tva + "]";
 	}
 
 }

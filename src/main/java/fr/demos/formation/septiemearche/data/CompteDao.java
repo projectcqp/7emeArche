@@ -16,6 +16,7 @@ public class CompteDao implements InterfaceDao<Compte> {
 	@Override
 	public Compte select(String id) throws Exception {
 
+		//TODO mettre à jour avec l'exemple sur TvaDao
 		int idInt = 2147483647;
 		try {
 			idInt = Integer.parseInt(id);
