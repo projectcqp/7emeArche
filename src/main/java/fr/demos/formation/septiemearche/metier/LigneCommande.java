@@ -1,61 +1,98 @@
 package fr.demos.formation.septiemearche.metier;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * @author STAGIAIRE
  *
  */
+@Entity
+@Table(name="ligne_commande")
 public class LigneCommande {
-	
-	private String refLigneCommande;
-	private String refArticle;
-	private String quantite;
-	private float prix;
-	private float prixTotalLigne;
-	
+	@Id
+		@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_ligne_commande")
+	private int id;
+	@Column(name="references_article_ligne_commande")
+	private String referencesArticle;
+	@Column(name="designation_article_ligne_commande")
+	private String ddesignationArticle;
+	@Column(name="prix_unitaire_ligne_commande")
+	private double prixUnitaire; 
+	@Column(name="taux_tva_ligne_commande")
+	private double tauxTva;
+	@Column(name="quantite_ligne_commande")
+	private int quantite;
+	@Column(name="total_ligne_commande")
+	private double total;
+		
 	public LigneCommande() {
 		super();
+	}
 
+	public int getId() {
+		return id;
 	}
-	
-	public LigneCommande(String refLigneCommande, String refArticle, String quantite, float prix,
-			float prixTotalLigne) {
-		super();
-		this.refLigneCommande = refLigneCommande;
-		this.refArticle = refArticle;
-		this.quantite = quantite;
-		this.prix = prix;
-		this.prixTotalLigne = prixTotalLigne;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	
-	public String getRefLigneCommande() {
-		return refLigneCommande;
+
+	public String getReferencesArticle() {
+		return referencesArticle;
 	}
-	public void setRefLigneCommande(String refLigneCommande) {
-		this.refLigneCommande = refLigneCommande;
+
+	public void setReferencesArticle(String referencesArticle) {
+		this.referencesArticle = referencesArticle;
 	}
-	public String getRefArticle() {
-		return refArticle;
+
+	public String getDdesignationArticle() {
+		return ddesignationArticle;
 	}
-	public void setRefArticle(String refArticle) {
-		this.refArticle = refArticle;
+
+	public void setDdesignationArticle(String ddesignationArticle) {
+		this.ddesignationArticle = ddesignationArticle;
 	}
-	public String getQuantite() {
+
+	public double getPrixUnitaire() {
+		return prixUnitaire;
+	}
+
+	public void setPrixUnitaire(double prixUnitaire) {
+		this.prixUnitaire = prixUnitaire;
+	}
+
+	public double getTauxTva() {
+		return tauxTva;
+	}
+
+	public void setTauxTva(double tauxTva) {
+		this.tauxTva = tauxTva;
+	}
+
+	public int getQuantite() {
 		return quantite;
 	}
-	public void setQuantite(String quantite) {
+
+	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
-	public float getPrix() {
-		return prix;
+
+	public double getTotal() {
+		return total;
 	}
-	public void setPrix(float prix) {
-		this.prix = prix;
+
+	public void setTotal(double total) {
+		this.total = total;
 	}
-	public float getPrixTotalLigne() {
-		return prixTotalLigne;
-	}
-	public void setPrixTotalLigne(float prixTotalLigne) {
-		this.prixTotalLigne = prixTotalLigne;
-	}
+
+	
+	
 	
 }

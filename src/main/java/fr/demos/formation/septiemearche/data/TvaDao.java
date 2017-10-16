@@ -1,10 +1,14 @@
 package fr.demos.formation.septiemearche.data;
 
+import java.text.ParseException;
+import org.apache.log4j.Logger;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+import org.apache.log4j.Logger;
 
 import fr.demos.formation.septiemearche.metier.Tva;
 
@@ -17,24 +21,28 @@ import fr.demos.formation.septiemearche.metier.Tva;
 public class TvaDao implements InterfaceDao<Tva> {
 	@PersistenceContext
 	private EntityManager em;
+	private static Logger logger = Logger.getLogger("Log");	
 
 	@Override
 	public Tva select(String id) throws Exception {
-
-		int idInt = 2147483647;
+		int idInt = 0;
+		Tva tva = null;
+		
 		try {
 			idInt = Integer.parseInt(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("On fait le select(id) sur un int" + e);
-		}
 
 		String requestString = "SELECT t FROM Tva t WHERE t.id=?";
 
 		TypedQuery<Tva> query = em.createQuery(requestString, Tva.class);
 		query.setParameter(1, idInt);
 
-		return query.getSingleResult();
+		tva = query.getSingleResult();
+		
+		logger.debug("objet chargé " + tva);
+	}catch(NumberFormatException e	) {
+		logger.error("Paramètre invalide, " + id + " n'est pas un nombre valide");
+	}
+		return tva;
 	}
 
 	@Override
