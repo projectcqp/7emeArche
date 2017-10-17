@@ -6,33 +6,34 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.apache.log4j.Logger;
+
 import fr.demos.formation.septiemearche.metier.Livre;
 
 public class LivreDao implements InterfaceDao<Livre> {
 	@PersistenceContext
 	private EntityManager em;
+	private static Logger logger = Logger.getLogger("Log");
 
 	@Override
-	public Livre select(String id) throws Exception {		
+	public Livre select(String idString) throws Exception {
+		int idInt = 0;
+		Livre livre = null;
 		
-		//TODO mettre à jour avec l'exemple sur TvaDao
 		try {
-			int idInt = Integer.parseInt(id);
+			idInt = Integer.parseInt(idString);
 			String requestString = "SELECT l FROM Livre l WHERE l.id=?";
 			
 			TypedQuery<Livre> query = em.createQuery(requestString, Livre.class);
 			query.setParameter(1, idInt);
 			
-			return query.getSingleResult();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("On fait le select(id) sur un int" + e);
-			return null;
+			livre = query.getSingleResult();
+		} catch(NumberFormatException e) {
+			logger.error("Paramètre invalide, " + idInt + " n'est pas un nombre valide");
 		}
+		return livre;
 	}
 
-	@Override
 	public List<Livre> selectSearch(String criteria) throws Exception {
 		
 		String requestString = "SELECT l FROM Livre l WHERE l.auteur=? OR l.isbn=? OR l.editeur=? OR l.genre=?";
@@ -57,20 +58,20 @@ public class LivreDao implements InterfaceDao<Livre> {
 	}
 
 	@Override
-	public void insert(Livre l) throws Exception {
-		em.persist(l);
+	public void insert(Livre livre) throws Exception {
+		em.persist(livre);
 
 	}
 
 	@Override
-	public void update(Livre l) throws Exception {
-		em.persist(l);
+	public void update(Livre livre) throws Exception {
+		em.persist(livre);
 	}
 
 	@Override
-	public void delete(Livre l) throws Exception {
-		em.remove(l);
-		l.setId(0);
+	public void delete(Livre livre) throws Exception {
+		em.remove(livre);
+		livre.setId(0);
 	}
 
 }

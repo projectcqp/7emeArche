@@ -2,79 +2,63 @@ package fr.demos.formation.septiemearche.data;
 
 import java.util.List;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import fr.demos.formation.septiemearche.metier.Adresse;
-import fr.demos.formation.septiemearche.metier.Tva;
+import org.apache.log4j.Logger;
 
-public class AdresseDao implements InterfaceDao<Adresse>{
+import fr.demos.formation.septiemearche.metier.Adresse;
+
+public class AdresseDao implements InterfaceDao<Adresse> {
 	@PersistenceContext
 	private EntityManager em;
+	private static Logger logger = Logger.getLogger("Log");
 
 	@Override
-	public Adresse select(String id) throws Exception {
-		
+	public Adresse select(String iStringd) throws Exception {
+
 		int idInt = 0;
+		Adresse adresse = null;
+
 		try {
-			idInt = Integer.parseInt(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("On fait le select(id) sur un int" + e);
+			idInt = Integer.parseInt(iStringd);
+
+			String requestString = "SELECT a FROM Adresse a WHERE a.id=?";
+
+			TypedQuery<Adresse> query = em.createQuery(requestString, Adresse.class);
+			query.setParameter(1, idInt);
+
+			adresse = query.getSingleResult();
+		} catch (NumberFormatException e) {
+			logger.error("Paramètre invalide, " + idInt + " n'est pas un nombre valide");
 		}
-		
-		String requestString = "SELECT a FROM Adresse a WHERE a.id=?";
-
-		TypedQuery<Adresse> query = em.createQuery(requestString, Adresse.class);
-		query.setParameter(1, idInt);
-
-		return query.getSingleResult();
+		return adresse;
 	}
 
-	
-	
-	@Override
-	public List<Adresse> selectSearch(String criteria) throws Exception {
-		
-		int criteriaInt = 2147483647;
-		try {
-			System.out.println("je parseInt");
-			criteriaInt = Integer.parseInt(criteria);
-		} catch (Exception e) {
-			System.out.println("Impossible de ParseInt le criteria");
-		}
-				
-		String requestString = "SELECT a FROM Adresse a WHERE a.id=? OR a.nomAdresse=? OR a.voie=?"
-				+ " OR a.complement=? OR a.codePostal=? OR a.ville=? OR a.pays=?";
-		
-		TypedQuery<Adresse> query =em.createQuery(requestString, Adresse.class);
-		query.setParameter(1, criteriaInt);
-		query.setParameter(2, criteria);
-		query.setParameter(3, criteria);
-		query.setParameter(4, criteria);
-		query.setParameter(5, criteria);
-		query.setParameter(6, criteria);
-		query.setParameter(7, criteria);
-		return query.getResultList();
-	}
-	
-	
-	
 	@Override
 	public List<Adresse> selectAll() throws Exception {
-		
 		String requestString = "SELECT a FROM Adresse a";
-		
-		TypedQuery<Adresse> query =em.createQuery(requestString, Adresse.class);
-		
-		return query.getResultList();
+
+		TypedQuery<Adresse> query = em.createQuery(requestString, Adresse.class);
+
+		List adresses = query.getResultList();
+
+		if (adresses.isEmpty()) {
+			logger.info("La table adresse est vide.");
+		}
+
+		return adresses;
 	}
 
 	@Override
 	public void insert(Adresse adresse) throws Exception {
-		em.persist(adresse);
-
+		try {
+			em.persist(adresse);
+		} catch (EntityExistsException e) {
+			logger.error("Une adresse existe déjà avec cette clef");
+		}
 	}
 
 	@Override

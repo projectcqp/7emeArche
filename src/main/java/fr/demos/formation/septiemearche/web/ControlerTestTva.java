@@ -83,7 +83,7 @@ public class ControlerTestTva extends HttpServlet {
 		// test tvaDao.selectSearch(normal ou 20.0 ou 3)
 		ArrayList<Tva> mesTvaSearch = null;
 		try {
-			mesTvaSearch = (ArrayList<Tva>) tvaDao.selectSearch("intermédiaire");
+			//mesTvaSearch = (ArrayList<Tva>) tvaDao.selectSearch("intermédiaire");
 			for (Tva tva : mesTvaSearch) {
 				System.out.println("le criteria de recherche retourne une tva : " + tva.toString());
 			}
@@ -126,7 +126,7 @@ public class ControlerTestTva extends HttpServlet {
 		try {
 			// mesAdressesSearch = (ArrayList<Adresse>)
 			// adresseDao.selectSearch("facturatio");
-			mesAdressesSearch = (ArrayList<Adresse>) adresseDao.selectSearch("75013");
+			//mesAdressesSearch = (ArrayList<Adresse>) adresseDao.selectSearch("75013");
 			for (Adresse adresse : mesAdressesSearch) {
 				System.out.println("le criteria de recherche retourne une adresse : " + adresse.toString());
 			}
