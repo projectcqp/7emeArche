@@ -10,6 +10,9 @@ import javax.persistence.Table;
 
 /**
  * @author STAGIAIRE
+ * 
+ * Une ligne commande appartient à une et une seule comande
+ * Elle ne réfférence pas un article, mais une copie de ces attributs pour figer l'état de l'article au moment de la validation de la commande
  *
  */
 @Entity
@@ -32,8 +35,20 @@ public class LigneCommande {
 	@Column(name="total_ligne_commande")
 	private double total;
 		
+	
 	public LigneCommande() {
 		super();
+	}
+	
+	public LigneCommande(String referencesArticle, String ddesignationArticle, double prixUnitaire, double tauxTva,
+			int quantite, double total) {
+		super();
+		this.referencesArticle = referencesArticle;
+		this.ddesignationArticle = ddesignationArticle;
+		this.prixUnitaire = prixUnitaire;
+		this.tauxTva = tauxTva;
+		this.quantite = quantite;
+		this.total = total;
 	}
 
 	public int getId() {

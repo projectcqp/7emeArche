@@ -18,13 +18,13 @@ import javax.persistence.Table;
 /**
  * @author Alexandre BIGOT
  *
+ *
+ *Une commande est associée à un compte.
+ *Elle  contient une ou plusieurs ligne comande
  */
 @Entity
 @Table(name = "commande")
 public class Commande implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,6 +53,21 @@ public class Commande implements Serializable {
 
 	public Commande() {
 		super();
+	}
+	
+	public Commande(LocalDateTime dateCommande, String numeroCommande, String numeroFacture,
+			String adresseFacturation, String adresseLivraison, double totalHt, double montantTva,
+			List<LigneCommande> lignesCommande, Compte compte) {
+		super();
+		this.dateCommande = dateCommande;
+		this.numeroCommande = numeroCommande;
+		this.numeroFacture = numeroFacture;
+		this.adresseFacturation = adresseFacturation;
+		this.adresseLivraison = adresseLivraison;
+		this.totalHt = totalHt;
+		this.montantTva = montantTva;
+		this.lignesCommande = lignesCommande;
+		this.compte = compte;
 	}
 
 	public int getId() {
