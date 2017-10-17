@@ -7,33 +7,35 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.apache.log4j.Logger;
+
 import fr.demos.formation.septiemearche.metier.Compte;
 
 public class CompteDao implements InterfaceDao<Compte> {
 	@PersistenceContext
 	private EntityManager em;
+	private static Logger logger = Logger.getLogger("Log");
 
 	@Override
-	public Compte select(String id) throws Exception {
+	public Compte select(String idString) throws Exception {
+		int idInt = 0;
+		Compte compte = null;
 
-		//TODO mettre à jour avec l'exemple sur TvaDao
-		int idInt = 2147483647;
 		try {
-			idInt = Integer.parseInt(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("On fait le select(id) sur un int" + e);
+			idInt = Integer.parseInt(idString);
+
+			String requestString = "SELECT c FROM Compte c WHERE c.id=?";
+
+			TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);
+			query.setParameter(1, idInt);
+
+			compte = query.getSingleResult();
+		} catch (NumberFormatException e) {
+			logger.error("Paramètre invalide, " + idInt + " n'est pas un nombre valide");
 		}
-
-		String requestString = "SELECT c FROM Compte c WHERE c.id=?";
-
-		TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);
-		query.setParameter(1, idInt);
-
-		return query.getSingleResult();
+		return compte;
 	}
 
-	@Override
 	public List<Compte> selectSearch(String criteria) throws Exception {
 
 		int criteriaInt = 2147483647;
@@ -52,9 +54,9 @@ public class CompteDao implements InterfaceDao<Compte> {
 		} catch (Exception e) {
 			System.out.println("Impossible de ParseLocalDate le criteria");
 		}
-		
+
 		String requestString = "SELECT c FROM Compte c WHERE c.id=? OR c.email=? OR c.nom=? OR c.prenom=?"
-				//+ " OR c.telephone=? OR c.dateNaissance=?";
+				// + " OR c.telephone=? OR c.dateNaissance=?";
 				+ " OR c.telephone=?";
 
 		TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);
@@ -63,8 +65,8 @@ public class CompteDao implements InterfaceDao<Compte> {
 		query.setParameter(3, criteria);
 		query.setParameter(4, criteria);
 		query.setParameter(5, criteria);
-		//query.setParameter(6, criteriaLocalDate);
-		
+		// query.setParameter(6, criteriaLocalDate);
+
 		return query.getResultList();
 	}
 

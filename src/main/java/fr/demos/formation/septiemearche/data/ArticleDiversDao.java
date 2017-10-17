@@ -6,34 +6,35 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.apache.log4j.Logger;
+
 import fr.demos.formation.septiemearche.metier.ArticleDivers;
 
 public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 	@PersistenceContext
 	private EntityManager em;
+	private static Logger logger = Logger.getLogger("Log");
 
+	
 	@Override
-	public ArticleDivers select(String id) throws Exception {
-		
-		//TODO mettre à jour avec l'exemple sur TvaDao
-		int idInt = 2147483647;
+	public ArticleDivers select(String idString) throws Exception {
+		int idInt = 0;
+		ArticleDivers article = null;
 		try {
-			idInt = Integer.parseInt(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("On fait le select(id) sur un int" + e);
-		}
+			idInt = Integer.parseInt(idString);
 				
-		// on accède directement à l'id de la classe mère article avec ad.id
 		String requestString = "SELECT ad FROM ArticleDivers ad WHERE ad.id=?";
 
 		TypedQuery<ArticleDivers> query = em.createQuery(requestString, ArticleDivers.class);
 		query.setParameter(1, idInt);
 
-		return query.getSingleResult();
+		article = query.getSingleResult();
+		} catch(NumberFormatException e) {
+			logger.error("Paramètre invalide, " + idInt + " n'est pas un nombre valide");
+		}
+		return article;
 	}
 
-	@Override
 	public List<ArticleDivers> selectSearch(String criteria) throws Exception {
 		
 		String requestString = "SELECT ad FROM ArticleDivers ad WHERE ad.type=?";

@@ -6,8 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.apache.log4j.Logger;
+
 import fr.demos.formation.septiemearche.metier.Article;
-import fr.demos.formation.septiemearche.metier.Livre;
 
 /**
  * @author STAGIAIRE
@@ -17,28 +18,28 @@ import fr.demos.formation.septiemearche.metier.Livre;
 public class ArticleDao implements InterfaceDao<Article> {
 	@PersistenceContext
 	private EntityManager em;
+	private static Logger logger = Logger.getLogger("Log");
 
 	@Override
-	public Article select(String id) throws Exception {
+	public Article select(String idString) throws Exception {
+		int idInt = 0;
+		Article article = null;
 
-		// TODO mettre à jour avec l'exemple sur TvaDao
 		try {
-			int idInt = Integer.parseInt(id);
+			idInt = Integer.parseInt(idString);
+			
 			String requestString = "SELECT a FROM Article a WHERE a.id=?";
 
 			TypedQuery<Article> query = em.createQuery(requestString, Article.class);
 			query.setParameter(1, idInt);
 
-			return query.getSingleResult();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("On fait le select(id) sur un int" + e);
-			return null;
+article = query.getSingleResult();
+		} catch (NumberFormatException e) {
+			logger.error("Paramètre invalide, " + idString + " n'est pas un nombre valide");
 		}
+		return article;
 	}
 
-	@Override
 	public List<Article> selectSearch(String criteria) throws Exception {
 
 		Double criteriaDouble = null;
@@ -82,9 +83,9 @@ public class ArticleDao implements InterfaceDao<Article> {
 	}
 
 	@Override
-	public void delete(Article a) throws Exception {
-		em.remove(a);
-		a.setId(0);
+	public void delete(Article articleDivers) throws Exception {
+		em.remove(articleDivers);
+		articleDivers.setId(0);
 	}
 
 }
