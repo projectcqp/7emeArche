@@ -7,6 +7,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,6 +45,10 @@ public class Compte implements Serializable {
 	@Column(name = "password_compte", nullable = false)
 	private String password;
 	
+	@Column(name = "titre_compte", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Titre titre;
+	
 	@Column(name = "nom_compte", nullable = false)
 	private String nom;
 	
@@ -56,13 +63,12 @@ public class Compte implements Serializable {
 	@Transient
 	private LocalDate dateNaissance;
 	
-	//TODO
+	
 	@OneToOne
 	@JoinColumn(name= "id_adresse_facturation_compte")
-	//@Transient
 	private Adresse adresseFacturation;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name="id_compte_adresse")
 	private List<Adresse> adressesCompte;
 	
@@ -88,12 +94,13 @@ public class Compte implements Serializable {
 	public Compte() {
 		super();
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Compte [id=" + id + ", email=" + email + ", password=" + password + ", nom=" + nom + ", prenom="
-				+ prenom + ", telephone=" + telephone + ", dateNaissance=" + dateNaissance + ", adresseFacturation="
-				+ adresseFacturation + ", longueurPasswordMini=" + longueurPasswordMini + "]";
+		return "Compte [id=" + id + ", email=" + email + ", password=" + password + ", titre=" + titre + ", nom=" + nom
+				+ ", prenom=" + prenom + ", telephone=" + telephone + ", dateNaissance=" + dateNaissance
+				+ ", adresseFacturation=" + adresseFacturation + ", adressesCompte=" + adressesCompte
+				+ ", longueurPasswordMini=" + longueurPasswordMini + "]";
 	}
 
 	public int getId() {
@@ -180,6 +187,12 @@ public class Compte implements Serializable {
 		return serialVersionUID;
 	}
 
-	
+	public Titre getTitre() {
+		return titre;
+	}
+
+	public void setTitre(Titre titre) {
+		this.titre = titre;
+	}
 	
 }

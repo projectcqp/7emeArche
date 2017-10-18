@@ -79,18 +79,6 @@ public class ControlerTestTva extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("exception dans select TVA :" + e);
 		}
-
-		// test tvaDao.selectSearch(normal ou 20.0 ou 3)
-		ArrayList<Tva> mesTvaSearch = null;
-		try {
-			//mesTvaSearch = (ArrayList<Tva>) tvaDao.selectSearch("intermédiaire");
-			for (Tva tva : mesTvaSearch) {
-				System.out.println("le criteria de recherche retourne une tva : " + tva.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("exception dans selectSearch TVA :" + e);
-		}
 		// ######## Fin TEST TvaDao ########
 
 		// ######## TEST AdresseDao ########
@@ -121,19 +109,6 @@ public class ControlerTestTva extends HttpServlet {
 			System.out.println("exception dans select Adresse :" + e);
 		}
 
-		// test adresseDao.selectSearch()
-		ArrayList<Adresse> mesAdressesSearch = null;
-		try {
-			// mesAdressesSearch = (ArrayList<Adresse>)
-			// adresseDao.selectSearch("facturatio");
-			//mesAdressesSearch = (ArrayList<Adresse>) adresseDao.selectSearch("75013");
-			for (Adresse adresse : mesAdressesSearch) {
-				System.out.println("le criteria de recherche retourne une adresse : " + adresse.toString());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("exception dans selectSearch Adresse :" + e);
-		}
 		// ######## FIN TEST AdresseDao ########
 
 		// ######## TEST CompteDao ########
@@ -203,7 +178,12 @@ public class ControlerTestTva extends HttpServlet {
 		// test mesArticlesDivers.select(2)
 		try {
 			ArticleDivers articleDivers = articleDiversDao.select("6");
-			System.out.println("Voici l'article divers demandé : " + articleDivers.toString());
+
+			if (articleDivers != null) {
+				System.out.println("Voici l'article divers demandé : " + articleDivers.toString());
+			} else {
+				System.out.println("aucun résultat pour l'id demandé");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -286,30 +266,33 @@ public class ControlerTestTva extends HttpServlet {
 			System.out.println("exception dans selectAll Article :" + e);
 		}
 
-//		// test mesArticles.select(3)
-//		try {
-//			Article article = articleDao.select("3");
-//			System.out.println("Voici l'article demandé : " + article.toString());
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("exception dans select Article :" + e);
-//		}
-//
-//		// // test articleDao.selectSearch(description_article 5)
-//		ArrayList<Article> mesArticlesSearch = null;
-//		try {
-//			// mes
-//			mesArticlesSearch = (ArrayList<Article>) articleDao.selectSearch("description_article 5");
-//			for (Article article : mesArticlesSearch) {
-//				System.out.println("le criteria de recherche retourne un article : " + article.toString());
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("exception dans selectSearch Article :" + e);
-//		}
-//
-//		// ######## FIN TEST LivreDao ########
+		// // test mesArticles.select(3)
+		// try {
+		// Article article = articleDao.select("3");
+		// System.out.println("Voici l'article demandé : " +
+		// article.toString());
+		//
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// System.out.println("exception dans select Article :" + e);
+		// }
+		//
+		// // // test articleDao.selectSearch(description_article 5)
+		// ArrayList<Article> mesArticlesSearch = null;
+		// try {
+		// // mes
+		// mesArticlesSearch = (ArrayList<Article>)
+		// articleDao.selectSearch("description_article 5");
+		// for (Article article : mesArticlesSearch) {
+		// System.out.println("le criteria de recherche retourne un article : "
+		// + article.toString());
+		// }
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// System.out.println("exception dans selectSearch Article :" + e);
+		// }
+		//
+		// // ######## FIN TEST LivreDao ########
 
 	}// do get
 

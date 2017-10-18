@@ -30,6 +30,7 @@ public class CompteDao implements InterfaceDao<Compte> {
 			query.setParameter(1, idInt);
 
 			compte = query.getSingleResult();
+			
 		} catch (NumberFormatException e) {
 			logger.error("Paramètre invalide, " + idInt + " n'est pas un nombre valide");
 		}
@@ -56,8 +57,7 @@ public class CompteDao implements InterfaceDao<Compte> {
 		}
 
 		String requestString = "SELECT c FROM Compte c WHERE c.id=? OR c.email=? OR c.nom=? OR c.prenom=?"
-				// + " OR c.telephone=? OR c.dateNaissance=?";
-				+ " OR c.telephone=?";
+				+ " OR c.telephone=? OR c.adresseFacturation.codePostal=? OR c.adresseFacturation.pays=?";
 
 		TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);
 		query.setParameter(1, criteriaInt);
@@ -65,7 +65,8 @@ public class CompteDao implements InterfaceDao<Compte> {
 		query.setParameter(3, criteria);
 		query.setParameter(4, criteria);
 		query.setParameter(5, criteria);
-		// query.setParameter(6, criteriaLocalDate);
+		query.setParameter(6, criteria);
+		query.setParameter(7, criteria);
 
 		return query.getResultList();
 	}

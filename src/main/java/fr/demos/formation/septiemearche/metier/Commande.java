@@ -25,38 +25,55 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "commande")
 public class Commande implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_commande")
 	private int id;
+	
 	@Column(name = "date_commande")
 	private LocalDateTime dateCommande;
+	
+	// numeroCommande composé de année-mois-nombre incrémenté ex: 2017-10-0001
 	@Column(name = "numero_commande")
 	private String numeroCommande;
+	
+	// numeroFacture composé de f-annéemoisjour-nombre incrémenté ex: f-20171018-0001
 	@Column(name = "numero_facture_commande")
 	private String numeroFacture;
-	@Column(name = "	dresse_facturation_commande")
+	
+	// concaténation des infos de adresse (adresse.toString())
+	@Column(name = "adresse_facturation_commande")
 	private String adresseFacturation;
+	
+	// concaténation des infos de adresse (adresse.toString())
 	@Column(name = "adresse_livraison_commande")
 	private String adresseLivraison;
+	
 	@Column(name = "total_ht_commande")
 	private double totalHt;
-	@Column(name = "montant_tva_commande")
-	private double montantTva;
+	
+	@Column(name = "total_tva_commande")
+	private double totalTva;
 
 	@OneToMany
-	@JoinColumn(name = "id_ligne_commande", referencedColumnName = "id_commande_ligne_commande")
+	@JoinColumn(name = "id_commande_ligne_commande", referencedColumnName = "id_commande")
 	private List<LigneCommande> lignesCommande = new ArrayList<>();
+	
 	@ManyToOne
 	private Compte compte;
+	
+	private String destinataireCompte;
+	private String destinataireAutre;
 
 	public Commande() {
 		super();
 	}
 	
 	public Commande(LocalDateTime dateCommande, String numeroCommande, String numeroFacture,
-			String adresseFacturation, String adresseLivraison, double totalHt, double montantTva,
+			String adresseFacturation, String adresseLivraison, double totalHt, double totalTva,
 			List<LigneCommande> lignesCommande, Compte compte) {
 		super();
 		this.dateCommande = dateCommande;
@@ -65,11 +82,11 @@ public class Commande implements Serializable {
 		this.adresseFacturation = adresseFacturation;
 		this.adresseLivraison = adresseLivraison;
 		this.totalHt = totalHt;
-		this.montantTva = montantTva;
+		this.totalTva = totalTva;
 		this.lignesCommande = lignesCommande;
 		this.compte = compte;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -127,11 +144,11 @@ public class Commande implements Serializable {
 	}
 
 	public double getTva() {
-		return montantTva;
+		return totalTva;
 	}
 
-	public void setTva(double montantTva) {
-		this.montantTva = montantTva;
+	public void setTva(double totalTva) {
+		this.totalTva = totalTva;
 	}
 
 	public List<LigneCommande> getLignesCommande() {
@@ -148,6 +165,35 @@ public class Commande implements Serializable {
 
 	public void setCompte(Compte compte) {
 		this.compte = compte;
+	}
+
+	public double getTotalTva() {
+		return totalTva;
+	}
+
+	public void setTotalTva(double totalTva) {
+		this.totalTva = totalTva;
+	}
+
+	public String getDestinataireCompte() {
+		destinataireCompte = this.compte.getTitre() + " " + this.compte.getPrenom() + " " + this.compte.getNom();
+		return destinataireCompte;
+	}
+
+	public void setDestinataireCompte(String destinataireCompte) {
+		this.destinataireCompte = destinataireCompte;
+	}
+
+	public String getDestinataireAutre() {
+		return destinataireAutre;
+	}
+
+	public void setDestinataireAutre(Enum<Titre> titre, String prenom, String nom) {
+		this.destinataireAutre = titre + " " + prenom + " " + nom;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

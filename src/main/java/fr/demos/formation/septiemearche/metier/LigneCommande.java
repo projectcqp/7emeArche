@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,33 +17,40 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ligne_commande")
 public class LigneCommande {
+	
 	@Id
-		@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_ligne_commande")
 	private int id;
-	@Column(name="references_article_ligne_commande")
-	private String referencesArticle;
-	@Column(name="designation_article_ligne_commande")
-	private String ddesignationArticle;
+	
+	@Column(name="reference_article_ligne_commande")
+	private String referenceArticle;
+	
+	@Column(name="nom_article_ligne_commande")
+	private String nomArticle;
+	
 	@Column(name="prix_unitaire_ligne_commande")
 	private double prixUnitaire; 
-	@Column(name="taux_tva_ligne_commande")
-	private double tauxTva;
+	
 	@Column(name="quantite_ligne_commande")
 	private int quantite;
+	
 	@Column(name="total_ligne_commande")
 	private double total;
+	
+	@Column(name="taux_tva_ligne_commande")
+	private double tauxTva;
 		
 	
 	public LigneCommande() {
 		super();
 	}
 	
-	public LigneCommande(String referencesArticle, String ddesignationArticle, double prixUnitaire, double tauxTva,
+	public LigneCommande(String referenceArticle, String nomArticle, double prixUnitaire, double tauxTva,
 			int quantite, double total) {
 		super();
-		this.referencesArticle = referencesArticle;
-		this.ddesignationArticle = ddesignationArticle;
+		this.referenceArticle = referenceArticle;
+		this.nomArticle = nomArticle;
 		this.prixUnitaire = prixUnitaire;
 		this.tauxTva = tauxTva;
 		this.quantite = quantite;
@@ -59,20 +65,20 @@ public class LigneCommande {
 		this.id = id;
 	}
 
-	public String getReferencesArticle() {
-		return referencesArticle;
+	public String getreferenceArticle() {
+		return referenceArticle;
 	}
 
-	public void setReferencesArticle(String referencesArticle) {
-		this.referencesArticle = referencesArticle;
+	public void setreferenceArticle(String referenceArticle) {
+		this.referenceArticle = referenceArticle;
 	}
 
-	public String getDdesignationArticle() {
-		return ddesignationArticle;
+	public String getnomArticle() {
+		return nomArticle;
 	}
 
-	public void setDdesignationArticle(String ddesignationArticle) {
-		this.ddesignationArticle = ddesignationArticle;
+	public void setnomArticle(String nomArticle) {
+		this.nomArticle = nomArticle;
 	}
 
 	public double getPrixUnitaire() {

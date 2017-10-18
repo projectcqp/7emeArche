@@ -3,6 +3,7 @@ package fr.demos.formation.septiemearche.data;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -15,33 +16,37 @@ public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 	private EntityManager em;
 	private static Logger logger = Logger.getLogger("Log");
 
-	
 	@Override
 	public ArticleDivers select(String idString) throws Exception {
 		int idInt = 0;
 		ArticleDivers article = null;
 		try {
 			idInt = Integer.parseInt(idString);
-				
-		String requestString = "SELECT ad FROM ArticleDivers ad WHERE ad.id=?";
 
-		TypedQuery<ArticleDivers> query = em.createQuery(requestString, ArticleDivers.class);
-		query.setParameter(1, idInt);
+			String requestString = "SELECT ad FROM ArticleDivers ad WHERE ad.id=?";
 
-		article = query.getSingleResult();
-		} catch(NumberFormatException e) {
+			TypedQuery<ArticleDivers> query = em.createQuery(requestString, ArticleDivers.class);
+			query.setParameter(1, idInt);
+
+			article = query.getSingleResult();
+		} catch (NumberFormatException e) {
 			logger.error("Paramètre invalide, " + idInt + " n'est pas un nombre valide");
+		}
+		catch (NoResultException e) {
+			// quand pas de résultat on retourne null
+			logger.error("Pas de résultat pour cet id : " + idInt);
+			return null;
 		}
 		return article;
 	}
 
 	public List<ArticleDivers> selectSearch(String criteria) throws Exception {
-		
+
 		String requestString = "SELECT ad FROM ArticleDivers ad WHERE ad.type=?";
 
 		TypedQuery<ArticleDivers> query = em.createQuery(requestString, ArticleDivers.class);
 		query.setParameter(1, criteria);
-		
+
 		return query.getResultList();
 	}
 
