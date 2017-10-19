@@ -93,7 +93,6 @@ public class CompteDao implements InterfaceDao<Compte> {
 		return query.getResultList();
 	}
 
-	@Override
 	public List<Compte> selectAll() throws Exception {
 		String requestString = "SELECT c FROM Compte c";
 

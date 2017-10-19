@@ -66,7 +66,6 @@ public class ArticleDao implements InterfaceDao<Article> {
 		return query.getResultList();
 	}
 
-	@Override
 	public List<Article> selectAll() throws Exception, SQLException {
 
 		String requestString = "SELECT a FROM Article a";

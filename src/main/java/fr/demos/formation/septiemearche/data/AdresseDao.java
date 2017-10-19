@@ -37,7 +37,6 @@ public class AdresseDao implements InterfaceDao<Adresse> {
 		return adresse;
 	}
 
-	@Override
 	public List<Adresse> selectAll() throws Exception {
 		String requestString = "SELECT a FROM Adresse a";
 

@@ -51,7 +51,6 @@ public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 		return query.getResultList();
 	}
 
-	@Override
 	public List<ArticleDivers> selectAll() throws Exception {
 		String requestString = "SELECT ad FROM ArticleDivers ad";
 

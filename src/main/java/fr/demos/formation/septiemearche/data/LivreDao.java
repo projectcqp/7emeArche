@@ -47,7 +47,6 @@ public class LivreDao implements InterfaceDao<Livre> {
 		return query.getResultList();
 	}
 
-	@Override
 	public List<Livre> selectAll() throws Exception {
 		String requestString = "SELECT l FROM Livre l";
 

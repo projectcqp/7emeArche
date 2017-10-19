@@ -54,13 +54,6 @@ public class CommandeDao implements InterfaceDao<Commande> {
 	}
 
 	@Override
-	public List<Commande> selectAll() throws Exception {
-		// TODO Auto-generated method stub
-		// Cette méthode est potentiellement dangereuse
-		return null;
-	}
-
-	@Override
 	public void insert(Commande commande) throws Exception {
 		em.persist(commande);
 	}

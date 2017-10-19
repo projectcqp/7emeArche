@@ -72,19 +72,17 @@ public class Compte implements Serializable {
 	@JoinColumn(name="id_compte_adresse")
 	private List<Adresse> adressesCompte;
 	
-	@Transient
-	private int longueurPasswordMini = 6;
-
-	public void testCreationPassword(String password, String passwordConfirmation) throws ExceptionPasswordFormat {
+	// TODO vérifier là où est appelé cette méthode car j'au ajouté un argument "passwordMinLength" (dans controler compte ?)
+	public void testCreationPassword(String password, String passwordConfirmation, int passwordMinLength) throws ExceptionPasswordFormat {
 		// test si les passwords entres sont identiques
 		if (password == passwordConfirmation) {
 			// test taille 6 caract�res mini
-			if (password.length() < longueurPasswordMini) {
+			if (password.length() < passwordMinLength) {
 
 			} else {
 				throw new ExceptionPasswordFormat(
 						"Votre mot de passe n'est pas assez long, vous avez entré un mot de passe de "
-								+ password.length() + " caractères et il en faut au moins 6");
+								+ password.length() + " caractères et il en faut au moins " + passwordMinLength);
 			} // test longueur
 		} else {
 			throw new ExceptionPasswordFormat("Vous avez entré des mots de passe différents");
@@ -99,8 +97,7 @@ public class Compte implements Serializable {
 	public String toString() {
 		return "Compte [id=" + id + ", email=" + email + ", password=" + password + ", titre=" + titre + ", nom=" + nom
 				+ ", prenom=" + prenom + ", telephone=" + telephone + ", dateNaissance=" + dateNaissance
-				+ ", adresseFacturation=" + adresseFacturation + ", adressesCompte=" + adressesCompte
-				+ ", longueurPasswordMini=" + longueurPasswordMini + "]";
+				+ ", adresseFacturation=" + adresseFacturation + ", adressesCompte=" + adressesCompte + "]";
 	}
 
 	public int getId() {
@@ -165,14 +162,6 @@ public class Compte implements Serializable {
 
 	public void setAdresseFacturation(Adresse adresseFacturation) {
 		this.adresseFacturation = adresseFacturation;
-	}
-
-	public int getLongueurPasswordMini() {
-		return longueurPasswordMini;
-	}
-
-	public void setLongueurPasswordMini(int longueurPasswordMini) {
-		this.longueurPasswordMini = longueurPasswordMini;
 	}
 
 	public List<Adresse> getAdressesCompte() {

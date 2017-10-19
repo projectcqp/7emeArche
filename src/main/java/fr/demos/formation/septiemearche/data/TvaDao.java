@@ -43,7 +43,6 @@ public class TvaDao implements InterfaceDao<Tva> {
 		return tva;
 	}
 
-	@Override
 	public List<Tva> selectAll() throws Exception {
 		String requestString = "SELECT t FROM Tva t";
 
