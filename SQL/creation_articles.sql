@@ -15,7 +15,8 @@ VALUES
 INSERT INTO dematerialise (id_dematerialise, format_dematerialise, url_download_dematerialise)
 VALUES
 ('6', 'KINDLE', 'url_download_demat_6'),
-('8', 'KINDLE', 'url_download_demat_8');
+('8', 'KINDLE', 'url_download_demat_8'),
+('12', 'PLAYLIST MP3', 'url_download_demat_12');
 
 INSERT INTO livre (id_article_livre, auteur_livre, isbn_livre, editeur_livre, genre_livre, date_livre)
 VALUES
@@ -32,7 +33,8 @@ INSERT INTO article_divers (id_article_article_divers, nature_article_divers)
 VALUES
 ('9', 'AFFICHE'),
 ('10', 'AFFICHE'),
-('11', 'ACCESSOIRE');
+('11', 'ACCESSOIRE'),
+('12', 'MUSIQUE');
 
 INSERT INTO article (id_article, reference_article, prix_ht_article, nom_article, description_article,
 url_image_article, id_materialise_article, id_dematerialise_article, stock_article, type_article, id_tva_article)
@@ -40,7 +42,7 @@ VALUES
 ('1', '1_livre_mat', '14.90', 'Le Paris de Michel Audiard', 'Paris a connu bien des périodes de vie. Le temps de Michel Audiard n''est pas la moins riche et la moins suprenante de ces époques extraordinaires. Né dans le 14e arrondissement, Michel Audiard fréquente l''école de la rue du Moulin-Vert puis le Vél'' d''Hiv'' de la rue Nélaton. Pendant l''Occupation, il s''inscrit en école de soudure pour échapper au STO. Mais c''est comme porteur de journaux à bicyclette qu''il entame sa vie professionnelle. La proximité avec les journalistes, qu''il croise dans les cafés des grands boulevards, lui vaut cependant de passer de l''autre côté du miroir, sa faconde naturelle nourrissant de longs articles " de notre envoyé spécial en Indochine " d''autant mieux informés que l''intéressé prend soin de les rédiger sans quitter sa mansarde ! Suivent les critiques de films, qu''Audiard compose sans s''infliger d''assister aux projections... Ces premiers pas le mènent à Cinémonde... Un producteur ne tarde pas à lui demander un premier scénario, Mission à Tanger en 1949... qui sera suivi de nombreux autres. Entre 125, rue Montmartre, Les Barbouzes, Les Tontons flingueurs... comme scénariste et/ou dialoguiste, Audiard truffera ses œuvres de décors familiers et de références au Paris de sa jeunesse. Celui des concierges assises sur le pas de leur porte, des pistards tournant sans relâche au Vél d''Hiv'', des Halles en effervescence... et de la réplique gouailleuse qu un titi ne manquera de faire glisser sur le zinc... " Toute une époque !" disait Blier dans Les Tontons.',
 'images/1_livre_mat.jpg', '1', NULL, '10', 'Livre', '3'),
 ('2', '2_livre_mat', '29.90', 'Tout sur le cinéma : Panorama des chefs-d''oeuvre et des techniques', 'Quel est le premier film parlant ? Comment se caractérise le néo-réalisme italien ? Comment les premiers effets spéciaux furent-ils réalisés ? Quelles oeuvres du XXIe siècle peuvent-elles être déjà considérées comme majeures ? Vingt-cinq historiens du cinéma, critiques, auteurs et enseignants ont participé à l''élaboration de cet ouvrage unique pour nous aider à mieux comprendre l''évolution du cinéma mondial, depuis ses balbutiements jusqu''aux dernières réalisations en 3D. Près de 700 films commentés ; 80 entrées thématiques, représentatives de l''histoire du cinéma, présentées en détail ; 160 chefs-d''oeuvre incontournables décryptés. Tous les outils indispensables (repères chronologiques, biographies de réalisateur et d''acteur, analyses de scènes emblématiques, index).',
-'2_livre_mat.jpg', '2', NULL, '20', 'Livre', '3'),
+'images/2_livre_mat.jpg', '2', NULL, '20', 'Livre', '3'),
 ('3', '3_livre_mat', '22.50', 'Cinéma - La grande histoire du 7ème art', 'De l''invention des frères Lumières jusqu''à nos jours, cet ouvrage propose, à travers 135 rétrospectives consacrées aux différentes facettes de l''histoire du cinéma, un panorama complet du 7e art : films, réalisateurs, acteurs, mouvements et écoles, genres, studios et producteurs. L''iconographie d''une richesse (plus de 400 documents d''archives, affiches, portraits ou photos de films), un glossaire technique, les palmarès complets des grands festivals internationaux, les filmographies des grands réalisateurs et des grands acteurs, permettent de construire une véritable mémoire du cinéma du monde entier.',
 'images/3_livre_mat.jpg', '3', NULL, '0', 'Livre', '3'),
 ('4', '4_livre_mat', '25.30', 'Les techniques narratives du cinéma', '"Je m''efforce de toujours chercher d''abord la façon cinématographique de raconter une histoire par la succession des plans et des morceaux de film entre eux. Lorsqu''on écrit un film, il est indispensable [...] chaque fois qu''il est possible, d''accorder la préférence au visuel sur le dialogue (...) En résumé, on peut dire que le rectangle de l''écran doit être chargé d''émotion." En écho à ces propos d''Alfred Hitchcock, ce livre présente 100 exemples des techniques proprement cinématographiques qui construisent l''histoire d''un film. De Metropolis à Kill Bill, des extraits de scénarii célèbres montrent comment créer des caractères, dynamiser une action, donner toute sa force à une intrigue par le travail du cadrage, des mouvements de caméra, de la lumière...',
@@ -58,4 +60,6 @@ VALUES
 ('10', '10_articleDivers_mat', '9.99', 'Poster Retour vers le futur', 'Affiche en papier glacé du film Retour vers le futur au format 61cm x 91cm',
 'images/10_articleDivers_mat.jpg', '10', NULL, '10', 'ArticleDivers', '3'),
 ('11', '11_articleDivers_mat', '5.37', 'Clap cinéma Hollywood', 'Véritable clap de cinéma en bois pour monter vos films comme à Hollywood !',
-'images/11_articleDivers_mat.jpg', '11', NULL, '15', 'ArticleDivers', '3');
+'images/11_articleDivers_mat.jpg', '11', NULL, '15', 'ArticleDivers', '3'),
+('12', '12_articleDivers_demat', '7.19', 'Le fabuleux destin d''Amélie Poulain (Bande originale du film)', 'Playlist complète au format MP3 des titres du film : I''ve Never Been There - Yann Tiersen, Les jours tristes (Instrumental) - Yann Tiersen & The Divine Comedy, La valse d''Amélie - Yann Tiersen, Comptine d''un autre été, l''après-midi - Yann Tiersen, The Drowned Girl - Yann Tiersen, L''autre valse d''Amélie - Yann Tiersen, Guilty (2001 Remastered Version) - George Shearing, A quai - Yann Tiersen, Le moulin - Yann Tiersen, Not That Simple - Yann Tiersen,	La valse d''Amélie (Version orchestre) - Yann Tiersen, La valse des vieux os - Yann Tiersen, Dispute - Yann Tiersen, Si tu n''étais pas là - Frehel, Evening Party - Yann Tiersen, La redécouverte - Yann Tiersen, On The Wire - Yann Tiersen, Banquet - Yann Tiersen, La Valse d''Amélie (Solo Piano Version) - Yann Tiersen, The Waltz Of The Monsters - de Yann Tiersen, L''autre valse d''Amélie (Quatuor à cordes et piano) - Yann Tiersen, Les deux pianos - Yann Tiersen, Comptine d''un autre été : la démarche - Yann Tiersen, La maison - Yann Tiersen, La valse d''Amélie (Version orchestre) [Live] - Yann Tiersen.',
+'images/12_articleDivers_demat.jpg', NULL, '12', '1', 'ArticleDivers', "3");

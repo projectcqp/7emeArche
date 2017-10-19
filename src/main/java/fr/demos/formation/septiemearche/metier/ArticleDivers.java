@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id_article_article_divers")
 public class ArticleDivers extends Article {
 
-	@Column(name = "nature_article_divers")
+	@Column(name = "nature_article_divers", nullable = false)
 	private String nature;
 
 	// constructeur vide pour hibernate
@@ -33,7 +33,7 @@ public class ArticleDivers extends Article {
 		this.nature = argNature;
 	}
 
-	// constructeur article divers materialise non neuf
+	// constructeur article divers materialise neuf ou non
 	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock,
 			Etat argEtat, String argNature) {
 		super(argReference, argPrixHt, argNom, argUrlImage, argStock, argEtat);
@@ -51,11 +51,11 @@ public class ArticleDivers extends Article {
 		}
 	}
 
-	public String getType() {
+	public String getNature() {
 		return nature;
 	}
 
-	public void setType(String nature) {
+	public void setNature(String nature) {
 		this.nature = nature;
 	}
 
