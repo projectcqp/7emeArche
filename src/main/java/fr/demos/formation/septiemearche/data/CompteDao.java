@@ -37,6 +37,28 @@ public class CompteDao implements InterfaceDao<Compte> {
 		return compte;
 	}
 
+	
+	public Compte select(String email, String password){
+		
+		Compte compteConnecte = null;
+		
+		try {
+			String requestString = "SELECT c FROM Compte c WHERE c.email=? AND c.password=?";
+			
+			TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);
+			query.setParameter(1, email);
+			query.setParameter(2, password);
+			
+			compteConnecte = query.getSingleResult();
+		} catch (Exception e) {
+		
+			logger.error("Il n'y a aucun compte trouvé avec cette combinaison email, mot de passe");
+		}
+		
+		
+		return compteConnecte;
+	
+	}
 	public List<Compte> selectSearch(String criteria) throws Exception {
 
 		int criteriaInt = 2147483647;

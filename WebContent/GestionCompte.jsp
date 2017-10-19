@@ -8,56 +8,78 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="styles.css" />
+
+<link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap-3.3.7/dist/css/style.css" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Indie+Flower|Noto+Serif|Roboto"
+	rel="stylesheet">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src='functionsJavascript.js'></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+
+
+
 <title>Gestion de compte</title>
 </head>
 <body>
-	<div class="divbody">
-		<header id="headerPanier">
-			<jsp:include page="/Menu.jsp"></jsp:include>
-		</header>
+	<div class="container">
 
-		<div class="titrePanier">
-			<p id="titreCompte">Les informations de votre compte utilisateur</p>
+		<%@ include file="Menu.jsp"%>
+		<%@ include file="Connexion.jsp"%>
+
+
+		<div class="section">
+			<div class="row">
+				<div id="monPanier">
+
+					<h3>LES INFORMATIONS DE VOTRE COMPTE</h3>
+				</div>
+
+			</div>
 		</div>
-		<br/>
-			
-		<!-- si non connecté à un compte -->	
-		<c:if test="${empty compteSession}">
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<p>Vous n'êtes connecté à aucun compte utilisateur et je me demande comment vous êtes arrivé là...</p>
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		</c:if>
-		
-		<!-- si non connecté à un compte -->
-		<c:if test="${not empty compteSession}">
-		<br/>
-		<p>Nom : ${compteSession.nom}</p>
-		<br/>
-		<p>Prénom : ${compteSession.prenom}</p>
-		<br/>
-		<p>Adresse :</p>
-		<p>${compteSession.adresseCompte}</p>
-		<br/>
-		<p>Adresse de livraison :</p>
-		<p>${compteSession.adresseLivraison}</p>
-		<br/>
-		<p>Téléphone : ${compteSession.telephone}</p>
-		<br/>
-		<p>Email : ${compteSession.email}</p>
-		<br/>
-		<p>Mot de passe : ${compteSession.password}</p>
-		<br/><br/>
-		<br/><br/>
+		<br />
 
-		
-		</c:if>		
+		<!-- si non connecté à un compte -->
+		<c:if test="${empty compteSession}">
+			<br />
+			<br />
+			<br />
+			<br />
+			<p>Vous n'êtes connecté à aucun compte utilisateur et je me
+				demande comment vous êtes arrivé là...</p>
+			<br />
+			<br />
+			<br />
+			<br />
+		</c:if>
+
+		<!-- si connecté à un compte -->
+		<c:if test="${not empty compteSession}">
+
+			
+				<br />
+				<p>Nom : ${compteSession.nom}</p>
+				<br />
+				<p>Prénom : ${compteSession.prenom}</p>
+				<br />
+				<p>Date de naissance: ${compteSession.dateNaissance}</p>
+				<br />
+				<p>Adresse de facturation: ${compteSession.adresse}</p>
+				<br />
+				<p>Adresse de livraison: ${compteSession.adresse_livraison}</p>
+				<br />
+				<p>Téléphone : ${compteSession.telephone}</p>
+				<br />
+				<p>Email : ${compteSession.email}</p>
+				<br /> <br /> <br /> <br />
+			
+
+		</c:if>
 	</div>
 </body>
 </html>

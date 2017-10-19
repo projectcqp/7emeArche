@@ -1,7 +1,8 @@
 package fr.demos.formation.septiemearche.web;
 
 import java.io.IOException;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -12,7 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import fr.demos.formation.septiemearche.data.ArticleDao;
+import fr.demos.formation.septiemearche.data.ArticleDiversDao;
+import fr.demos.formation.septiemearche.data.LivreDao;
 import fr.demos.formation.septiemearche.metier.Article;
 
 @WebServlet("/ControlerArticles")
@@ -20,8 +25,16 @@ public class ControlerArticles extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// appel de l'interface on pourra choisir son dao si plusieurs
-	@Inject ArticleDao articleDaoCDI;
+	@Inject
+	ArticleDao articleDaoCDI;
 
+	@Inject
+	private ArticleDiversDao articleDiversDao;
+
+	@Inject
+	private LivreDao livreDao;
+
+	private static Logger logger = Logger.getLogger("Log");
 
 	public ControlerArticles() {
 		super();
@@ -31,15 +44,52 @@ public class ControlerArticles extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// j'identifie et je stocke la session actuelle
+		int page = 1;
+		int recordsPerPage = 5;
+
 		HttpSession session = request.getSession();
 
-		// je r�cup�re la requ�te et je renvoie vers la JSP
-		RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
+		ArrayList<Article> catalogue = new ArrayList<Article>();
+		try {
+			catalogue = (ArrayList<Article>) articleDaoCDI.selectAll();
+			session.setAttribute("catalogue", catalogue);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Le catalogue d'articles n'a pas été récupéré");
+		}
+	
+		
+		if (request.getParameter("page") != null)
+			page = Integer.parseInt(request.getParameter("page"));
+
+		ArrayList<Article> catalogue1;
+		try {
+			// calcule le premier élément du lot d'articles de la page - 1
+			// car la méthode query.setFirstResult(firstOfPage) commence le compte à 0
+			int firstOfPage = (page - 1) * recordsPerPage;
+			catalogue1 = (ArrayList<Article>) articleDaoCDI.select(firstOfPage, recordsPerPage);
+
+			// nombre total d'articles présents dans le catalogue global
+			int noOfRecords = catalogue.size();
+
+			// nombre de pages
+			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+
+			session.setAttribute("catalogue1", catalogue1);
+			request.setAttribute("noOfPages", noOfPages);
+			request.setAttribute("currentPage", page);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("Les articles de la page n'ont pas pu être récupérés");
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
 		rd.forward(request, response);
 
-		// je renseigne la nouvelle jsp courante apr�s chaque rd.forward
-		String jspCourante = "/Articles.jsp";
+		//TODO vérifier si jspCourante utilisée (après une recherche ?)
+		// je renseigne la nouvelle jsp courante après chaque rd.forward
+		String jspCourante = "/Accueil.jsp";
 		session.setAttribute("jspCourante", jspCourante);
 
 	}// do get
@@ -47,81 +97,52 @@ public class ControlerArticles extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// je dis � tomcat d'utiliser les accents et caract�res sp�ciaux
+		// je dis à tomcat d'utiliser les accents et caract�res sp�ciaux
 		request.setCharacterEncoding("UTF-8");
 
 		// j'identifie et je stocke la session actuelle
 		HttpSession session = request.getSession();
 
-		// je stocke le param�tre de requete (le name du bouton)
+		// je stocke le paramètre de requete (le name du bouton)
 		String action = request.getParameter("action");
 
 		// si on clique sur Voir les articles j'affiche la page articles
-		// TODO : v�rification nom utilisateur et mdp pour valider connection
-		if (action != null && action.equals("Voir les articles")) {
-
-			// je r�cup�re la requ�te et je renvoie vers la JSP
-			RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
-			rd.forward(request, response);
-
-			// je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la
-			// m�me que le forward)
-			String jspCourante = "/Articles.jsp";
-			session.setAttribute("jspCourante", jspCourante);
-
-		} // if bouton Voir les articles
+		// TODO : vérification nom utilisateur et mdp pour valider connection
 
 		// si bouton rechercher
 		if (action != null && action.equals("Rechercher")) {
-			
-			// recherche va renseigner le "string critere" en argument de la m�thode select
+
+			// recherche va renseigner le "string critere" en argument de la
+			// m�thode select
 			String recherche = request.getParameter("recherche").toUpperCase();
-			
-			// chercher en BDD les correspondance
-			// it�rer et mettre les r�sultats dans catalogue dans session
-			// apr�s une recherche on ne remet pas le catalogue � son �tat d'avant la recherche
-			// il faudra faire une nouvelle recherche ou appeler select sans argument
-			
-			//ancienne version
-//			try {
-//				ArticleDAOMySql articleDAOMySql = new ArticleDAOMySql();
-//				ArrayList<Article> catalogue = (ArrayList<Article>) articleDAOMySql.select(recherche);
-//				session.setAttribute("catalogue", catalogue);
-//				
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-			
+
 			// version avec injection
-			List<Article> catalogue;
+			ArrayList<Article> catalogue;
 			try {
-				catalogue = (List<Article>) articleDaoCDI.select(recherche);
+				catalogue = (ArrayList<Article>) articleDaoCDI.selectSearch(recherche);
 				session.setAttribute("catalogue", catalogue);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 
-			
-			//je mets le crit�re de recherche dans la requete pour le cas o� on ne trouve rien
+
+			// je mets le critère de recherche dans la requete pour le cas où on
+			// ne trouve rien
 			String critereRecherche = request.getParameter("recherche");
 			session.setAttribute("critereRecherche", critereRecherche);
-			
-			// je r�cup�re la requ�te et je renvoie vers la JSP
-			RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
+
+			// je récupère la requête et je renvoie vers la JSP
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
 			rd.forward(request, response);
 
 			// je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la
-			// m�me que le forward)
-			String jspCourante = "/Articles.jsp";
+			// même que le forward)
+			String jspCourante = "/Accueil.jsp";
 			session.setAttribute("jspCourante", jspCourante);
-			
-		}// if Rechercher
 
-		
-		
+		} // if Rechercher
+
 	}// do post
 
 } // class

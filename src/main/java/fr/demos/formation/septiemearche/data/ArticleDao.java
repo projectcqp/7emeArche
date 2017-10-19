@@ -1,8 +1,11 @@
 package fr.demos.formation.septiemearche.data;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -16,8 +19,10 @@ import fr.demos.formation.septiemearche.metier.Article;
  */
 
 public class ArticleDao implements InterfaceDao<Article> {
+
 	@PersistenceContext
 	private EntityManager em;
+
 	private static Logger logger = Logger.getLogger("Log");
 
 	@Override
@@ -27,13 +32,13 @@ public class ArticleDao implements InterfaceDao<Article> {
 
 		try {
 			idInt = Integer.parseInt(idString);
-			
+
 			String requestString = "SELECT a FROM Article a WHERE a.id=?";
 
 			TypedQuery<Article> query = em.createQuery(requestString, Article.class);
 			query.setParameter(1, idInt);
 
-article = query.getSingleResult();
+			article = query.getSingleResult();
 		} catch (NumberFormatException e) {
 			logger.error("Paramètre invalide, " + idString + " n'est pas un nombre valide");
 		}
@@ -62,7 +67,7 @@ article = query.getSingleResult();
 	}
 
 	@Override
-	public List<Article> selectAll() throws Exception {
+	public List<Article> selectAll() throws Exception, SQLException {
 
 		String requestString = "SELECT a FROM Article a";
 
@@ -70,7 +75,24 @@ article = query.getSingleResult();
 
 		return query.getResultList();
 	}
+	
+	// Retourne la liste d'articles à afficher pour chaque page "paginée"
+	public List<Article> select(int firstOfPage, int recordsPerPage) {
+		
+		String requestString = "SELECT a FROM Article a ORDER BY a.id ASC";
+		
+		TypedQuery<Article> query = em.createQuery(requestString, Article.class);
 
+		query.setFirstResult(firstOfPage);
+		query.setMaxResults(recordsPerPage);
+
+		return query.getResultList();
+	}
+	
+
+	
+	
+	
 	@Override
 	public void insert(Article a) throws Exception {
 		em.persist(a);

@@ -95,12 +95,12 @@ public class ServletAjax extends HttpServlet {
 						String messageExceptionQDSAS = message + quantiteStock;
 						// je mets � disposition le message en EL pour la requete
 						request.setAttribute("ExceptionQuantiteDemandeeSuperieureAuStock", messageExceptionQDSAS);
-						// je mets dans la session la r�f�rence de l'article mis
+						// je mets dans la session la référence de l'article mis
 						// dans le panier
 						session.setAttribute("referenceArticlePanier", refArticle);
 					}
 					// break pour arr�ter de boucler car on aura qu'une seule
-					// fois cet article (r�f�rence unique)
+					// fois cet article (référence unique)
 					break;
 				} // if
 			} // for article catalogue

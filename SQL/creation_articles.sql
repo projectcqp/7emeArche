@@ -28,7 +28,7 @@ VALUES
 ('7', 'Vincent Amiel', '978-2200619831', 'Armand Colin', 'cinéma', '2017-08-16'),
 ('8', 'Vincent Amiel', 'B074P18YLF', 'Armand Colin', 'cinéma', '2017-08-16');
 
-INSERT INTO article_divers (id_article_article_divers, type_article_divers)
+INSERT INTO article_divers (id_article_article_divers, nature_article_divers)
 VALUES
 ('9', 'AFFICHE'),
 ('10', 'AFFICHE'),

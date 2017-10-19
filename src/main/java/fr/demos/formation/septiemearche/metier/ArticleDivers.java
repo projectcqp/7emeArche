@@ -10,8 +10,8 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id_article_article_divers")
 public class ArticleDivers extends Article {
 
-	@Column(name = "type_article_divers")
-	private String type;
+	@Column(name = "nature_article_divers")
+	private String nature;
 
 	// constructeur vide pour hibernate
 	public ArticleDivers() {
@@ -19,41 +19,44 @@ public class ArticleDivers extends Article {
 
 	// constructeur article divers dematerialise
 	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, String argFormat,
-			String argUrlDownload, String argType) {
+			String argUrlDownload, String argNature) {
 		super(argReference, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload);
-		this.type = argType;
+		super.setType("ArticleDivers");
+		this.nature = argNature;
 	}
 
 	// constructeur article divers materialise neuf
 	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock,
-			String argType) {
+			String argNature) {
 		super(argReference, argPrixHt, argNom, argUrlImage, argStock);
-		this.type = argType;
+		super.setType("ArticleDivers");
+		this.nature = argNature;
 	}
 
 	// constructeur article divers materialise non neuf
 	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock,
-			Etat argEtat, String argType) {
+			Etat argEtat, String argNature) {
 		super(argReference, argPrixHt, argNom, argUrlImage, argStock, argEtat);
-		this.type = argType;
+		super.setType("ArticleDivers");
+		this.nature = argNature;
 	}
 
 	@Override
 	public String toString() {
 		if (super.getMaterialise() == null) {
-			return "ArticleDivers [type=" + type + ", toString()=" + super.getDematerialise().getFormat()
+			return "ArticleDivers [nature=" + nature +  super.getDematerialise().getFormat() + "ref : " + getReference() + "nom article : " + getNom()
 					+ ", getUrlDownload()=" + super.getDematerialise().getUrlDownload() + "]";
 		} else {
-			return "ArticleDivers [type=" + type + ", toString()=" + ", Etat=" + super.getMaterialise().getEtat() + "]";
+			return "ArticleDivers [nature=" + nature + ", ref : " + getReference() + "nom article : " + getNom() +" , Etat=" + super.getMaterialise().getEtat() + "]";
 		}
 	}
 
 	public String getType() {
-		return type;
+		return nature;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setType(String nature) {
+		this.nature = nature;
 	}
 
 }

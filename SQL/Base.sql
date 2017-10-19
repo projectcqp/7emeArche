@@ -52,7 +52,7 @@ date_livre date not null
 create table article_divers(
 id_article_article_divers integer(5) primary key,
 foreign key (id_article_article_divers) references article(id_article),
-type_article_divers varchar(50) not null
+nature_article_divers varchar(50) not null
 ) engine innodb;
 
 -- Les tables 'adresse' et 'compte' ont des références mutuelles

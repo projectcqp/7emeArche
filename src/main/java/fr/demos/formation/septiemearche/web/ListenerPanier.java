@@ -1,6 +1,6 @@
 package fr.demos.formation.septiemearche.web;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebListener;
@@ -46,15 +46,16 @@ public class ListenerPanier implements HttpSessionListener {
 //    	arg0.getSession().setAttribute("catalogue", catalogue);
     	
     	// version avec CDI et appel interface pour choisir le DAO
-    	List<Article> catalogue;
+    	ArrayList<Article> catalogue;
 		try {
-			catalogue = (List<Article>) articleDaoCDI.select("");
-			arg0.getSession().setAttribute("catalogue", catalogue);
+			catalogue = (ArrayList<Article>) articleDaoCDI.selectAll();
+	    	arg0.getSession().setAttribute("catalogue", catalogue);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
+
     	
     	
     	
@@ -67,7 +68,7 @@ public class ListenerPanier implements HttpSessionListener {
     	
     	// je cr�e un attribut pour la session pour savoir de quelle jsp je viens
     	// Page Articles par d�faut car page d'accueil
-    	String jspCourante = "/Articles.jsp";
+    	String jspCourante = "/test.jsp";
     	arg0.getSession().setAttribute("jspCourante", jspCourante);
     	
     	// Je mets compte dans la session

@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
 
+import fr.demos.formation.septiemearche.metier.Article;
 import fr.demos.formation.septiemearche.metier.ArticleDivers;
 
 public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
@@ -59,6 +60,7 @@ public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 		return query.getResultList();
 		// Todo filtrer les résultats en fonction du paramètre
 	}
+	
 
 	@Override
 	public void insert(ArticleDivers ad) throws Exception {

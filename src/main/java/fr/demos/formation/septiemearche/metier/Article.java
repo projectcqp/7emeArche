@@ -51,6 +51,9 @@ public abstract class Article {
 	@Column(name = "stock_article")
 	private int stock;
 	
+	@Column(name = "type_article")
+	private String type;
+	
 	@ManyToOne
 	@JoinColumn(name="id_tva_article")
 	private Tva tva;
@@ -188,6 +191,15 @@ public abstract class Article {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Tva getTva() {

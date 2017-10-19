@@ -38,6 +38,7 @@ public class Livre extends Article {
 	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload,
 			String argAuteur, String argIsbn, String argEditeur, String argGenre) {
 		super(argReference, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload);
+		super.setType("Livre");
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
@@ -48,6 +49,7 @@ public class Livre extends Article {
 	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock,
 			String argAuteur, String argIsbn, String argEditeur, String argGenre) {
 		super(argReference, argPrixHt, argNom, argUrlImage, argStock);
+		super.setType("Livre");
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
@@ -58,6 +60,7 @@ public class Livre extends Article {
 	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat,
 			String argAuteur, String argIsbn, String argEditeur, String argGenre) {
 		super(argReference, argPrixHt, argNom, argUrlImage, argStock, argEtat);
+		super.setType("Livre");
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;

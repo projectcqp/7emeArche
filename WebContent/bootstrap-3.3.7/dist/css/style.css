@@ -1,0 +1,57 @@
+body {
+	background-color: #E0E6F8;
+}
+
+.container {
+	max-width: 960px;
+	min-height: 800px; margin : auto;
+	margin-bottom: 20px;
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: #464040 0px 0px 15px;
+	margin: auto;
+}
+
+.header {
+	max-width: 960px;
+	min-height: 800px;
+	margin: auto;
+	margin-bottom: 20px;
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: #464040 0px 0px 15px;
+}
+
+.text-primary {
+	stroke-dashoffset: 100;
+}
+
+h1 {
+	font-family: 'Noto Serif', serif;
+}
+
+.section .row #nomArticle h2 {
+	margin-top: 0 px;
+}
+
+h3 {
+	font-family: 'Indie Flower', cursive;
+}
+
+.ajout {
+	position: relative;
+}
+
+.glyphicon {
+	font-size: 23px;
+}
+
+.messageException {
+	color: #DF0101;
+}
+
+.col-xs-12 {
+	margin-top: 30px;
+}

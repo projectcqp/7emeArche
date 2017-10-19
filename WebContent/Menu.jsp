@@ -3,85 +3,86 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<div class="menuVertical">
-	<div class="titreSite">
-		<div>
-			<p>Ciné Grande Arche - Votre librairie cinéphile</p>
+	<header>
+		<div class="text-center">
+			<h1 class="blue" style="color: #2196F3;">7ième Arche</h1>
+			<h3 class="blue">Votre librairie cinéphile</h3>
 		</div>
-	</div>
-	<div class="menuHorizontal">
-	
-		<!-- si non connecté à un compte -->
-		<c:if test="${empty compteSession}">
-			<div class="elementMenu">
-			
-				<form id="formConnectionCompte" method="post" action="ControlerCompte">
-					<input type=submit value="Connection" name="action" id="boutonConnexion"/>
-					<b>${messageErreurConnexion}</b>
-					<br/>
-					<label for="nom">Email : </label><input type="email" value="${param.email}" name="email" />
-					<br/>
-					<label for="password">Mot de passe : </label><input type="password" value="${param.password}" name="password" />					
-				</form>
-				
-			</div>		
-		</c:if>
+	</header>
+	<nav class="navbar navbar-default">
 
-		<!-- si connecté -->	
-		<c:if test="${not empty compteSession}">
-			<div class="elementMenu" id="divBoutonDeconnecter">
-				<form id="formPageCompte" method="POST" action="ControlerCompte">
-					<input type=submit value="Se déconnecter" name="action">
-				</form>
+
+		<div class="container-fluid">
+
+
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand"
+					href="${pageContext.request.contextPath}/ControlerArticles">Accueil
+				</a>
 			</div>
-		</c:if>
 
-		<!-- si connecté -->
-		<c:if test="${not empty compteSession}">
-			<div class="elementMenu">
-				<form id="formPageCompte" method="POST" action="ControlerCompte">
-					<input type=submit value="Voir le compte" name="action">
+
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav ">
+
+
+					<c:if test="${empty compteSession}">
+
+						<form>
+							<button type="button" class="btn btn-primary navbar-btn"
+								data-toggle="modal" data-target="#myModal">Connexion</button>
+						</form>
+					</c:if>
+
+					<c:if test="${not empty compteSession}">
+
+
+						<form role="form" action="ControlerCompte" method="POST">
+							<button class="btn btn-primary navbar-btn" type="submit"
+								name="action" value="Deconnexion">Deconnexion</button>
+						</form>
+					</c:if>
+
+
+
+				</ul>
+				<form class="navbar-form navbar-left">
+					<div class="form-group">
+						<input type="text" value="${param.recherche}" class="form-control"
+							placeholder="Rechercher">
+					</div>
+					<button type="submit" class="btn btn-primary">Soumettre</button>
 				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="Panier.jsp">Panier (<span id="artCumuPanier">${panier.getArticlesCumulesPanier()}</span>)
+					</a>
+					<li><a href="#"> Total HT : <span id="pxTotalPanier"><fmt:formatNumber
+									type="number" value="${panier.getPrixTotal()}"
+									minFractionDigits="2" /> </span> €
+					</a></li>
+					<c:if test="${empty compteSession}">
+
+						<li><a href="CreerCompte.jsp">Créer un compte</a></li>
+
+
+					</c:if>
+					<c:if test="${not empty compteSession}">
+						<li><a href="${pageContext.request.contextPath}/ControlerCompte">Mon Compte</a></li>
+					</c:if>
+				</ul>
 			</div>
-		</c:if>
-		
-		<!-- si non connecté à un compte -->
-		<c:if test="${empty compteSession}">
-			<div class="elementMenu">
-				<form id="formCreerCompte" method="POST" action="ControlerCompte">
-					<input type=submit value="Créer un compte" name="action">
-				</form>
-			</div>			
-		</c:if>
-
-		<div class="elementMenu">
-			<form id="formPageArticle" method="POST" action="ControlerArticles">
-				<input type=submit value="Voir les articles" name="action">
-			</form>
+			<!-- /.navbar-collapse -->
 		</div>
+		<!-- /.container-fluid -->
 
-		<div class="elementMenu">
-			<div>
-				<form id="formPagePanier" method="POST" action="ControlerPanier">
-					<input type=submit value="Voir le panier" name="action">
-				</form>
-			</div>
-		</div>
-		
-		<div class="elementMenu" id="elementMenuContenuPanier">
-			<div>
-				Le panier contient <span id="artCumuPanier">${panier.getArticlesCumulesPanier()}</span> articles <br />
-				Montant total HT :
-				<span id="pxTotalPanier"><fmt:formatNumber value="${panier.getPrixTotal()}" minFractionDigits="2" /></span>€
-			</div>
-		</div>
-	</div>
 
-	<div class="elementMenu" id="rechercheArticleMenu">
-		<form id="formRecherche" method="post" action="ControlerArticles">
-			<input type=submit value="Rechercher" name="action" />
-			<input type="text" value="${param.recherche}" name="recherche" />
-			</form>
-	</div>
-</div>
-
+	</nav>
