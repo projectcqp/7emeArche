@@ -35,9 +35,9 @@ public class Livre extends Article {
 	}
 	
 	// constructeur livre dematerialise
-	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload,
+	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva argTva, String argFormat, String argUrlDownload,
 			String argAuteur, String argIsbn, String argEditeur, String argGenre) {
-		super(argReference, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload);
+		super(argReference, argPrixHt, argNom, argUrlImage, argTva, argFormat, argUrlDownload);
 		super.setType("Livre");
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
@@ -46,9 +46,9 @@ public class Livre extends Article {
 	}
 	
 	// constructeur livre materialise neuf
-	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock,
+	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva argTva, int argStock,
 			String argAuteur, String argIsbn, String argEditeur, String argGenre) {
-		super(argReference, argPrixHt, argNom, argUrlImage, argStock);
+		super(argReference, argPrixHt, argNom, argUrlImage, argTva, argStock);
 		super.setType("Livre");
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
@@ -57,9 +57,9 @@ public class Livre extends Article {
 	}
 
 	// constructeur livre materialise non neuf
-	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat,
+	public Livre(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva argTva, int argStock, Etat argEtat,
 			String argAuteur, String argIsbn, String argEditeur, String argGenre) {
-		super(argReference, argPrixHt, argNom, argUrlImage, argStock, argEtat);
+		super(argReference, argPrixHt, argNom, argUrlImage, argTva, argStock, argEtat);
 		super.setType("Livre");
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;

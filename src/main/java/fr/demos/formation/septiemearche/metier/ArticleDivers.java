@@ -18,25 +18,25 @@ public class ArticleDivers extends Article {
 	}
 
 	// constructeur article divers dematerialise
-	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, String argFormat,
+	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva argTva, String argFormat,
 			String argUrlDownload, String argNature) {
-		super(argReference, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload);
+		super(argReference, argPrixHt, argNom, argUrlImage, argTva, argFormat, argUrlDownload);
 		super.setType("ArticleDivers");
 		this.nature = argNature;
 	}
 
 	// constructeur article divers materialise neuf
-	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock,
+	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva argTva, int argStock,
 			String argNature) {
-		super(argReference, argPrixHt, argNom, argUrlImage, argStock);
+		super(argReference, argPrixHt, argNom, argUrlImage, argTva, argStock);
 		super.setType("ArticleDivers");
 		this.nature = argNature;
 	}
 
 	// constructeur article divers materialise neuf ou non
-	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock,
+	public ArticleDivers(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva argTva, int argStock,
 			Etat argEtat, String argNature) {
-		super(argReference, argPrixHt, argNom, argUrlImage, argStock, argEtat);
+		super(argReference, argPrixHt, argNom, argUrlImage, argTva, argStock, argEtat);
 		super.setType("ArticleDivers");
 		this.nature = argNature;
 	}

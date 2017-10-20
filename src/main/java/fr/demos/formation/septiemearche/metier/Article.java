@@ -66,24 +66,26 @@ public abstract class Article {
 	
 	// constructeur si dematerialise pdf, iso, exe...
 	// id est à 0, il sera renseigné par hibernate lors du premier enregistrement en BDD
-	public Article(String argReference, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload) {
+	public Article(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva tva, String argFormat, String argUrlDownload) {
 		super();
 		this.reference = argReference;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
 		this.urlImage = argUrlImage;
+		this.tva = tva;
 		this.stock = 1;
 		this.dematerialise = new Dematerialise(argFormat, argUrlDownload);
 	}
 
 	// constructeur si materialise et neuf car 80% de l'activite = livres neufs
 	// id est à 0, il sera renseigné par hibernate losr du premier enregistrement en BDD
-	public Article(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock) {
+	public Article(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva tva, int argStock) {
 		super();
 		this.reference = argReference;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
 		this.urlImage = argUrlImage;
+		this.tva = tva;
 		this.stock = argStock;
 		this.materialise = new Materialise(Etat.NEUF);
 	}
@@ -91,12 +93,13 @@ public abstract class Article {
 	// constructeur si materialise livre, dvd, cd...
 	// + arguments stock et etat)
 	// id est à 0, il sera renseigné par hibernate losr du premier enregistrement en BDD
-	public Article(String argReference, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat) {
+	public Article(String argReference, double argPrixHt, String argNom, String argUrlImage, Tva tva, int argStock, Etat argEtat) {
 		super();
 		this.reference = argReference;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
 		this.urlImage = argUrlImage;
+		this.tva = tva;
 		this.stock = argStock;
 		this.materialise = new Materialise(argEtat);
 	}
