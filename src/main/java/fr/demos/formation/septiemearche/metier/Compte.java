@@ -63,7 +63,6 @@ public class Compte implements Serializable {
 	@Transient
 	private LocalDate dateNaissance;
 	
-	
 	@OneToOne
 	@JoinColumn(name= "id_adresse_facturation_compte")
 	private Adresse adresseFacturation;
@@ -72,8 +71,10 @@ public class Compte implements Serializable {
 	@JoinColumn(name="id_compte_adresse")
 	private List<Adresse> adressesCompte;
 	
+	private static final int passwordMinLength = 6;
+	
 	// TODO vérifier là où est appelé cette méthode car j'au ajouté un argument "passwordMinLength" (dans controler compte ?)
-	public void testCreationPassword(String password, String passwordConfirmation, int passwordMinLength) throws ExceptionPasswordFormat {
+	public void testCreationPassword(String password, String passwordConfirmation) throws ExceptionPasswordFormat {
 		// test si les passwords entres sont identiques
 		if (password == passwordConfirmation) {
 			// test taille 6 caract�res mini
@@ -92,6 +93,8 @@ public class Compte implements Serializable {
 	public Compte() {
 		super();
 	}
+
+
 
 	@Override
 	public String toString() {
@@ -182,6 +185,10 @@ public class Compte implements Serializable {
 
 	public void setTitre(Titre titre) {
 		this.titre = titre;
+	}
+
+	public static int getPasswordminlength() {
+		return passwordMinLength;
 	}
 	
 }
