@@ -1,3 +1,5 @@
+SET foreign_key_checks = 0;
+
 -- Création de la base
 drop database if exists 7emearche;
 create database 7emearche charset=utf8;
@@ -10,7 +12,7 @@ libelle_tva varchar(25) not null unique,
 taux_tva double  not null default 0
 ) engine innodb;
 
---  Crééation de l'arboressence article
+--  Création de l'arboressence article
 create table materialise(
 id_materialise integer(5) primary key,
 etat_materialise varchar(20)
@@ -66,7 +68,7 @@ complement_adresse varchar(25),
 code_postal_adresse varchar(10) not null, 
 ville_adresse varchar(50) not null,
 pays_adresse varchar(50) not null default 'France',
-id_compte_adresse integer(5) not null
+id_compte_adresse integer(5)
 ) engine innodb;
 
 create table compte(
@@ -78,7 +80,7 @@ nom_compte varchar(50) not null,
 prenom_compte varchar(50) not null,
 telephone_compte varchar(15) not null,
 date_naissance_compte date not null,
-id_adresse_facturation_compte integer(5) not null,
+id_adresse_facturation_compte integer(5),
 foreign key (id_adresse_facturation_compte) references adresse(id_adresse)
 ) engine innodb;
 alter table adresse add foreign key (id_compte_adresse) references compte(id_compte);
@@ -116,3 +118,5 @@ GRANT select, delete, insert, update ON 7emearche.* To '7emeArcheUser'@'localhos
 
 CREATE USER if not exists '7emeArcheDba'@'localhost' IDENTIFIED BY 'password';
 GRANT all privileges ON 7emearche.* To '7emeArcheDba'@'localhost';
+
+SET foreign_key_checks = 1;

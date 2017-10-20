@@ -1,5 +1,6 @@
--- Décocher "Activer la vérification des clés étrangères"
--- Mettre les materialise ou dematerialise à NULL dans article
+-- IL FAUT DESACTIVER LA VERIFICATION DES CLES ETRANGERES QUAND ON PASSE LES SCRITP DANS PHPMYADMIN
+SET FOREIGN_KEY_CHECKS = 0;
+
 INSERT INTO materialise (id_materialise, etat_materialise)
 VALUES
 ('1', 'NEUF'),
@@ -62,4 +63,6 @@ VALUES
 ('11', '11_articleDivers_mat', '5.37', 'Clap cinéma Hollywood', 'Véritable clap de cinéma en bois pour monter vos films comme à Hollywood !',
 'images/11_articleDivers_mat.jpg', '11', NULL, '15', 'ArticleDivers', '3'),
 ('12', '12_articleDivers_demat', '7.19', 'Le fabuleux destin d''Amélie Poulain (Bande originale du film)', 'Playlist complète au format MP3 des titres du film : I''ve Never Been There - Yann Tiersen, Les jours tristes (Instrumental) - Yann Tiersen & The Divine Comedy, La valse d''Amélie - Yann Tiersen, Comptine d''un autre été, l''après-midi - Yann Tiersen, The Drowned Girl - Yann Tiersen, L''autre valse d''Amélie - Yann Tiersen, Guilty (2001 Remastered Version) - George Shearing, A quai - Yann Tiersen, Le moulin - Yann Tiersen, Not That Simple - Yann Tiersen,	La valse d''Amélie (Version orchestre) - Yann Tiersen, La valse des vieux os - Yann Tiersen, Dispute - Yann Tiersen, Si tu n''étais pas là - Frehel, Evening Party - Yann Tiersen, La redécouverte - Yann Tiersen, On The Wire - Yann Tiersen, Banquet - Yann Tiersen, La Valse d''Amélie (Solo Piano Version) - Yann Tiersen, The Waltz Of The Monsters - de Yann Tiersen, L''autre valse d''Amélie (Quatuor à cordes et piano) - Yann Tiersen, Les deux pianos - Yann Tiersen, Comptine d''un autre été : la démarche - Yann Tiersen, La maison - Yann Tiersen, La valse d''Amélie (Version orchestre) [Live] - Yann Tiersen.',
-'images/12_articleDivers_demat.jpg', NULL, '12', '1', 'ArticleDivers', "3");
+'images/12_articleDivers_demat.jpg', NULL, '12', '1', 'ArticleDivers', '3');
+
+SET FOREIGN_KEY_CHECKS = 1;

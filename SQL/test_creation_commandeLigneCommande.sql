@@ -1,4 +1,6 @@
--- Décocher "Activer la vérification des clés étrangères"
+-- IL FAUT DESACTIVER LA VERIFICATION DES CLES ETRANGERES QUAND ON PASSE LES SCRITP DANS PHPMYADMIN
+SET FOREIGN_KEY_CHECKS = 0;
+
 INSERT INTO ligne_commande (id_ligne_commande, reference_article_ligne_commande, nom_article_ligne_commande, prix_unitaire_ligne_commande,
 quantite_ligne_commande, total_ligne_commande, taux_tva_ligne_commande, id_commande_ligne_commande)
 VALUES
@@ -11,3 +13,5 @@ adresse_facturation_commande, adresse_livraison_commande, id_compte_commande)
 VALUES
 ('1', '2017-10-18', '39', '7.8', '2017-10-0001', 'f-20171018-0001',
 'Monsieur Jean DUPONT 1 rue du midi 75001 PARIS FRANCE', 'Monsieur Jean DUPONT 1 rue du midi 75001 PARIS FRANCE', '1');
+
+SET FOREIGN_KEY_CHECKS = 1;
