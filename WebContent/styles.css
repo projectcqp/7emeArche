@@ -26,6 +26,10 @@ header{
 	justify-content: space-around;
 }
 
+.display-user-name {
+	display: flex;
+}
+
 .parentFlex{
 	display: flex;
 	
@@ -156,8 +160,6 @@ header{
 	width: 90%;
 	flex-direction: column;
 }
-
-
 
 textarea{
 	resize:none;

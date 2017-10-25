@@ -143,14 +143,6 @@ public class Commande implements Serializable {
 		this.totalHt = totalHt;
 	}
 
-	public double getTva() {
-		return totalTva;
-	}
-
-	public void setTva(double totalTva) {
-		this.totalTva = totalTva;
-	}
-
 	public List<LigneCommande> getLignesCommande() {
 		return lignesCommande;
 	}

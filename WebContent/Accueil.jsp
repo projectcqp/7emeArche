@@ -67,8 +67,7 @@
 
 					<br>
 					<div class="col-xs-8">
-						<img class="img-responsive"
-							src="<c:url value='${article.urlImage}'/>" style="width: 20%;" />
+						<img class="img-responsive" src="<c:url value='${article.urlImage}'/>" style="width: 20%;" alt="${article.nom}"/>
 					</div>
 
 					<!-- si Livre -->
@@ -79,13 +78,12 @@
 								<ul>
 									<li>Auteur : ${article.auteur}</li>
 									<li>Editeur : ${article.editeur}</li>
+									<li>Format : Livre</li>
 									<li>Etat : ${article.materialise.etat}</li>
 									<li>Prix HT : <fmt:formatNumber value="${article.prixHt}"
 											minFractionDigits="2" /> €
 									</li>
 									<li>Quantité disponible : ${article.stock}</li>
-									<li>Date de parution : ${article.date}</li>
-									<li>Genre : ${article.genre}</li>
 									<li>ISBN : ${article.isbn}</li>
 									<li>Référence : ${article.reference}</li>
 								</ul>
@@ -102,8 +100,6 @@
 											minFractionDigits="2" /> €
 									</li>
 									<li>Quantité disponible : ${article.stock}</li>
-									<li>Date de parution : ${article.date}</li>
-									<li>Genre : ${article.genre}</li>
 									<li>ASIN : ${article.isbn}</li>
 									<li>Référence : ${article.reference}</li>
 								</ul>

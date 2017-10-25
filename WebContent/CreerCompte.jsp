@@ -22,8 +22,9 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="functionsJavascript.js"></script>
-<script
-	src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+<!-- <script
+	src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 
@@ -44,7 +45,7 @@
 		<form data-toggle="validator" role="form" class="form-horizontal"
 			action='ControlerCompte' method="POST">
 
-			<div class="col-xs-4">
+			<div class="col-xs-6">
 
 				<div class="form-group">
 					<!-- E-mail -->
@@ -72,9 +73,9 @@
 					<label class="control-label" for="password_compte_confirm">Confimer
 						le mot de passe</label> <input type="password"
 						id="password_compte_confirm" data-match="#password_compte"
-						data-match-error="Whoops, les mots de passe ne corespondent pas"
-						name="password_compte" placeholder="Confimer le mot de passe"
-						class="form-control" data-minlength="6" required>
+						data-match-error="Les mots de passe ne correspondent pas"
+						name="password_compte_confirm" placeholder="Confimer le mot de passe"
+						class="form-control" required>
 					<span class="help-block with-errors"></span>
 
 
@@ -126,25 +127,43 @@
 
 				<div class="form-group">
 					<!-- Adresse -->
-					<label class="control-label" for="adresse_compte">Adresse
+					<!-- <label class="control-label" for="adresse_compte">Adresse
 						de facturation</label> <input type="text" id="adresse_compte"
 						name="adresse_compte" placeholder="Adresse de facturation"
-						class="form-control" required>
-
-
+						class="form-control" required> voie complement codepostal ville pays
+					-->
+					<label>Adresse de facturation</label>
+					<br/>
+					<label class="control-label">Numéro et rue</label>
+					<input type="text" id="voie_adresse"name="voie_adresse" placeholder="Numéro et rue"	class="form-control" required>
+					<label class="control-label">Complément d'adresse</label>
+					<input type="text" id="complement_adresse"name="complement_adresse" placeholder="Complément d'adresse" class="form-control" required>
+					<label class="control-label">Code postal</label>
+					<input type="text" id="code_postal_adresse"name="code_postal_adresse" placeholder="Code postal"	class="form-control" required>
+					<label class="control-label">Ville</label>
+					<input type="text" id="ville_adresse"name="ville_adresse" placeholder="Ville" class="form-control" required>
+					<label class="control-label">Pays</label>
+					<input type="text" id="pays_adresse"name="pays_adresse" placeholder="pays" class="form-control" required>
 				</div>
-
+				
+				<br/><br/>
+				<p>Laisser vide si identique à l'adresse de facturation</p>
 				<div class="form-group">
-					<!-- Adresse -->
-					<label class="control-label" for="adresse_livraison_compte">Adresse
-						de Livraison</label> <input type="text" id="adresse_livraison_compte"
-						name="adresse_livraison_compte" placeholder="Adresse de livraison"
-						class="form-control" required>
-
-
+					<label>Adresse de livraison</label>
+					<br/>
+					<label class="control-label">Numéro et rue</label>
+					<input type="text" id="voie_adresse" name="voie_adresse" placeholder="Numéro et rue" class="form-control">
+					<label class="control-label">Complément d'adresse</label>
+					<input type="text" id="complement_adresse"name="complement_adresse" placeholder="Complément d'adresse" class="form-control">
+					<label class="control-label">Code postal</label>
+					<input type="text" id="code_postal_adresse"name="code_postal_adresse" placeholder="Code postal"	class="form-control">
+					<label class="control-label">Ville</label>
+					<input type="text" id="ville_adresse"name="ville_adresse" placeholder="Ville" class="form-control">
+					<label class="control-label">Pays</label>
+					<input type="text" id="pays_adresse"name="pays_adresse" placeholder="pays" class="form-control">
 				</div>
 
-				<br> <br>
+				<br/><br/>
 
 				<div class="form-group">
 					<!-- Button -->

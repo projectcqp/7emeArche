@@ -64,14 +64,14 @@
 			<c:forEach var="ligne" items="${panier.iterator()}">
 				<div class="articlePanier">
 					<div class="headerArticle">
-						<c:if test="${empty ligne.article.materiel}">
+						<c:if test="${empty ligne.article.materialise}">
 
 							<div class="section">
 								<div class="row">
 									<div class="col-xs-6">
 										<img class="img-responsive"
 											src="<c:url value='${ligne.article.urlImage}'/>"
-											style="width: 20%;" />
+											style="width: 20%;" alt="${article.nom}"/>
 
 									</div>
 									<div class="col-xs-6">
@@ -81,7 +81,7 @@
 													value="${ligne.article.prixHt}" minFractionDigits="2" /> €
 											</li>
 											<li>Format numérique :
-												${ligne.article.immateriel.format}</li>
+												${ligne.article.dematerialise.format}</li>
 										</ul>
 
 									</div>
@@ -90,7 +90,7 @@
 						</c:if>
 
 						<!-- si article matériel -->
-						<c:if test="${empty ligne.article.immateriel}">
+						<c:if test="${empty ligne.article.dematerialise}">
 
 							<div class="section">
 								<div class="row">
@@ -103,12 +103,12 @@
 									<div class="col-xs-6">
 										<ul>
 											<li>${ligne.article.nom}</li>
-											<li>Etat : ${ligne.article.materiel.etat}</li>
+											<li>Etat : ${ligne.article.materialise.etat}</li>
 											<li>Prix HT : <fmt:formatNumber
 													value="${ligne.article.prixHt}" minFractionDigits="2" /> €
 											</li>
 											<li>Quantité disponible : ${ligne.article.stock}</li>
-											<c:if test="${referenceArticlePanier == ligne.article.ref}">
+											<c:if test="${referenceArticlePanier == ligne.article.reference}">
 												<li class="messageException">
 													${ExceptionQuantiteDemandeeSuperieureAuStock}</li>
 											</c:if>
@@ -121,7 +121,7 @@
 						<div class="contenuHeaderArticle">
 							<br />
 							<form action="ControlerPanier" method="post">
-								<input type="hidden" value="${ligne.article.ref}"
+								<input type="hidden" value="${ligne.article.reference}"
 									name="refArticle"> <label for="nom">Quantité :</label>
 								<input class="champsAjoutPanier" type="number"
 									value="${ligne.getQuantite()}" min="1"

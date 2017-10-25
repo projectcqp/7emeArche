@@ -76,8 +76,8 @@ public class ControlerArticles extends HttpServlet {
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
 			session.setAttribute("catalogue1", catalogue1);
-			request.setAttribute("noOfPages", noOfPages);
-			request.setAttribute("currentPage", page);
+			session.setAttribute("noOfPages", noOfPages);
+			session.setAttribute("currentPage", page);
 
 		} catch (Exception e) {
 			e.printStackTrace();
