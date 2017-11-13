@@ -22,7 +22,8 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="functionsJavascript.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
 <!-- <script
 	src="http://1000hz.github.io/bootstrap-validator/dist/validator.min.js"></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -67,9 +68,8 @@
 
 				</div>
 
-				<div class="form-group">
-
-					<!-- Password Confirm-->
+				<!-- <div class="form-group">
+					Password Confirm
 					<label class="control-label" for="password_compte_confirm">Confimer
 						le mot de passe</label> <input type="password"
 						id="password_compte_confirm" data-match="#password_compte"
@@ -77,9 +77,7 @@
 						name="password_compte_confirm" placeholder="Confimer le mot de passe"
 						class="form-control" required>
 					<span class="help-block with-errors"></span>
-
-
-				</div>
+				</div> -->
 
 				<div class="form-group">
 					<!-- Nom -->
@@ -132,38 +130,45 @@
 						name="adresse_compte" placeholder="Adresse de facturation"
 						class="form-control" required> voie complement codepostal ville pays
 					-->
-					<label>Adresse de facturation</label>
-					<br/>
-					<label class="control-label">Numéro et rue</label>
-					<input type="text" id="voie_adresse"name="voie_adresse" placeholder="Numéro et rue"	class="form-control" required>
-					<label class="control-label">Complément d'adresse</label>
-					<input type="text" id="complement_adresse"name="complement_adresse" placeholder="Complément d'adresse" class="form-control" required>
-					<label class="control-label">Code postal</label>
-					<input type="text" id="code_postal_adresse"name="code_postal_adresse" placeholder="Code postal"	class="form-control" required>
-					<label class="control-label">Ville</label>
-					<input type="text" id="ville_adresse"name="ville_adresse" placeholder="Ville" class="form-control" required>
-					<label class="control-label">Pays</label>
-					<input type="text" id="pays_adresse"name="pays_adresse" placeholder="pays" class="form-control" required>
-				</div>
-				
-				<br/><br/>
-				<p>Laisser vide si identique à l'adresse de facturation</p>
-				<div class="form-group">
-					<label>Adresse de livraison</label>
-					<br/>
-					<label class="control-label">Numéro et rue</label>
-					<input type="text" id="voie_adresse" name="voie_adresse" placeholder="Numéro et rue" class="form-control">
-					<label class="control-label">Complément d'adresse</label>
-					<input type="text" id="complement_adresse"name="complement_adresse" placeholder="Complément d'adresse" class="form-control">
-					<label class="control-label">Code postal</label>
-					<input type="text" id="code_postal_adresse"name="code_postal_adresse" placeholder="Code postal"	class="form-control">
-					<label class="control-label">Ville</label>
-					<input type="text" id="ville_adresse"name="ville_adresse" placeholder="Ville" class="form-control">
-					<label class="control-label">Pays</label>
-					<input type="text" id="pays_adresse"name="pays_adresse" placeholder="pays" class="form-control">
+					<label>Adresse de facturation</label> <br /> <label
+						class="control-label">Numéro et rue</label> <input type="text"
+						id="voie_adresse_facturation" name="voie_adresse_facturation" placeholder="Numéro et rue"
+						class="form-control" required> <label
+						class="control-label">Complément d'adresse</label> <input
+						type="text" id="complement_adresse" name="complement_adresse_facturation"
+						placeholder="Complément d'adresse" class="form-control" required>
+					<label class="control-label">Code postal</label> <input type="text"
+						id="code_postal_adresse_facturation" name="code_postal_adresse_facturation"
+						placeholder="Code postal" class="form-control" required> <label
+						class="control-label">Ville</label> <input type="text"
+						id="ville_adresse_facturation" name="ville_adresse_facturation" placeholder="Ville"
+						class="form-control" required> <label
+						class="control-label">Pays</label> <input type="text"
+						id="pays_adresse_facturation" name="pays_adresse_facturation" placeholder="pays"
+						class="form-control" required>
 				</div>
 
-				<br/><br/>
+				<br /> <br />
+				<p>Laisser vide si identique à l'adresse de facturation</p>
+				<div class="form-group">
+					<label>Adresse de livraison</label> <br /> <label
+						class="control-label">Numéro et rue</label> <input type="text"
+						id="voie_adresse_livraison" name="voie_adresse_livraison" placeholder="Numéro et rue"
+						class="form-control"> <label class="control-label">Complément
+						d'adresse</label> <input type="text" id="complement_adresse_livraison"
+						name="complement_adresse_livraison" placeholder="Complément d'adresse"
+						class="form-control"> <label class="control-label">Code
+						postal</label> <input type="text" id="code_postal_adresse_livraison"
+						name="code_postal_adresse_livraison" placeholder="Code postal"
+						class="form-control"> <label class="control-label">Ville</label>
+					<input type="text" id="ville_adresse_livraison" name="ville_adresse_livraison"
+						placeholder="Ville" class="form-control"> <label
+						class="control-label">Pays</label> <input type="text"
+						id="pays_adresse_livraison" name="pays_adresse_livraison" placeholder="pays"
+						class="form-control">
+				</div>
+
+				<br /> <br />
 
 				<div class="form-group">
 					<!-- Button -->

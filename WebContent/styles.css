@@ -105,6 +105,10 @@ header{
 	margin-bottom: 15px;
 }
 
+#monPanier{
+	text-align:center;
+}
+
 .pPanier{
 	font-size: 1.2em;
 }

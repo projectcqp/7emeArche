@@ -111,12 +111,8 @@ public class ControlerArticles extends HttpServlet {
 
 		// si bouton rechercher
 		if (action != null && action.equals("Rechercher")) {
-
-			// recherche va renseigner le "string critere" en argument de la
-			// m�thode select
 			String recherche = request.getParameter("recherche").toUpperCase();
 
-			// version avec injection
 			ArrayList<Article> catalogue;
 			try {
 				catalogue = (ArrayList<Article>) articleDaoCDI.selectSearch(recherche);

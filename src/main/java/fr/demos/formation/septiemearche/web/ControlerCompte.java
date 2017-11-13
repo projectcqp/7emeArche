@@ -138,61 +138,59 @@ public class ControlerCompte extends HttpServlet {
 
 		
 		
-		// if bouton voir le compte
-		if (session.getAttribute("compteSession") != null && action != null && action.equals("Compte Utilisateur")) {
-			// je r�cup�re la requ�te et je renvoie vers la JSP
-			RequestDispatcher rd = request.getRequestDispatcher("/GestionCompte.jsp");
-			rd.forward(request, response);
-			
-			//je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la m�me que le forward)
-	    	String jspCourante = "/GestionCompte.jsp";
-	    	session.setAttribute("jspCourante", jspCourante);
-			
-		} // if bouton Voir le compte
-		
-		
-		// if bouton Cr�er un Compte	
+		// if bouton Créer un Compte	
 		if (session.getAttribute("compteSession") == null && action != null && action.equals("Creer un compte")) {
 			
-			// je r�cup�re la requ�te et je renvoie vers la JSP
 			RequestDispatcher rd = request.getRequestDispatcher("/CreerCompte.jsp");
 			rd.forward(request, response);
 			
-			//je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la m�me que le forward)
+			//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
 	    	String jspCourante = "/CreerCompte.jsp";
 	    	session.setAttribute("jspCourante", jspCourante);
 			
 		} // if bouton Cr�er un Compte
 		
-		// if bouton Cr�er un Compte	
+		// if bouton voir le compte	
 		if (session.getAttribute("compteSession") != null && action != null && action.equals("Compte Utilisateur")) {
 
-					// je r�cup�re la requ�te et je renvoie vers la JSP
 					RequestDispatcher rd = request.getRequestDispatcher("/GestionCompte.jsp");
 					rd.forward(request, response);
 					
-					//je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la m�me que le forward)
+					//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
 			    	String jspCourante = "/GestionCompte.jsp";
 			    	session.setAttribute("jspCourante", jspCourante);
 					
-				} // if bouton Cr�er un Compte
+				} // if bouton voir le compte
 
-		
-// ###	if bouton Valider (nouveau compte)   ###
+		// TODO gérer tentative de création de compte avec un email existant
+		// ###	if bouton Valider (nouveau compte)   ###
 		if (action != null && action.equals("Valider")) {
 			
-			
+			// pour compte
 			String paramEmail = request.getParameter("e_mail_compte");
 			String paramPassword = request.getParameter("password_compte");
 			String paramNom = request.getParameter("nom_compte");
 			String paramPrenom = request.getParameter("prenom_compte");
 			String paramTelephone = request.getParameter("telephone_compte");
 			String paramDateNaissance = request.getParameter("dateNaissance_compte");
-			String paramAdresse = request.getParameter("adresse_compte");
-			String paramAdresseLivraison = request.getParameter("adresse_livraison_compte");
+			// pour adresse facturation
+			String paramVoie_adresse_facturation = request.getParameter("voie_adresse_facturation");
+			String paramComplement_adresse_facturation = request.getParameter("complement_adresse_facturation");
+			String paramCode_postal_adresse_facturation = request.getParameter("code_postal_adresse_facturation");
+			String paramVille_adresse_facturation = request.getParameter("ville_adresse_facturation");
+			String paramPays_adresse_facturation = request.getParameter("pays_adresse_facturation");
+		
+			// pour adresse livraison
+			String paramVoie_adresse_livraison = request.getParameter("voie_adresse_livraison");
+			String paramComplement_adresse_livraison = request.getParameter("complement_adresse_livraison");
+			String paramCode_postal_adresse_livraison = request.getParameter("code_postal_adresse_livraison");
+			String paramVille_adresse_livraison = request.getParameter("ville_adresse_livraison");
+			String paramPays_adresse_livraison = request.getParameter("pays_adresse_livraison");
+		
+			// créer adresseFacturation
+			// créer adresse livraison identique facturation ou comme renseignée dans formulaire
 			
-			
-			
+			//créer compte avec adresses
 			Compte c=new Compte ();
 			try {
 				compteDao.insert(c);

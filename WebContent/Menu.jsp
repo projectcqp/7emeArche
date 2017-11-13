@@ -38,10 +38,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav ">
-
-
 				<c:if test="${empty compteSession}">
-
 					<form>
 						<button type="button" class="btn btn-primary navbar-btn"
 							data-toggle="modal" data-target="#myModal">Connexion</button>
@@ -56,12 +53,12 @@
 				</c:if>
 
 			</ul>
-			<form class="navbar-form navbar-left">
+			<form class="navbar-form navbar-left" method="post" action="ControlerArticles">
 				<div class="form-group">
-					<input type="text" value="${param.recherche}" class="form-control"
+					<input type="text" value="${param.recherche}" name="recherche" class="form-control"
 						placeholder="Rechercher">
 				</div>
-				<button type="submit" class="btn btn-primary">Soumettre</button>
+				<button type="submit" class="btn btn-primary" name="action" value= "Rechercher">Soumettre</button>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="Panier.jsp">Panier (<span id="artCumuPanier">${panier.getArticlesCumulesPanier()}</span>)
