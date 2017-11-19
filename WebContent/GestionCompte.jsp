@@ -22,9 +22,7 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 
-
-
-<title>Gestion de compte</title>
+<title>7eme Arche - Gérer mon compte</title>
 </head>
 <body>
 	<div class="container">
@@ -35,8 +33,7 @@
 
 		<div class="section">
 			<div class="row">
-				<div id="monPanier">
-
+				<div id="monPanier" class="text-center">
 					<h3>LES INFORMATIONS DE VOTRE COMPTE</h3>
 				</div>
 
@@ -69,9 +66,9 @@
 				<br />
 				<p>Date de naissance: ${compteSession.dateNaissance}</p>
 				<br />
-				<p>Adresse de facturation: ${compteSession.adresse}</p>
+				<p>Adresse de facturation: ${compteSession.adresseFacturation.toString()}</p>
 				<br />
-				<p>Adresse de livraison: ${compteSession.adresse_livraison}</p>
+				<p>Adresse de livraison: ### A gérer ###</p>
 				<br />
 				<p>Téléphone : ${compteSession.telephone}</p>
 				<br />

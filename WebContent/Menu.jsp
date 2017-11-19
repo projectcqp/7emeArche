@@ -72,9 +72,7 @@
 				</c:if>
 				
 				<c:if test="${not empty compteSession}">
-					<li><a
-						href="${pageContext.request.contextPath}/ControlerCompte">Mon
-							Compte</a></li>
+					<li><a href="GestionCompte.jsp">Mon Compte</a></li>
 				</c:if>
 			</ul>
 		</div>

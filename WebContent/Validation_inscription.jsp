@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>7eme Arche</title>
+<title>7eme Arche - Inscription validée</title>
 
 <!-- Bootstrap -->
 <link href="bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -39,8 +39,8 @@
 		<%@ include file="Menu.jsp" %>
 		<%@ include file="Connexion.jsp" %>
 
-
-		<p>Votre inscription est validée. Veuillez vous identifiez à
+		<br/><br/><br/>
+		<p>Votre inscription est validée. Veuillez vous identifier à
 			présent.
 		<p>
 	</div>

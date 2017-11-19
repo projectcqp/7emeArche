@@ -98,7 +98,7 @@ public class Adresse implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return voie + ", " + complement + ",\n " + codePostal + " " + ville + "\n" + pays;
+		return voie + ", " + complement + "\n " + codePostal + " " + ville + "\n" + pays;
 	}
 	
 	
