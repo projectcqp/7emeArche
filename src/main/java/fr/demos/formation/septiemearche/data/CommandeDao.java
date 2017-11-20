@@ -52,6 +52,8 @@ public class CommandeDao implements InterfaceDao<Commande> {
 
 		return commandes;
 	}
+	
+	
 
 	@Override
 	public void insert(Commande commande) throws Exception {

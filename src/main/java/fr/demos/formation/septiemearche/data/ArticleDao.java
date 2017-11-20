@@ -45,23 +45,21 @@ public class ArticleDao implements InterfaceDao<Article> {
 		return article;
 	}
 
+	public int countElements() {
+
+		int count = (int) em.createQuery("SELECT COUNT(*) FROM Article a").getSingleResult();
+
+		return count;
+	}
+
 	public List<Article> selectSearch(String criteria) throws Exception {
 
-		Double criteriaDouble = null;
-		try {
-			criteriaDouble = Double.parseDouble(criteria);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Impossible de parseDouble : " + criteria + ", " + e);
-		}
-
-		String requestString = "SELECT a FROM Article a WHERE a.reference=? OR a.prixHt=? OR a.nom=? OR a.description=?";
+		String requestString = "SELECT a FROM Article a WHERE a.reference=? OR a.nom=? OR a.description=?";
 
 		TypedQuery<Article> query = em.createQuery(requestString, Article.class);
 		query.setParameter(1, criteria);
-		query.setParameter(2, criteriaDouble);
+		query.setParameter(2, criteria);
 		query.setParameter(3, criteria);
-		query.setParameter(4, criteria);
 
 		return query.getResultList();
 	}
@@ -74,12 +72,12 @@ public class ArticleDao implements InterfaceDao<Article> {
 
 		return query.getResultList();
 	}
-	
+
 	// Retourne la liste d'articles à afficher pour chaque page "paginée"
 	public List<Article> select(int firstOfPage, int recordsPerPage) {
-		
+
 		String requestString = "SELECT a FROM Article a ORDER BY a.id ASC";
-		
+
 		TypedQuery<Article> query = em.createQuery(requestString, Article.class);
 
 		query.setFirstResult(firstOfPage);
@@ -87,11 +85,7 @@ public class ArticleDao implements InterfaceDao<Article> {
 
 		return query.getResultList();
 	}
-	
 
-	
-	
-	
 	@Override
 	public void insert(Article a) throws Exception {
 		em.persist(a);

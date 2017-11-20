@@ -50,27 +50,22 @@ public class ControlerArticles extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		ArrayList<Article> catalogue = new ArrayList<Article>();
-		try {
-			catalogue = (ArrayList<Article>) articleDaoCDI.selectAll();
-			session.setAttribute("catalogue", catalogue);
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("Le catalogue d'articles n'a pas été récupéré");
-		}
-	
-		
+
+		session.setAttribute("catalogue", catalogue);
+
 		if (request.getParameter("page") != null)
 			page = Integer.parseInt(request.getParameter("page"));
 
 		ArrayList<Article> catalogue1;
 		try {
 			// calcule le premier élément du lot d'articles de la page - 1
-			// car la méthode query.setFirstResult(firstOfPage) commence le compte à 0
+			// car la méthode query.setFirstResult(firstOfPage) commence le
+			// compte à 0
 			int firstOfPage = (page - 1) * recordsPerPage;
 			catalogue1 = (ArrayList<Article>) articleDaoCDI.select(firstOfPage, recordsPerPage);
 
 			// nombre total d'articles présents dans le catalogue global
-			int noOfRecords = catalogue.size();
+			int noOfRecords = articleDaoCDI.countElements();
 
 			// nombre de pages
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -83,11 +78,11 @@ public class ControlerArticles extends HttpServlet {
 			e.printStackTrace();
 			logger.error("Les articles de la page n'ont pas pu être récupérés");
 		}
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
 		rd.forward(request, response);
 
-		//TODO vérifier si jspCourante utilisée (après une recherche ?)
+		// TODO vérifier si jspCourante utilisée (après une recherche ?)
 		// je renseigne la nouvelle jsp courante après chaque rd.forward
 		String jspCourante = "/Accueil.jsp";
 		session.setAttribute("jspCourante", jspCourante);
@@ -121,7 +116,6 @@ public class ControlerArticles extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 
 			// je mets le critère de recherche dans la requete pour le cas où on
 			// ne trouve rien

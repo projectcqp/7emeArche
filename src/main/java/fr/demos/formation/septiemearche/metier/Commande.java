@@ -1,8 +1,10 @@
 package fr.demos.formation.septiemearche.metier;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,7 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "commande")
-public class Commande implements Serializable {
+public class Commande implements Serializable, Iterable<LigneCommande> {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -86,6 +88,34 @@ public class Commande implements Serializable {
 		this.lignesCommande = lignesCommande;
 		this.compte = compte;
 	}
+	
+	public Commande(Panier panierCommande, Compte compteCommande, LocalDateTime dateCommande){
+		
+		
+		
+		super();
+		LigneCommande lc= new LigneCommande();
+		
+		for(LignePanier lp:panierCommande){
+			
+			lc.setId(lp.getArticle().getId());
+			lc.setreferenceArticle(lp.getArticle().getReference());
+			lc.setnomArticle(lp.getArticle().getNom());
+			lc.setPrixUnitaire(lp.getArticle().getPrixHt());
+			lc.setQuantite(lp.getArticle().getStock());
+			lc.setTauxTva(lp.getArticle().getTva().getTaux());
+			lc.setTotal(lc.getQuantite()*lc.getPrixUnitaire());
+			
+		}
+		this.compte = compteCommande;
+		
+		this.lignesCommande.add(lc);
+		
+		this.dateCommande= dateCommande;
+		
+		
+	}
+	
 	
 	public int getId() {
 		return id;
@@ -186,6 +216,12 @@ public class Commande implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public Iterator<LigneCommande> iterator() {
+		// TODO Auto-generated method stub
+		return lignesCommande.iterator();
 	}
 
 }
