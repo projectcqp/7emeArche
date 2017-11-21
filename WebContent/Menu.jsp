@@ -66,15 +66,15 @@
 					<button type="submit" class="btn btn-primary" name="action" value= "Rechercher" role="bouton rechercher">Soumettre</button>
 				</form>
 			</nav>
-			<div role="region" aria-live="polite" aria-atomic="true" aria-busy="false">
+			<nav>
 				<ul class="nav navbar-nav navbar-right" role="menu">
 					<li role="lien panier">
-						<a href="Panier.jsp">Panier (
+						<a href="Panier.jsp" role="region" aria-live="polite" aria-atomic="true" aria-busy="false">Panier (
 							<span id="artCumuPanier">${panier.getArticlesCumulesPanier()}
 							</span>)
 						</a>
 					<li role="contenu panier">
-						<a> Total HT : 
+						<a role="region" aria-live="polite" aria-atomic="true" aria-busy="false"> Total HT : 
 							<span id="pxTotalPanier">
 								<fmt:formatNumber type="number" value="${panier.getPrixTotal()}" minFractionDigits="2" />
 							</span> €
@@ -88,7 +88,7 @@
 						<li role="voir le compte"><a href="GestionCompte.jsp">Mon Compte</a></li>
 					</c:if>
 				</ul>
-			 </div>
+			 </nav>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
