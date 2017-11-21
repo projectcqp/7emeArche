@@ -24,7 +24,7 @@
 
 <title>7eme Arche - Gérer mon compte</title>
 </head>
-<body>
+<body role="document">
 	<div class="container">
 
 		<%@ include file="Menu.jsp"%>

@@ -29,7 +29,7 @@
 <script src="bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body role="document">
 
 
 	<div class="container">
@@ -43,7 +43,7 @@
 
 				<c:forEach var="article" items="${catalogue1}">
 
-					<form class="form-inline">
+					<form class="form-inline" role="form">
 
 						<div class="form-group col-xs-12 col-sm-6" id="nomArticle">
 							<h2 style="margin-top: 0;">${article.nom}</h2>
@@ -51,12 +51,11 @@
 
 						<div class="form-group col-xs-12 col-sm-6" id="formAjoutPanier">
 
-							<input class="sr-only" value="${article.reference}"
-								name="referenceArticle" id="idArticle"> <label for="nom">
-								Quantité :</label> <input class="form-control" type="number" value="1"
+							<input class="sr-only" value="${article.reference}"	name="referenceArticle" id="idArticle">
+							<label for="quantité">
+								Quantité :<input class="form-control" type="number" value="1"
 								min="1" name="quantiteAjouteePanier"
-								id="quteAjoutPanier${article.reference}" />
-
+								id="quteAjoutPanier${article.reference}" /></label>
 							<button class="btn btn-primary" name="action"
 								value="boutonAjoutArticle" id="actionBouton"
 								onclick="appelAjaxAjouterPanier('${article.reference}',document.getElementById('quteAjoutPanier${article.reference}').
