@@ -63,6 +63,7 @@
 		<c:if test="${panier.getSizeContenuPanier() > 0}">
 			<c:forEach var="ligne" items="${panier.iterator()}">
 				<div class="articlePanier">
+				<h4>${ligne.article.nom}</h4>
 					<div class="headerArticle">
 						<c:if test="${empty ligne.article.materialise}">
 
@@ -76,7 +77,7 @@
 									</div>
 									<div class="col-xs-6">
 										<ul>
-											<li>${ligne.article.nom}</li>
+											<!-- <li>${ligne.article.nom}</li> -->
 											<li>Prix HT : <fmt:formatNumber
 													value="${ligne.article.prixHt}" minFractionDigits="2" /> €
 											</li>
@@ -102,7 +103,7 @@
 									</div>
 									<div class="col-xs-6">
 										<ul>
-											<li>${ligne.article.nom}</li>
+											<!-- <li>${ligne.article.nom}</li> -->
 											<li>Etat : ${ligne.article.materialise.etat}</li>
 											<li>Prix HT : <fmt:formatNumber
 													value="${ligne.article.prixHt}" minFractionDigits="2" /> €

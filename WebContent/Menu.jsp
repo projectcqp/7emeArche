@@ -66,7 +66,7 @@
 					<button type="submit" class="btn btn-primary" name="action" value= "Rechercher" role="bouton rechercher">Soumettre</button>
 				</form>
 			</nav>
-			<div role="region" aria-live="polite" ariaatomic="true" aria-busy="false">
+			<div role="region" aria-live="polite" aria-atomic="true" aria-busy="false">
 				<ul class="nav navbar-nav navbar-right" role="menu">
 					<li role="lien panier">
 						<a href="Panier.jsp">Panier (
