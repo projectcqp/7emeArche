@@ -47,8 +47,15 @@ public class ArticleDao implements InterfaceDao<Article> {
 
 	public int countElements() {
 
-		int count = (int) em.createQuery("SELECT COUNT(*) FROM Article a").getSingleResult();
-
+		String countString = em.createQuery("SELECT COUNT(*) FROM Article a").getSingleResult().toString();
+		int count = 0;
+		try {
+			count = Integer.parseInt(countString);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e);
+		}
 		return count;
 	}
 

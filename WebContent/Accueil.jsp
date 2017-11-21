@@ -45,11 +45,11 @@
 
 					<form class="form-inline">
 
-						<div class="form-group col-xs-6" id="nomArticle">
+						<div class="form-group col-xs-12 col-sm-6" id="nomArticle">
 							<h2 style="margin-top: 0;">${article.nom}</h2>
 						</div>
 
-						<div class="form-group col-xs-6" id="formAjoutPanier">
+						<div class="form-group col-xs-12 col-sm-6" id="formAjoutPanier">
 
 							<input class="sr-only" value="${article.reference}"
 								name="referenceArticle" id="idArticle"> <label for="nom">
@@ -66,15 +66,15 @@
 					</form>
 
 					<br>
-					<div class="col-xs-8">
-						<img class="img-responsive" src="<c:url value='${article.urlImage}'/>" style="width: 20%;" alt="${article.nom}"/>
+					<div class="col-xs-4 col-sm-8">
+						<img class="img-responsive" src="<c:url value='${article.urlImage}'/>" alt="${article.nom}"/>
 					</div>
 
 					<!-- si Livre -->
 					<c:if test="${article.type eq 'Livre'}">
 						<!-- si matérialisé -->
 						<c:if test="${empty article.dematerialise}">
-							<div class="col-xs-4">
+							<div class="col-xs-8 col-sm-4">
 								<ul>
 									<li>Auteur : ${article.auteur}</li>
 									<li>Editeur : ${article.editeur}</li>
@@ -91,7 +91,7 @@
 						</c:if>
 						<!-- si dématérialisé -->
 						<c:if test="${empty article.materialise}">
-							<div class="col-xs-4">
+							<div class="col-xs-8 col-sm-4">
 								<ul>
 									<li>Auteur : ${article.auteur}</li>
 									<li>Editeur : ${article.editeur}</li>
@@ -111,7 +111,7 @@
 					<c:if test="${article.type eq 'ArticleDivers'}">
 						<!-- si matérialisé -->
 						<c:if test="${empty article.dematerialise}">
-							<div class="col-xs-4">
+							<div class="col-xs-8 col-sm-4">
 								<ul>
 									<li>Etat : ${article.materialise.etat}</li>
 									<li>Prix HT : <fmt:formatNumber value="${article.prixHt}"
@@ -125,7 +125,7 @@
 						</c:if>
 						<!-- si dématérialisé -->
 						<c:if test="${empty article.materialise}">
-							<div class="col-xs-4">
+							<div class="col-xs-8 col-sm-4">
 								<ul>
 									<li>Format : ${article.dematerialise.format}</li>
 									<li>Prix HT : <fmt:formatNumber value="${article.prixHt}"

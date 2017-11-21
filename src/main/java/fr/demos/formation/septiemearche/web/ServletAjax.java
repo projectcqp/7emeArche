@@ -64,11 +64,11 @@ public class ServletAjax extends HttpServlet {
 			String refArticle = request.getParameter("idArticle");
 
 			// ### je r�cup�re l'arraylist du controlerArticle en le castant en arrayList
-			ArrayList<Article> catalogue = (ArrayList<Article>) session.getAttribute("catalogue");
+			ArrayList<Article> catalogue1 = (ArrayList<Article>) session.getAttribute("catalogue1");
 
 			// et je cherche l'article de cette r�f###
 			// pour chaque article du catalogue
-			for (Article article : catalogue) {
+			for (Article article : catalogue1) {
 				// l� o� r�f de l'article est la m�me que celle r�cup�r�e dans le bouton
 				if (article.getReference().equals(refArticle)) {
 					// Je me connecte au panier de la session en le castant
