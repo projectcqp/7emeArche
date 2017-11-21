@@ -48,5 +48,16 @@ public class LignePanier {
 	public String toString() {
 		return "LignePanier [quantite=" + quantite + ", article=" + article + "]";
 	}
+
+	public double getTotalHt() {
+		return article.getPrixHt() * quantite;
+	}
+		public double getTotalTc() {
+			return article.getTva().calculerTtc(getTotalHt());
+	}
+		
+		public double getMontantTva() {
+			return article.getTva().calculerHt(getTotalHt());
+		}
 		
 }

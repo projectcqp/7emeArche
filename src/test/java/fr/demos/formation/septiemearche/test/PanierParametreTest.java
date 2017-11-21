@@ -11,24 +11,31 @@ import org.junit.runners.Parameterized.Parameters;
 
 import fr.demos.formation.septiemearche.exceptions.ExceptionQuantiteDemandeeSuperieureAuStock;
 import fr.demos.formation.septiemearche.metier.Article;
+import fr.demos.formation.septiemearche.metier.ArticleDivers;
 import fr.demos.formation.septiemearche.metier.Etat;
 import fr.demos.formation.septiemearche.metier.LignePanier;
 import fr.demos.formation.septiemearche.metier.Livre;
 import fr.demos.formation.septiemearche.metier.Panier;
+import fr.demos.formation.septiemearche.metier.Tva;
 
 @RunWith(Parameterized.class)
 public class PanierParametreTest {
 
 	@Parameters	
 	public static Collection<Object[]> params(){
-		Object[] element1 = {new Livre("Reference", 10, "Nom", "UrlImage", 10, Etat.OCCASION_BON, "Auteur", "Isbn",
+		Object[] element1 = {new Livre("Reference", 10, "Nom", "UrlImage", new Tva(1, 10, "A"), 10, Etat.OCCASION_BON, "Auteur", "Isbn",
 				"Editeur", "Genre")};
 		
-		Object[] element2 = {new Livre("Reference", 13, "Nom", "UrlImage", "Format", "UrlDownload", "auteur", "Isbn", "Editeur", "enre")}; 
+		Object[] element2 = {new Livre("Reference", 13, "Nom", "UrlImage", new Tva(1, 10, "A"), "Format", "UrlDownload", "auteur", "Isbn", "Editeur", "enre")};
+		
+		Object[] element3 = {new ArticleDivers("Reference", 10, "Nom", "UrlImage", new Tva(1, 10, "a"), 10, "nature")};
+		
+		
 		
 		ArrayList<Object[]> listeParams = new ArrayList<>();
 		listeParams.add(element1);			
 		listeParams.add(element2);
+		listeParams.add(element3);
 		return listeParams;				
 	}
 
