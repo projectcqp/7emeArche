@@ -20,7 +20,7 @@ public class ListenerPanier implements HttpSessionListener {
 	
 	// appel de l'interface on pourra choisir son dao si plusieurs
 	@Inject private ArticleDao articleDaoCDI;
-	
+	private static final int RECORDS_PER_PAGE = 5;
 	
     public ListenerPanier() {
         // TODO Auto-generated constructor stub
@@ -46,18 +46,14 @@ public class ListenerPanier implements HttpSessionListener {
 //    	arg0.getSession().setAttribute("catalogue", catalogue);
     	
     	// version avec CDI et appel interface pour choisir le DAO
-    	ArrayList<Article> catalogue;
+    	ArrayList<Article> catalogue1;
 		try {
-			catalogue = (ArrayList<Article>) articleDaoCDI.selectAll();
-	    	arg0.getSession().setAttribute("catalogue", catalogue);
+			catalogue1 = (ArrayList<Article>) articleDaoCDI.selectSearch("", 0, RECORDS_PER_PAGE);
+	    	arg0.getSession().setAttribute("catalogue1", catalogue1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-
-    	
-    	
     	
     	
     	// je cr�e un panier au d�marrage de la session

@@ -1,8 +1,9 @@
 package fr.demos.formation.septiemearche.web;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -12,8 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.log4j.Logger;
 
 import fr.demos.formation.septiemearche.data.ArticleDao;
 import fr.demos.formation.septiemearche.data.ArticleDiversDao;
@@ -28,11 +27,7 @@ public class ControlerArticles extends HttpServlet {
 	@Inject
 	ArticleDao articleDaoCDI;
 
-	@Inject
-	private ArticleDiversDao articleDiversDao;
-
-	@Inject
-	private LivreDao livreDao;
+	private static final int RECORDS_PER_PAGE = 5;
 
 	private static Logger logger = Logger.getLogger("Log");
 
@@ -44,95 +39,106 @@ public class ControlerArticles extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int page = 1;
-		int recordsPerPage = 5;
-
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-
-		ArrayList<Article> catalogue = new ArrayList<Article>();
-
-		session.setAttribute("catalogue", catalogue);
-
-		if (request.getParameter("page") != null)
-			page = Integer.parseInt(request.getParameter("page"));
-
-		ArrayList<Article> catalogue1;
-		try {
-			// calcule le premier élément du lot d'articles de la page - 1
-			// car la méthode query.setFirstResult(firstOfPage) commence le
-			// compte à 0
-			int firstOfPage = (page - 1) * recordsPerPage;
-			catalogue1 = (ArrayList<Article>) articleDaoCDI.select(firstOfPage, recordsPerPage);
-
-			// nombre total d'articles présents dans le catalogue global
-			int noOfRecords = articleDaoCDI.countElements();
-
-			// nombre de pages
-			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-
-			session.setAttribute("catalogue1", catalogue1);
-			session.setAttribute("noOfPages", noOfPages);
+		
+		int page = 1;
+		List<Article> catalogue1 = new ArrayList<>();
+		String pageString = request.getParameter("page");
+		// cas de la gestion de la pagination : appui sur une href
+		if (pageString != null) {
+			page = Integer.parseInt(pageString);
+			String critereRecherche = (String) session.getAttribute("critereRecherche");
+			int firstOfPage = (page - 1) * RECORDS_PER_PAGE;
+			try{
+				catalogue1 = articleDaoCDI.selectSearch(critereRecherche, firstOfPage, RECORDS_PER_PAGE);
+			}
+			catch(Exception ex){
+				// TODO : afficher un message dans la vue
+				logger.info("pb acces base de donnees pendant la recherche 1");
+				//ex.printStackTrace();
+				request.setAttribute("messageErreur", "pb acces base de donnees pendant la recherche 1");
+			}
 			session.setAttribute("currentPage", page);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error("Les articles de la page n'ont pas pu être récupérés");
 		}
-
-		RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
-		rd.forward(request, response);
-
-		// TODO vérifier si jspCourante utilisée (après une recherche ?)
-		// je renseigne la nouvelle jsp courante après chaque rd.forward
+		// cas de la recherche initiale, lors du premier appel de la fenetre (sans
+		// crit�re de recherche)
+		else {
+			int noOfPages = 0;
+			try{
+				// on calcule le nombre de pages de resultats
+				noOfPages = calculNbPagesPourPagination("");
+				// on recupere les articles, en les paginant
+				catalogue1 = articleDaoCDI.selectSearch("", 0, RECORDS_PER_PAGE);
+			}
+			catch(Exception ex){
+				// TODO : afficher un message dans la vue
+				logger.info("pb acces base de donnees pendant la recherche 2");
+				ex.printStackTrace();
+				request.setAttribute("messageErreur", "pb acces base de donnees pendant la recherche 2");
+			}
+			session.setAttribute("critereRecherche", "");
+			session.setAttribute("noOfPages", noOfPages);
+			session.setAttribute("currentPage", 1);
+		}
+		
+		session.setAttribute("catalogue1", catalogue1);
+		// je renseigne la nouvelle jsp courante
 		String jspCourante = "/Accueil.jsp";
-		session.setAttribute("jspCourante", jspCourante);
+		session.setAttribute("jspCourante",jspCourante);
+		// appel de la vue
+		RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
+		rd.forward(request,response);
 
-	}// do get
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// je dis à tomcat d'utiliser les accents et caract�res sp�ciaux
 		request.setCharacterEncoding("UTF-8");
-
-		// j'identifie et je stocke la session actuelle
 		HttpSession session = request.getSession();
-
-		// je stocke le paramètre de requete (le name du bouton)
+		
+		int page = 1;
+		List<Article> catalogue1 = new ArrayList<>();
+		
 		String action = request.getParameter("action");
-
-		// si on clique sur Voir les articles j'affiche la page articles
-		// TODO : vérification nom utilisateur et mdp pour valider connection
-
-		// si bouton rechercher
+		// cas du lancement de la recherche par bouton rechercher avec critere
 		if (action != null && action.equals("Rechercher")) {
-			String recherche = request.getParameter("recherche").toUpperCase();
-
-			ArrayList<Article> catalogue;
-			try {
-				catalogue = (ArrayList<Article>) articleDaoCDI.selectSearch(recherche);
-				session.setAttribute("catalogue", catalogue);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			// je mets le critère de recherche dans la requete pour le cas où on
-			// ne trouve rien
-			String critereRecherche = request.getParameter("recherche");
+			String critereRecherche = request.getParameter("recherche").toUpperCase();
+			// on conserve le critere de recherche, tant qu'on ne fait pas une nouvelle recherche
 			session.setAttribute("critereRecherche", critereRecherche);
+			int noOfPages=0;	
+			try{
+				// on calcule le nombre de pages de resultats
+				noOfPages = calculNbPagesPourPagination(critereRecherche);
+				// on recupere les articles, en les paginant	
+				catalogue1 = articleDaoCDI.selectSearch(critereRecherche, 0, RECORDS_PER_PAGE);
+			}
+			catch(Exception ex){
+				// TODO : afficher un message dans la vue
+				logger.info("pb acces base de donnees pendant la recherche 3");
+				//ex.printStackTrace();
+				request.setAttribute("messageErreur", "pb acces base de donnees pendant la recherche 3");
+			}
+			session.setAttribute("noOfPages", noOfPages);
+			session.setAttribute("currentPage", 1);
+		}
+		session.setAttribute("catalogue1", catalogue1);
+		
+		// je renseigne la nouvelle jsp courante
+		String jspCourante = "/Accueil.jsp";
+		session.setAttribute("jspCourante", jspCourante);
+		// appel de la vue
+		RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
+		rd.forward(request, response);
+	}
 
-			// je récupère la requête et je renvoie vers la JSP
-			RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
-			rd.forward(request, response);
+	private int calculNbPagesPourPagination(String rechercheCritere) {
+		// nombre total d'articles issus de la recherche
+		long noOfRecords = articleDaoCDI.countElementsSearch(rechercheCritere);
+		// nombre de pages
+		return (int) Math.ceil(noOfRecords * 1.0 / RECORDS_PER_PAGE);
+	}
 
-			// je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la
-			// même que le forward)
-			String jspCourante = "/Accueil.jsp";
-			session.setAttribute("jspCourante", jspCourante);
 
-		} // if Rechercher
-
-	}// do post
-
-} // class
+}
