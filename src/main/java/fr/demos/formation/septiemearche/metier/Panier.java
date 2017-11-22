@@ -212,34 +212,48 @@ public class Panier implements Iterable<LignePanier> {
 		this.compte = compte;
 	}
 
-	public double getTotalHt() {
-		double totalHt = 0;
+	/**
+	 * Retourne le montant total hors taxes pour le panier
+	 * 
+	 * @return
+	 */
+	public double getMontantTotalHorsTaxes() {
+		double total = 0;
 
 		for (LignePanier lignePanier : lignesPanier) {
-			totalHt += lignePanier.getTotalHt();
+			total += lignePanier.getMontantHorsTaxes();
 		}
 
-		return totalHt;
+		return total;
 	}
 
-	public double getTotalTc() {
-		double totalTc = 0;
+	/**
+	 * 
+	 * Retourne le total toutes taxes comprises pour le panier
+	 * @return
+	 */
+	public double getMontantToutesTaxsComprises() {
+		double total = 0;
 
 		for (LignePanier lignePanier : lignesPanier) {
-			totalTc += lignePanier.getTotalTc();
+			total += lignePanier.getMontantTaxesComprises();
 		}
 
-		return totalTc;
+		return total;
 	}
 
+	/**
+	 * Retourne le montant de la tva pour le panier 
+	 * @return
+	 */
 	public double getMontantTva() {
-		double totalTva = 0;
+		double total = 0;
 
 		for (LignePanier lignePanier : lignesPanier) {
-			totalTva += lignePanier.getMontantTva();
+			total += lignePanier.getMontantTva();
 		}
 
-		return totalTva;
+		return total;
 	}
 
 	/**
@@ -259,3 +273,5 @@ public class Panier implements Iterable<LignePanier> {
 	}
 
 }
+
+//Fin de classe

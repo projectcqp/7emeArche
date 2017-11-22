@@ -1,5 +1,25 @@
 package fr.demos.formation.septiemearche.metier;
 
+/**
+ * @author STAGIAIRE
+ *
+ */
+/**
+ * @author STAGIAIRE
+ *
+ */
+/**
+ * @author STAGIAIRE
+ *
+ */
+/**
+ * @author STAGIAIRE
+ *
+ */
+/**
+ * @author STAGIAIRE
+ *
+ */
 public class LignePanier {
 
 	private Article article;
@@ -49,15 +69,28 @@ public class LignePanier {
 		return "LignePanier [quantite=" + quantite + ", article=" + article + "]";
 	}
 
-	public double getTotalHt() {
+	/**
+	 * Retourne le montant hors taxes pour la ligne
+	 * @return
+	 */
+	public double getMontantHorsTaxes() {
 		return article.getPrixHt() * quantite;
 	}
-		public double getTotalTc() {
-			return article.getTva().calculerTtc(getTotalHt());
+	
+		/**
+		 * Retourne le total taxe comprises
+		 * @return
+		 */
+		public double getMontantTaxesComprises() {
+			return article.getTva().calculerTtc(getMontantHorsTaxes());
 	}
 		
+		/**
+		 * Retourne le montant de la TVA pour la ligne
+		 * @return
+		 */
 		public double getMontantTva() {
-			return article.getTva().calculerHt(getTotalHt());
+			return article.getTva().calculerTvaDepuisHt(getMontantHorsTaxes());
 		}
 		
 }

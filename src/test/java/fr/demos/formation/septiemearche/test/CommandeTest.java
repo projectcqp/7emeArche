@@ -63,7 +63,7 @@ commande = new Commande(panier);
 	@Test
 	public void testTotalHt() {
 		Assert.assertEquals(
-				panier.getTotalHt(),
+				panier.getMontantTotalHorsTaxes(),
 				commande.getTotalHt());
 	}
 	
