@@ -210,7 +210,7 @@ public class PanierParametreTest {
 			
 			double totalHt = article.getPrixHt() * lignePanier.getQuantite(); 
 			
-			Assert.assertEquals(totalHt, lignePanier.getTotalHt());
+			Assert.assertEquals(totalHt, lignePanier.getMontantHorsTaxes());
 		} catch (IllegalArgumentException | ExceptionQuantiteDemandeeSuperieureAuStock e) {
 			e.printStackTrace();
 			Assert.fail("Vérifier l'appel à la méthode ajouter article : la quantité n'est pas valide");
