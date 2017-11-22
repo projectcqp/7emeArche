@@ -67,7 +67,7 @@
 				</div>
 			</c:forEach>
 			
-			<p>Prix total TTC : </p>
+			<div>Prix total TTC :  €</div>
 
 
 

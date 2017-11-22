@@ -67,8 +67,10 @@
 				<p>Date de naissance: ${compteSession.dateNaissance}</p>
 				<br />
 				<p>Adresse de facturation: ${compteSession.adresseFacturation.toString()}</p>
+				<!--
 				<br />
-				<p>Adresse de livraison: ### A gérer ###</p>
+				<p>Adresse de livraison: ### A gérer ###</p> 
+				-->
 				<br />
 				<p>Téléphone : ${compteSession.telephone}</p>
 				<br />
