@@ -273,3 +273,5 @@ public class Panier implements Iterable<LignePanier> {
 	}
 
 }
+
+//Fin de classe
