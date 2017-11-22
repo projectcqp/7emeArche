@@ -1,11 +1,14 @@
 package fr.demos.formation.septiemearche.web;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ControlerCommande
@@ -26,8 +29,18 @@ public class ControlerCommande extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// j'identifie et je stocke la session actuelle
+		HttpSession session = request.getSession();
+		
+		// je rï¿½cupï¿½re la requï¿½te et je renvoie vers la JSP
+		RequestDispatcher rd = request.getRequestDispatcher("/Commande.jsp");
+		rd.forward(request, response);
+		
+		//je renseigne la nouvelle jsp courante aprï¿½s chaque rd.forward (la mï¿½me que le forward)
+    	String jspCourante = "/Commande.jsp";
+    	session.setAttribute("jspCourante", jspCourante);
+
+
 	}
 
 	/**
@@ -36,7 +49,7 @@ public class ControlerCommande extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	// if bouton valider commande
-	// test siconnecté ou non, il faut être connecteé pour commander	
+	// test siconnectï¿½ ou non, il faut ï¿½tre connecteï¿½ pour commander	
 	
 	
 	

@@ -53,7 +53,7 @@
 					<div class="headerArticle">
 							<div class="section">
 								<div class="row">
-									<div class="col-xs-6">
+									<div class="col-xs-12">
 										<ul>
 											<li>${ligne.article.nom}</li>
 											<li>Quantité : ${ligne.getQuantite()}</li>
@@ -63,65 +63,15 @@
 									</div>
 								</div>
 							</div>
-
-						<!-- si article matériel -->
-						<c:if test="${empty ligne.article.dematerialise}">
-
-							<div class="section">
-								<div class="row">
-									<div class="col-xs-6">
-										<img class="img-responsive"
-											src="<c:url value='${ligne.article.urlImage}'/>"
-											style="width: 20%;" />
-
-									</div>
-									<div class="col-xs-6">
-										<ul>
-											<li>${ligne.article.nom}</li>
-											<li>Etat : ${ligne.article.materialise.etat}</li>
-											<li>Prix HT : <fmt:formatNumber
-													value="${ligne.article.prixHt}" minFractionDigits="2" /> €
-											</li>
-											<li>Quantité disponible : ${ligne.article.stock}</li>
-											<c:if test="${referenceArticlePanier == ligne.article.reference}">
-												<li class="messageException">
-													${ExceptionQuantiteDemandeeSuperieureAuStock}</li>
-											</c:if>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</c:if>
-
-						<div class="contenuHeaderArticle">
-							<br />
-							<form action="ControlerPanier" method="post">
-								<input type="hidden" value="${ligne.article.reference}"
-									name="refArticle"> <label for="nom">Quantité :</label>
-								<input class="champsAjoutPanier" type="number"
-									value="${ligne.getQuantite()}" min="1"
-									name="quantiteDansPanier" /> <input class="btn btn-success"
-									type=submit value="Modifier" name="action" /> <input
-									class="btn btn-danger" type=submit value="Supprimer"
-									name="action" />
-							</form>
-						</div>
 					</div>
 				</div>
 			</c:forEach>
-		</c:if>
+			
+			<p>Prix total TTC : </p>
+
 
 
 		<br /> <br />
-
-		<c:if test="${panier.getSizeContenuPanier() > 0}">
-			<div id="boutonAcheter" class="enTetePanier">
-				<form id="acheter" action="ControlerPanier" method="post">
-					<input class="btn btn-primary" type=submit value="Commander"
-						name="action" />
-				</form>
-			</div>
-		</c:if>
 		
 				
 
