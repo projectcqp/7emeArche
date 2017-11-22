@@ -122,14 +122,12 @@
 						<div class="contenuHeaderArticle">
 							<br />
 							<form action="ControlerPanier" method="post">
-								<input type="hidden" value="${ligne.article.reference}"
-									name="refArticle"> <label for="nom">Quantité :</label>
-								<input class="champsAjoutPanier" type="number"
+								<input type="hidden" value="${ligne.article.reference}"	name="refArticle">
+								<label for="nom">Quantité :<input class="champsAjoutPanier" type="number"
 									value="${ligne.getQuantite()}" min="1"
-									name="quantiteDansPanier" /> <input class="btn btn-success"
-									type=submit value="Modifier" name="action" /> <input
-									class="btn btn-danger" type=submit value="Supprimer"
-									name="action" />
+									name="quantiteDansPanier" /></label>
+									<input class="btn btn-success" type=submit value="Modifier" name="action"/>
+									<input class="btn btn-danger" type=submit value="Supprimer"	name="action"/>
 							</form>
 						</div>
 					</div>
@@ -140,21 +138,27 @@
 
 		<br /> <br />
 
-		<c:if test="${panier.getSizeContenuPanier() > 0}">
-			<div id="boutonAcheter" class="enTetePanier">
-				<form id="acheter" action="ControlerPanier" method="post">
-					<input class="btn btn-primary" type=submit value="Commander"
-						name="action" />
-				</form>
-			</div>
+		<c:if test="${not empty compteSession}">
+			<c:if test="${panier.getSizeContenuPanier() > 0}">
+				<div id="boutonAcheter" class="enTetePanier">
+					<form id="acheter" action="ControlerCommande" method="get">
+						<input class="btn btn-primary" type=submit value="Commander" name="action"/>
+					</form>
+				</div>
+			</c:if>
+		</c:if>
+		<c:if test="${empty compteSession}">
+			<c:if test="${panier.getSizeContenuPanier() > 0}">
+				<div id="boutonAcheter" class="enTetePanier">
+					<form>
+						<input class="btn btn-primary" value="Commander" name="action"  disabled/>
+					</form>
+					<p>Vous devez être connecté pour commander</p>
+				</div>
+			</c:if>
 		</c:if>
 		
-				
-
 	</div>
-
-
-
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
