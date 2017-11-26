@@ -85,7 +85,7 @@ public class PanierParametreTest {
 		try {
 			panier.ajouterUnArticle(article, 2);
 			Assert.assertTrue(panier.articleDejaDansLePanier(article));
-			Assert.assertEquals(2, panier.getLignePanier(article));
+			Assert.assertEquals(2, panier.getLignePanier(article).getQuantite());
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			Assert.fail(
@@ -107,7 +107,7 @@ public class PanierParametreTest {
 			panier.ajouterUnArticle(article, 2);
 			panier.ajouterUnArticle(article, 3);
 			Assert.assertTrue(panier.articleDejaDansLePanier(article));
-			Assert.assertEquals(5, panier.getLignePanier(article));
+			Assert.assertEquals(5, panier.getLignePanier(article).getQuantite());
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 			Assert.fail(
@@ -210,7 +210,7 @@ public class PanierParametreTest {
 			
 			double totalHt = article.getPrixHt() * lignePanier.getQuantite(); 
 			
-			Assert.assertEquals(totalHt, lignePanier.getMontantHorsTaxes());
+			Assert.assertEquals(totalHt, lignePanier.getMontantHorsTaxes(),0.01);
 		} catch (IllegalArgumentException | ExceptionQuantiteDemandeeSuperieureAuStock e) {
 			e.printStackTrace();
 			Assert.fail("Vérifier l'appel à la méthode ajouter article : la quantité n'est pas valide");

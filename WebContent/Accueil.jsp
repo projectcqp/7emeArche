@@ -56,11 +56,20 @@
 								Quantité :<input class="form-control" type="number" value="1"
 								min="1" name="quantiteAjouteePanier"
 								id="quteAjoutPanier${article.reference}" /></label>
-							<button class="btn btn-primary" name="action"
-								value="boutonAjoutArticle" id="actionBouton"
-								onclick="appelAjaxAjouterPanier('${article.reference}',document.getElementById('quteAjoutPanier${article.reference}').
- 								value,document.getElementById('actionBouton').value); return false">Ajouter
-								au panier</button>
+							<c:if test="${article.stock > 0}">	
+								<button class="btn btn-primary" name="action"
+									value="boutonAjoutArticle" id="actionBouton"
+									onclick="appelAjaxAjouterPanier('${article.reference}',document.getElementById('quteAjoutPanier${article.reference}').
+	 								value,document.getElementById('actionBouton').value); return false">Ajouter
+									au panier</button>
+							</c:if>
+							<c:if test="${article.stock == 0}">	
+								<button class="btn btn-primary" name="action"
+									value="boutonAjoutArticle" id="actionBouton" disabled
+									>Ajouter au panier</button>
+									<p>Article indisponible</p>
+							</c:if>
+							
 						</div>
 					</form>
 

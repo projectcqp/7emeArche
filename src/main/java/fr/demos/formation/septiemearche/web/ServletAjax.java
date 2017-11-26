@@ -85,7 +85,7 @@ public class ServletAjax extends HttpServlet {
 						// je renvoie les infos en jason dans la r�ponse http vers la page jsp
 						// la r�ception de cette r�ponse est l'�tape n� 4 du xhr.readyState
 						//je g�n�re le jason manuellement mais on pourrait utiliser un outil pour le g�n�rer
-						out.println("{\"nouveauQteCumuPanier\":" + p.getArticlesCumulesPanier() + ",\"nouveauPxTotalPanier\":" + p.getPrixTotal() + "}");
+						out.println("{\"nouveauQteCumuPanier\":" + p.getArticlesCumulesPanier() + ",\"nouveauPxTotalPanier\":" + p.getMontantTotalHorsTaxes() + "}");
 							
 					} catch (ExceptionQuantiteDemandeeSuperieureAuStock e) {
 						String message = e.getMessage();

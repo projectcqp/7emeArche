@@ -69,16 +69,12 @@
 			<nav>
 				<ul class="nav navbar-nav navbar-right" role="menu">
 					<li role="lien panier">
-						<a href="Panier.jsp" role="region" aria-live="polite" aria-atomic="true" aria-busy="false">Panier (
-							<span id="artCumuPanier">${panier.getArticlesCumulesPanier()}
-							</span>)
-						</a>
+						<a href="Panier.jsp" role="region" aria-live="polite" aria-atomic="true" aria-busy="false">Panier (<span id="artCumuPanier">${panier.getArticlesCumulesPanier()}</span>)</a>
 					<li role="contenu panier">
 						<a role="region" aria-live="polite" aria-atomic="true" aria-busy="false"> Total HT : 
 							<span id="pxTotalPanier">
-								<fmt:formatNumber type="number" value="${panier.getPrixTotal()}" minFractionDigits="2" />
-							</span> €
-						</a>
+								<fmt:formatNumber type="number" value="${panier.getMontantTotalHorsTaxes()}" minFractionDigits="2" />
+							</span> €</a>
 					</li>
 					<c:if test="${empty compteSession}">
 						<li role="créer un compte"><a href="CreerCompte.jsp">Créer un compte</a></li>

@@ -65,6 +65,7 @@ public class Panier implements Iterable<LignePanier> {
 	public void ajouterUnArticle(Article a, int quantiteAjoutee) throws ExceptionQuantiteDemandeeSuperieureAuStock {
 		LignePanier lp1 = new LignePanier(a, quantiteAjoutee);
 		int indexDeMaLigne = lignesPanier.indexOf(lp1);
+		
 
 		// si la ligne a dÃ©jÃ  des articles il faut les comptabiliser pour
 		// comparer au stock
@@ -92,6 +93,10 @@ public class Panier implements Iterable<LignePanier> {
 		// si la ligne article n'existe pas
 		else {
 			this.ajouterLignePanier(a, quantiteAjoutee);
+		}
+		for (LignePanier lp:lignesPanier){
+			System.out.println(lp.getArticle().getNom() + "-->" +lp.getQuantite() );
+
 		}
 	}
 
@@ -192,7 +197,7 @@ public class Panier implements Iterable<LignePanier> {
 	 */
 	public boolean articleDejaDansLePanier(Article article) {
 		for (LignePanier lignePanier : lignesPanier) {
-			if (lignePanier.getArticle() == article) {
+			if (lignePanier.getArticle().equals(article)) {
 				return true;
 			}
 		}
@@ -224,7 +229,9 @@ public class Panier implements Iterable<LignePanier> {
 			total += lignePanier.getMontantHorsTaxes();
 		}
 
-		return total;
+		double totalArrondi = Math.round(total * 100.0) / 100.0;
+		
+		return totalArrondi;
 	}
 
 	/**
@@ -238,8 +245,10 @@ public class Panier implements Iterable<LignePanier> {
 		for (LignePanier lignePanier : lignesPanier) {
 			total += lignePanier.getMontantTaxesComprises();
 		}
-
-		return total;
+		
+		double totalArrondi = Math.round(total * 100.0) / 100.0;
+		
+		return totalArrondi;
 	}
 
 	/**
@@ -252,8 +261,10 @@ public class Panier implements Iterable<LignePanier> {
 		for (LignePanier lignePanier : lignesPanier) {
 			total += lignePanier.getMontantTva();
 		}
+		
+		double totalArrondi = Math.round(total * 100.0) / 100.0;
 
-		return total;
+		return totalArrondi;
 	}
 
 	/**

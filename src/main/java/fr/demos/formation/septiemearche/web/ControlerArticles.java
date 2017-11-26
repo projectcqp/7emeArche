@@ -70,6 +70,9 @@ public class ControlerArticles extends HttpServlet {
 				noOfPages = calculNbPagesPourPagination("");
 				// on recupere les articles, en les paginant
 				catalogue1 = articleDaoCDI.selectSearch("", 0, RECORDS_PER_PAGE);
+				for (Article a:catalogue1){
+					System.out.println("art " +a.getReference());
+				}
 			}
 			catch(Exception ex){
 				// TODO : afficher un message dans la vue

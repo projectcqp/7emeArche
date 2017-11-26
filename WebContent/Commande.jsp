@@ -58,7 +58,7 @@
 											<li>${ligne.article.nom}</li>
 											<li>Quantité : ${ligne.getQuantite()}</li>
 											<li>Prix HT : <fmt:formatNumber value="${ligne.article.prixHt}" minFractionDigits="2" /> €</li>
-											<li>Tva : </li>
+											<li>Tva : <fmt:formatNumber value="${ligne.getMontantTva()}" minFractionDigits="2" /> €</li>
 										</ul>
 									</div>
 								</div>
@@ -67,8 +67,11 @@
 				</div>
 			</c:forEach>
 			
-			<div>Prix total TTC :  €</div>
-
+			<div  class="col-xs-12">
+				<ul>
+					<li>Prix total TTC : <fmt:formatNumber value="${panier.getMontantToutesTaxsComprises()}" minFractionDigits="2" /> €</li>
+				</ul>
+			</div>
 
 
 		<br /> <br />
