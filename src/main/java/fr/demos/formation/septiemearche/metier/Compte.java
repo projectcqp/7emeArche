@@ -58,8 +58,6 @@ public class Compte implements Serializable {
 	@Column(name = "telephone_compte", nullable = false)
 	private String telephone;
 	
-	//TODO faire autrechose que de la date java 8 ça fait planter hibernate
-	//@Column(name = "date_naissance_compte", nullable = false)
 	@Transient
 	private LocalDate dateNaissance;
 	
@@ -73,18 +71,15 @@ public class Compte implements Serializable {
 	
 	private static final int passwordMinLength = 6;
 	
-	// TODO vérifier là où est appelé cette méthode car j'au ajouté un argument "passwordMinLength" (dans controler compte ?)
 	public void testCreationPassword(String password, String passwordConfirmation) throws ExceptionPasswordFormat {
-		// test si les passwords entres sont identiques
 		if (password == passwordConfirmation) {
-			// test taille 6 caract�res mini
 			if (password.length() < passwordMinLength) {
 
 			} else {
 				throw new ExceptionPasswordFormat(
 						"Votre mot de passe n'est pas assez long, vous avez entré un mot de passe de "
 								+ password.length() + " caractères et il en faut au moins " + passwordMinLength);
-			} // test longueur
+			}
 		} else {
 			throw new ExceptionPasswordFormat("Vous avez entré des mots de passe différents");
 		}

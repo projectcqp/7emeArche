@@ -38,7 +38,6 @@ public class CommandeDao implements InterfaceDao<Commande> {
 	}
 
 	public List<Commande> selectCommandeFor(Compte compte) throws Exception {
-		// TODO intégrer un critère de délai pour limiter le nombre de résultats dans le temps
 		String requestString = "SELECT c FROM Commande c WHERE c.id=?";
 
 		TypedQuery<Commande> query = em.createQuery(requestString, Commande.class);

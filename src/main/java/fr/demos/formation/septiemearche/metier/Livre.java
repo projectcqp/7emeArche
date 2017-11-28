@@ -25,8 +25,6 @@ public class Livre extends Article {
 	@Column(name = "genre_livre", nullable = false)
 	private String genre;
 	
-	//TODO type, stockage et mettre dans constructeurs et toString
-	//@Column(name = "date_livre", nullable = false)
 	@Transient
 	private LocalDate date;
 	

@@ -22,7 +22,6 @@ public class ControlerCommande extends HttpServlet {
      */
     public ControlerCommande() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -32,11 +31,11 @@ public class ControlerCommande extends HttpServlet {
 		// j'identifie et je stocke la session actuelle
 		HttpSession session = request.getSession();
 		
-		// je r�cup�re la requ�te et je renvoie vers la JSP
+		// je récupère la requête et je renvoie vers la JSP
 		RequestDispatcher rd = request.getRequestDispatcher("/Commande.jsp");
 		rd.forward(request, response);
 		
-		//je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la m�me que le forward)
+		//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
     	String jspCourante = "/Commande.jsp";
     	session.setAttribute("jspCourante", jspCourante);
 
@@ -48,12 +47,6 @@ public class ControlerCommande extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	// if bouton valider commande
-	// test siconnect� ou non, il faut �tre connecte� pour commander	
-	
-	
-	
-	
 	}
 
 }

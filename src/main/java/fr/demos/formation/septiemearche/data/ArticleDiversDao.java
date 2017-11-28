@@ -57,7 +57,6 @@ public class ArticleDiversDao implements InterfaceDao<ArticleDivers> {
 		TypedQuery<ArticleDivers> query = em.createQuery(requestString, ArticleDivers.class);
 
 		return query.getResultList();
-		// Todo filtrer les résultats en fonction du paramètre
 	}
 	
 

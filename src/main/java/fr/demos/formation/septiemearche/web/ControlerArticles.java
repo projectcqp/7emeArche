@@ -23,7 +23,6 @@ import fr.demos.formation.septiemearche.metier.Article;
 public class ControlerArticles extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// appel de l'interface on pourra choisir son dao si plusieurs
 	@Inject
 	ArticleDao articleDaoCDI;
 
@@ -33,8 +32,7 @@ public class ControlerArticles extends HttpServlet {
 
 	public ControlerArticles() {
 		super();
-		// TODO Auto-generated constructor stub
-	} // constructeur
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -54,15 +52,13 @@ public class ControlerArticles extends HttpServlet {
 				catalogue1 = articleDaoCDI.selectSearch(critereRecherche, firstOfPage, RECORDS_PER_PAGE);
 			}
 			catch(Exception ex){
-				// TODO : afficher un message dans la vue
 				logger.info("pb acces base de donnees pendant la recherche 1");
-				//ex.printStackTrace();
 				request.setAttribute("messageErreur", "pb acces base de donnees pendant la recherche 1");
 			}
 			session.setAttribute("currentPage", page);
 		}
-		// cas de la recherche initiale, lors du premier appel de la fenetre (sans
-		// crit�re de recherche)
+		// cas de la recherche initiale, lors du premier appel de la fenetre
+		// (sans critère de recherche)
 		else {
 			int noOfPages = 0;
 			try{
@@ -75,7 +71,6 @@ public class ControlerArticles extends HttpServlet {
 				}
 			}
 			catch(Exception ex){
-				// TODO : afficher un message dans la vue
 				logger.info("pb acces base de donnees pendant la recherche 2");
 				ex.printStackTrace();
 				request.setAttribute("messageErreur", "pb acces base de donnees pendant la recherche 2");
@@ -118,9 +113,7 @@ public class ControlerArticles extends HttpServlet {
 				catalogue1 = articleDaoCDI.selectSearch(critereRecherche, 0, RECORDS_PER_PAGE);
 			}
 			catch(Exception ex){
-				// TODO : afficher un message dans la vue
 				logger.info("pb acces base de donnees pendant la recherche 3");
-				//ex.printStackTrace();
 				request.setAttribute("messageErreur", "pb acces base de donnees pendant la recherche 3");
 			}
 			session.setAttribute("noOfPages", noOfPages);

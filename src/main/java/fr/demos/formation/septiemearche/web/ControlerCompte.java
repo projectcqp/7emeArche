@@ -18,25 +18,17 @@ import fr.demos.formation.septiemearche.data.CompteDao;
 import fr.demos.formation.septiemearche.exceptions.ExceptionPasswordFail;
 import fr.demos.formation.septiemearche.metier.Article;
 import fr.demos.formation.septiemearche.metier.Compte;
-import fr.demos.formation.septiemearche.metier.CompteLogin;
 
 @WebServlet("/ControlerCompte")
 public class ControlerCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	//à supprimer
-	@Inject	private CompteLogin compteLoginCDI;
-	
 	@Inject	private CompteDao compteDao;
 	
 	private static Logger logger = Logger.getLogger("Log");
 	
-	// a g�rer dans Compte.java puis instancier un compte et le r�cup�rer
-//	private boolean connecteAuCompte = false;
-
 	public ControlerCompte() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	
@@ -47,7 +39,7 @@ public class ControlerCompte extends HttpServlet {
 		// j'identifie et je stocke la session actuelle
 		HttpSession session = request.getSession();
 		
-		// je récupère la requ�te et je renvoie vers la JSP
+		// je récupère la requête et je renvoie vers la JSP
 		RequestDispatcher rd = request.getRequestDispatcher("/GestionCompte.jsp");
 		rd.forward(request, response);
 		
@@ -62,16 +54,14 @@ public class ControlerCompte extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// je dis � tomcat d'utiliser les accente et caractères spéciaux
+		// je dis à tomcat d'utiliser les accents et caractères spéciaux
 		request.setCharacterEncoding("UTF-8");
 		
 		// j'identifie et je stocke la session actuelle
 		HttpSession session = request.getSession();
 		
-		// je stocke le param�tre de requete (le name du bouton)
+		// je stocke le paramêtre de requete (le name du bouton)
 		String action = request.getParameter("action");
-		
-		
 		
 		// on clique sur OK pour se connecter à un compte
 		if (action != null && action.equals("Connexion")) {
@@ -90,7 +80,7 @@ public class ControlerCompte extends HttpServlet {
 					logger.error("Le compte session est null : " + compteConnecte);
 			    	String messageErreurConnexion = "Echec connexion, l'email ou le mot de passe est erroné";
 			    	request.setAttribute("messageErreurConnexion", messageErreurConnexion);
-				} //if
+				}
 
 	
 			} catch (Exception e) {
@@ -107,23 +97,20 @@ public class ControlerCompte extends HttpServlet {
 
 			
 			
-		// if bouton Se  déconnecter
+		// if bouton se déconnecter
 		if (session.getAttribute("compteSession") != null && action != null && action.equals("Deconnexion")) {
 
-			// je d�connecte
-			// je redéfinis la valeur de ma variable
-			// il fait de l'autoboxing donc pas besoin de lui mettre un objet  mais la valeur compatible avec le type
 			session.setAttribute("compteSession", null);
 			
-			// je récupère la requ�te et je renvoie vers la JSP
-			// mais si je me d�connecte dans la page gestion de compte je dois changer de page !
+			// je récupère la requête et je renvoie vers la JSP
+			// mais si je me déconnecte dans la page gestion de compte je dois changer de page !
 			if (session.getAttribute("jspCourante").equals("/GestionCompte.jsp")){
 
-				// on va dire qu'on retourne à l'acceuil apr�s une d�connexion du compte
+				//on retourne à l'acceuil après une déconnexion du compte
 				RequestDispatcher rd = request.getRequestDispatcher("/Accueil.jsp");
 				rd.forward(request, response);
 
-				//je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la m�me que le forward)
+				//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
 		    	String jspCourante = "/Accueil.jsp";
 		    	session.setAttribute("jspCourante", jspCourante);
 				
@@ -162,7 +149,6 @@ public class ControlerCompte extends HttpServlet {
 					
 				} // if bouton voir le compte
 
-		// TODO gérer tentative de création de compte avec un email existant
 		// ###	if bouton Valider (nouveau compte)   ###
 		if (action != null && action.equals("Valider")) {
 			
@@ -187,23 +173,18 @@ public class ControlerCompte extends HttpServlet {
 			String paramVille_adresse_livraison = request.getParameter("ville_adresse_livraison");
 			String paramPays_adresse_livraison = request.getParameter("pays_adresse_livraison");
 		
-			// créer adresseFacturation
-			// créer adresse livraison identique facturation ou comme renseignée dans formulaire
-			
-			//créer compte avec adresses
 			Compte c=new Compte ();
 			try {
 				compteDao.insert(c);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-			// je r�cup�re la requ�te et je renvoie vers la JSP
+			// je récupère la requête et je renvoie vers la JSP
 			RequestDispatcher rd = request.getRequestDispatcher("/Validation_inscription.jsp");
 			rd.forward(request, response);
 			
-			//je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la m�me que le forward)
+			//je renseigne la nouvelle jsp courante apr�s chaque rd.forward (la même que le forward)
 	    	String jspCourante = "/Validation_inscription.jsp";
 	    	session.setAttribute("jspCourante", jspCourante);
 

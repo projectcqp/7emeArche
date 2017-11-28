@@ -15,7 +15,6 @@ import fr.demos.formation.septiemearche.metier.Tva;
  *
  */
 
-// On défini le type generique (entre chevrons) de l'interface implémentée
 public class TvaDao implements InterfaceDao<Tva> {
 	@PersistenceContext
 	private EntityManager em;

@@ -220,7 +220,6 @@ public class Commande implements Serializable, Iterable<LigneCommande> {
 
 	@Override
 	public Iterator<LigneCommande> iterator() {
-		// TODO Auto-generated method stub
 		return lignesCommande.iterator();
 	}
 

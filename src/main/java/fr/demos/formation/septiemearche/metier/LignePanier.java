@@ -4,22 +4,7 @@ package fr.demos.formation.septiemearche.metier;
  * @author STAGIAIRE
  *
  */
-/**
- * @author STAGIAIRE
- *
- */
-/**
- * @author STAGIAIRE
- *
- */
-/**
- * @author STAGIAIRE
- *
- */
-/**
- * @author STAGIAIRE
- *
- */
+
 public class LignePanier {
 
 	private Article article;

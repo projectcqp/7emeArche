@@ -53,7 +53,6 @@ public class LivreDao implements InterfaceDao<Livre> {
 		TypedQuery<Livre> query = em.createQuery(requestString, Livre.class);
 
 		return query.getResultList();
-		// Todo filtrer les résultats en fonction du paramètre
 	}
 
 	@Override

@@ -99,7 +99,6 @@ public class CompteDao implements InterfaceDao<Compte> {
 		TypedQuery<Compte> query = em.createQuery(requestString, Compte.class);
 
 		return query.getResultList();
-		// Todo filtrer les résultats en fonction du paramètre
 	}
 
 	@Override
