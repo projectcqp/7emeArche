@@ -47,8 +47,7 @@
 			<br />
 			<br />
 			<br />
-			<p>Vous n'êtes connecté à aucun compte utilisateur et je me
-				demande comment vous êtes arrivé là...</p>
+			<p>Vous n'êtes connecté à aucun compte utilisateur</p>
 			<br />
 			<br />
 			<br />
