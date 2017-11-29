@@ -132,6 +132,8 @@
 						</div>
 					</div>
 				</div>
+				<br/>
+				<br/>
 			</c:forEach>
 		</c:if>
 

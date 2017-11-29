@@ -61,11 +61,12 @@ public class Panier implements Iterable<LignePanier> {
 		int indexDeMaLigne = lignesPanier.indexOf(lp1);
 		
 
-		// si la ligne a déjà des articles il faut les comptabiliser pour comparer au stock
-		int quantiteLignePlusQuantiteAjoutee = lp1.getQuantite() + quantiteAjoutee;
+		
 
 		// si la ligne article existe déjà
 		if (indexDeMaLigne != -1) {
+			// si la ligne a déjà des articles il faut les comptabiliser pour comparer au stock
+			int quantiteLignePlusQuantiteAjoutee = lignesPanier.get(indexDeMaLigne).getQuantite() + quantiteAjoutee;
 			// si la quantité ajoutée <= stock de l'article
 			if (quantiteLignePlusQuantiteAjoutee <= a.getStock()) {
 				lignesPanier.get(indexDeMaLigne)

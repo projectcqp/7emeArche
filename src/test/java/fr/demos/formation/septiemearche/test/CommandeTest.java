@@ -1,11 +1,16 @@
 package fr.demos.formation.septiemearche.test;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.demos.formation.septiemearche.metier.Adresse;
 import fr.demos.formation.septiemearche.metier.Article;
 import fr.demos.formation.septiemearche.metier.Commande;
+import fr.demos.formation.septiemearche.metier.Compte;
 import fr.demos.formation.septiemearche.metier.Etat;
 import fr.demos.formation.septiemearche.metier.Livre;
 import fr.demos.formation.septiemearche.metier.Panier;
@@ -18,7 +23,7 @@ import fr.demos.formation.septiemearche.metier.Tva;
  */
 public class CommandeTest {
 		private Panier panier;
-		private 	 Commande commande;
+		private Commande commande;
 	
 	@Before
 	public void initPanier() {
@@ -27,6 +32,7 @@ public class CommandeTest {
 panier.ajouterUnArticle(new Livre("Reference", 10, "Nom", "UrlImage", new Tva(1, 10, "A"), 10, Etat.OCCASION_BON, "Auteur", "Isbn","Editeur", "Genre"), 1);
 ///panier.ajouterUnArticle(new Livre("Reference", 13, "Nom", "UrlImage", new Tva(1, 10, "A"), "Format", "UrlDownload", "auteur", "Isbn", "Editeur", "enre";
 		///panier.ajouterUnArticle(a, quantiteAjoutee);new ArticleDivers("Reference", 10, "Nom", "UrlImage", new Tva(1, 10, "a"), 10, "nature");getClass()
+
 
 commande = new Commande(panier);
 	}

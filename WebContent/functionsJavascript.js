@@ -15,18 +15,20 @@ function appelAjaxAjouterPanier(argIdArticle, argQte, argActionBouton) {
 			// elles sont dans menu.jsp
 			var spanQteArtPanier = document.getElementById("artCumuPanier");
 			var spanPxTotPanier = document.getElementById("pxTotalPanier");
-
+			var spanMessageErreurAjoutPanier = document.getElementById("messageErreurAjoutPanier");
+			
 			// si pas d'erreur
 			if (xhr.status == 200) {
 
 				// on remplit les span avec ce qu'on récupère du serveur
 				// on crée l'objet à partir de la chaine contenant du json
-
 				var objetJSON = JSON.parse(xhr.responseText);
-
-				spanQteArtPanier.innerHTML = objetJSON.nouveauQteCumuPanier;
-				spanPxTotPanier.innerHTML = objetJSON.nouveauPxTotalPanier;
-
+				if(objetJSON.nouveauQteCumuPanier){
+					spanQteArtPanier.innerHTML = objetJSON.nouveauQteCumuPanier;
+					spanPxTotPanier.innerHTML = objetJSON.nouveauPxTotalPanier;
+				}
+				spanMessageErreurAjoutPanier.innerHTML = objetJSON.nouveauMessageErreurAjoutPanier;
+				
 			} // if
 		} // if
 	}; // on ready state change

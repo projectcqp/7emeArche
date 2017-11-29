@@ -58,12 +58,11 @@ public class ServletAjax extends HttpServlet {
 			for (Article article : catalogue1) {
 				if (article.getReference().equals(refArticle)) {
 					Panier p = (Panier) session.getAttribute("panier");
+					response.setContentType("application/json");
 					try {
 						p.ajouterUnArticle(article, intQuantiteAjoutee);
 
-						response.setContentType("application/json");
-						
-						out.println("{\"nouveauQteCumuPanier\":" + p.getArticlesCumulesPanier() + ",\"nouveauPxTotalPanier\":" + p.getMontantTotalHorsTaxes() + "}");
+						out.println("{\"nouveauQteCumuPanier\":" + p.getArticlesCumulesPanier() + ",\"nouveauPxTotalPanier\":" + p.getMontantTotalHorsTaxes() + ",\"nouveauMessageErreurAjoutPanier\":\"\"" + "}");
 							
 					} catch (ExceptionQuantiteDemandeeSuperieureAuStock e) {
 						String message = e.getMessage();
@@ -71,6 +70,10 @@ public class ServletAjax extends HttpServlet {
 						String messageExceptionQDSAS = message + quantiteStock;
 						request.setAttribute("ExceptionQuantiteDemandeeSuperieureAuStock", messageExceptionQDSAS);
 						session.setAttribute("referenceArticlePanier", refArticle);
+						
+						System.out.println("{\"nouveauMessageErreurAjoutPanier\":\""+messageExceptionQDSAS + "\"}");
+						out.println("{\"nouveauQteCumuPanier\":" + p.getArticlesCumulesPanier() + ",\"nouveauPxTotalPanier\":" + p.getMontantTotalHorsTaxes() + ",\"nouveauMessageErreurAjoutPanier\":\""+messageExceptionQDSAS + "\"}");
+
 					}
 					// break pour arr�ter de boucler car on aura qu'une seule
 					// fois cet article (référence unique)

@@ -90,6 +90,7 @@ public class ControlerCompte extends HttpServlet {
 			// je récupère la requête et je renvoie vers la JSP
 			// pas besoin de changer la jspCourante car c'est la même
 			String uriCible = (String)session.getAttribute("jspCourante");
+			System.out.println("jsp courante : " + uriCible);
 			RequestDispatcher rd = request.getRequestDispatcher(uriCible);
 			rd.forward(request, response);
 

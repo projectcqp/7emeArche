@@ -75,7 +75,10 @@ public class LignePanier {
 		 * @return
 		 */
 		public double getMontantTva() {
-			return article.getTva().calculerTvaDepuisHt(getMontantHorsTaxes());
+			double montantTva = article.getTva().calculerTvaDepuisHt(getMontantHorsTaxes());
+			double montantTvaArrondi = Math.round(montantTva * 100.0) / 100.0;
+			
+			return montantTvaArrondi;
 		}
 		
 }

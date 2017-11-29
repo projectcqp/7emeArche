@@ -62,6 +62,8 @@
 									onclick="appelAjaxAjouterPanier('${article.reference}',document.getElementById('quteAjoutPanier${article.reference}').
 	 								value,document.getElementById('actionBouton').value); return false">Ajouter
 									au panier</button>
+									<br/>
+									<span id="messageErreurAjoutPanier" class=messageException></span>
 							</c:if>
 							<c:if test="${article.stock == 0}">	
 								<button class="btn btn-primary" name="action"
